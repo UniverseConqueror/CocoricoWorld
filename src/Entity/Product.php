@@ -77,9 +77,17 @@ class Product
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $updated_at;
+
+    public function __construct()
+    {
+        $this->rate = 0;
+        $this->enable = true;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = null;
+    }
 
     public function getId(): ?int
     {
