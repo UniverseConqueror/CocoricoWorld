@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -81,12 +83,24 @@ class Product
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Producer", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $producer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subcategory", inversedBy="products")
+     */
+    private $subcategories;
+
     public function __construct()
     {
         $this->rate = 0;
         $this->enable = true;
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
+        $this->subcategories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,6 +260,44 @@ class Product
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getProducer(): ?Producer
+    {
+        return $this->producer;
+    }
+
+    public function setProducer(?Producer $producer): self
+    {
+        $this->producer = $producer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subcategory[]
+     */
+    public function getSubcategories(): Collection
+    {
+        return $this->subcategories;
+    }
+
+    public function addSubcategory(Subcategory $subcategory): self
+    {
+        if (!$this->subcategories->contains($subcategory)) {
+            $this->subcategories[] = $subcategory;
+        }
+
+        return $this;
+    }
+
+    public function removeSubcategory(Subcategory $subcategory): self
+    {
+        if ($this->subcategories->contains($subcategory)) {
+            $this->subcategories->removeElement($subcategory);
+        }
 
         return $this;
     }
