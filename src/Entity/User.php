@@ -77,6 +77,11 @@ class User implements UserInterface
      */
     private $enable;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Producer", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $producer;
+
     public function __construct()
     {
         $this->enable = true;
@@ -242,6 +247,23 @@ class User implements UserInterface
     public function setEnable(bool $enable): self
     {
         $this->enable = $enable;
+
+        return $this;
+    }
+
+    public function getProducer(): ?Producer
+    {
+        return $this->producer;
+    }
+
+    public function setProducer(Producer $producer): self
+    {
+        $this->producer = $producer;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $producer->getUser()) {
+            $producer->setUser($this);
+        }
 
         return $this;
     }
