@@ -77,7 +77,7 @@ class Product
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
 
