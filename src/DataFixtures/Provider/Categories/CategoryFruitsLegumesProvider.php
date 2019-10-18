@@ -7,7 +7,7 @@ use Faker\Provider\Base;
 
 class CategoryFruitsLegumesProvider extends Base
 {
-    protected static $fruitsLegumes = [
+    protected static $fruitsLegumesArray = [
         
         'Fruits',
         'Légumes',
@@ -15,13 +15,19 @@ class CategoryFruitsLegumesProvider extends Base
         'Légumes Secs'
         
     ];
-
    
     public static function randomCategoryFruitsLegumes()
     {
         // on utilise les fonctions fournies par Base pour retourner facilement une données aléatoire
-        return static::randomElement(static::$fruitsLegumes);
+        return static::randomElement(static::$fruitsLegumesArray);
     }
+
+    public static function categories() 
+    {
+        return static::$fruitsLegumesArray;
+    }
+
+
 
    
 }

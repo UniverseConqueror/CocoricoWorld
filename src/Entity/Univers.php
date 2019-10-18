@@ -36,13 +36,13 @@ class Univers
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="univers", orphanRemoval=true)
@@ -52,8 +52,8 @@ class Univers
     public function __construct()
     {
         $this->enable = true;
-        $this->created_at = new \DateTime();
-        $this->updated_at = null;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = null;
         $this->categories = new ArrayCollection();
     }
 

@@ -36,12 +36,12 @@ class Subcategory
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Product", mappedBy="subcategories")

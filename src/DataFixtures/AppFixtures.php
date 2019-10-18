@@ -30,20 +30,19 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
       
+        $universes = [];
         // Création des 10 Univers
         $universarray = UniversProvider::univers();
         for ($i = 0 ; $i <= 9 ; $i++) {
-
             $univers = new Univers();
             $uni = $universarray[$i];
             $univers    ->setName($uni)
                         ->setCreatedAt(new \DateTime());
 
             $manager->persist($univers);
+            $universes[] = $univers;
         }
 
-
-        
 
         // Créer 1 user Admin
 
@@ -62,16 +61,16 @@ class AppFixtures extends Fixture
                     ->setUpdatedAt(null)
                     ;
 
-                    // Création d'un password encodé pour admin
-                    $pw = 'admin';
-                    $hash =  $this->encoder->encodePassword($admin, $pw);
-                    $admin      ->setPassword($hash);
+        // Création d'un password encodé pour admin
+        $pw = 'admin';
+        $hash =  $this->encoder->encodePassword($admin, $pw);
+        $admin      ->setPassword($hash);
 
         $manager->persist($admin);
 
         // Créer 10 users
 
-         //Création d'un tableau de users pour stocker et réutiliser pour lier aux producers
+        //Création d'un tableau de users pour stocker et réutiliser pour lier aux producers
         $users = [];
         for ($i = 0 ; $i <= 9 ; $i++) {
             $user = new User();
@@ -95,7 +94,6 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
             $users[] = $user;
-    
         }
         //Créer 1 producer
         
@@ -132,35 +130,80 @@ class AppFixtures extends Fixture
         }
 
 
-        //Créer 1 Product
+        //Créer 10 Product
 
         //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
         $products = [];
+        for ($i = 0 ; $i <= 10 ; $i++) {
+            $product = new Product();
 
-        $product = new Product();
-
-        $product    ->setName($faker->sentence($nbWords = 4, $variableNbWords = true))
-                    ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
-                    ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
-                    ->setQuantity($faker->numberBetween($min = 0, $max = 50));
+            $product    ->setName($faker->sentence($nbWords = 4, $variableNbWords = true))
+                        ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
+                        ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
+                        ->setQuantity($faker->numberBetween($min = 0, $max = 50));
                    
-                    // on récupère un nombre aléatoire de user dans un tableau
+            // on récupère un nombre aléatoire de user dans un tableau
             $randomProducer = (array) array_rand($producers, rand(1, count($producers)));
             // on lie un producer à un user
             foreach ($randomProducer as $key => $value) {
                 $product->setProducer($producers[$key]);
             }
 
-        $manager->persist($product);
-       
-        $manager->flush();
+            $manager->persist($product);
+            $products[] = $product;
+        }
+          
+          
+        // Créer les Catégories de l'univers Fruits et Légumes
+        //Création d'un tableau de catégory pour stocker et réutiliser pour lier aux Univers
+        
+      
+        $flcategories = CategoryFruitsLegumesProvider::categories();
+        $categories = [];
+        for ($i = 0 ; $i <= count($flcategories)-1 ; $i++) {
+            $category = new Category();
+          
+            $cat = $flcategories[$i];
+            $univ =$universarray[0];
+
+            $category   ->setName($cat)
+                        ->setImage($faker->url())
+                        ->setUnivers($universes[0]);
+
+
+
+            $manager->persist($category);
+            $categories [] = $category;
+        }
+
+
+
+        //Créer 1 SubCatégory
+        //Création d'un tableau de catégory pour stocker et réutiliser pour lier aux Univers
+        
+        $subcategories = [];
+
+        $subcategory = new Category();
+
+        $subcategory    ->setName($faker->words($nb = 2, $asText = false))
+                        ->setImage($faker->url());
+
+        
+        
+        
+        $manager->persist($subcategory);
+        $subcategories[] = $subcategory;
+
+
+
+    $manager->flush();
     }
-   
-  
+
 
     public function randomPostalCode() {
         $postal = mt_rand(100,900) * 100;
         return $postal;
     }
+
 }
 

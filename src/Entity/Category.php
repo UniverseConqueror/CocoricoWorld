@@ -36,12 +36,12 @@ class Category
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true )
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Subcategory", mappedBy="category", orphanRemoval=true)
@@ -57,8 +57,8 @@ class Category
     {
         
         $this->enable = true;
-        $this->created_at = new \DateTime();
-        $this->updated_at = null;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = null;
         $this->subcategories = new ArrayCollection();
     }
 
