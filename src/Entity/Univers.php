@@ -51,7 +51,6 @@ class Univers
 
     public function __construct()
     {
-        
         $this->enable = true;
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
