@@ -103,7 +103,7 @@ class Producer
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="producer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 

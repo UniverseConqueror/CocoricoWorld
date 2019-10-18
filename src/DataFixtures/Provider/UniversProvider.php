@@ -7,7 +7,7 @@ use Faker\Provider\Base;
 
 class UniversProvider extends Base
 {
-    protected static $univers = [
+    protected static $universarray = [
         
         'Fruits et Légumes',
         'Produits de la Mer',
@@ -26,8 +26,15 @@ class UniversProvider extends Base
     public static function randomUnivers()
     {
         // on utilise les fonctions fournies par Base pour retourner facilement une données aléatoire
-        return static::randomElement(static::$univers);
+        return static::randomElement(static::$universarray);
     }
+
+    public static function univers() 
+    {
+        return static::$universarray;
+    }
+
+   
 
 
 

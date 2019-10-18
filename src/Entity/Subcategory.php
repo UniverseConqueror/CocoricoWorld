@@ -58,8 +58,8 @@ class Subcategory
     {
         
         $this->enable = true;
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = null;
+        $this->created_at = new \DateTime();
+        $this->updated_at = null;
         $this->products = new ArrayCollection();
     }
 

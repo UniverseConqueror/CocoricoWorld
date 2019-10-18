@@ -29,24 +29,20 @@ class AppFixtures extends Fixture
         // Paramétrage de Faker pour générer des données en fr
         $faker = Faker\Factory::create('fr_FR');
 
-        // On donne le Manager de Doctrine à Faker
-        $populator = new Faker\ORM\Doctrine\Populator($faker, $manager);
-
-        // On ajoute notre UniversProvider à Faker
-        $faker->addProvider(new UniversProvider($faker));
-
+      
         // Création des 10 Univers
+        $universarray = UniversProvider::univers();
+        for ($i = 0 ; $i <= 9 ; $i++) {
 
-        $populator->addEntity('App\Entity\Univers', 10, array(
-            'name' => function () use ($faker) {
-                return $faker->unique()->randomUnivers();
-            }
-                   
-        ));
+            $univers = new Univers();
+            $uni = $universarray[$i];
+            $univers    ->setName($uni)
+                        ->setCreatedAt(new \DateTime());
 
-        $insertedEntities = $populator->execute();
+            $manager->persist($univers);
+        }
 
-        $univers = $insertedEntities['App\Entity\Univers'];
+
         
 
         // Créer 1 user Admin
@@ -73,61 +69,98 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
 
-        //Créer 1 producer
+        // Créer 10 users
 
-        $producer = new Producer();
+         //Création d'un tableau de users pour stocker et réutiliser pour lier aux producers
+        $users = [];
+        for ($i = 0 ; $i <= 9 ; $i++) {
+            $user = new User();
+            $postal = $this->randomPostalCode();
 
-        $siretNumber = $faker->siret();
-        $postalcode = $this->randomPostalCode();
-        $user = new User();
-
-        $producer   ->setUser($user->getId())
-                    ->setSocialReason($faker->company())
-                    ->setSiretNumber('$siretNumber')
-                    ->setAdress($faker->streetAddress())
-                    ->setPostalCode($postalcode)
-                    ->setCity($faker->city())
-                    ->setEmail($faker->email())
+            $user   ->setEmail($faker->email())
+                    ->setRoles(['ROLE_USER'])
                     ->setFirstname($faker->firstName())
                     ->setLastname($faker->lastName())
-                    ->setTelephone($faker->mobileNumber())
-                    ->setStatus(null)
-                    ->setEnable(true)
-                    ->setAvatar($faker->url())
-                    ->setDescription($faker->sentence($nbWords = 10, $variableNbWords = true))
-                    ->setCreatedAt(new \DateTime())
-                    ->setUpdatedAt(null);
+                    ->setTelephone($faker->phoneNumber())
+                    ->setAdress($faker->streetAddress())
+                    ->setPostalCode($postal)
+                    ->setCity($faker->city())
+                          
+                    ;
 
-        $manager->persist($producer);
+            // Création d'un password encodé pour admin
+            $pw = 'user';
+            $hash =  $this->encoder->encodePassword($user, $pw);
+            $user->setPassword($hash);
 
-
-        // Créer 1 Product
-
-        // $product = new Product();
-
-        // $product    ->setName($faker->sentence($nbWords = 4, $variableNbWords = true))
-        //             ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
-        //             ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
-        //             ->setQuantity($faker->numberBetween($min = 0, $max = 50))
-        //             ->setCreatedAt(new \DateTime())
-        //             ->setUpdatedAt(null)
-        //             ->setProducer(null);
-
-        // $manager->persist($product);
-
-
-
-
-
-
+            $manager->persist($user);
+            $users[] = $user;
+    
+        }
+        //Créer 1 producer
         
+        //Création d'un tableau de producers pour stocker et réutiliser pour lier aux products
+        $producers = [];
+       
+        //Création d'un CP avec notre méthode personnelle.
+        $postalcode = $this->randomPostalCode();
+      
+        for ($i = 0 ; $i <= 4 ; $i++) {
+            $producer = new Producer();
+            $producer    ->setEmail($faker->email())
+                        ->setSocialReason($faker->company(), $faker->companySuffix())
+                        ->setSiretNumber($faker->siret())
+                        ->setAdress($faker->streetAddress())
+                        ->setPostalCode($postalcode)
+                        ->setCity($faker->city())
+                        ->setFirstname($faker->firstName())
+                        ->setLastname($faker->lastName())
+                        ->setTelephone($faker->phoneNumber())
+                        ->setStatus(null)
+                        ->setAvatar($faker->url())
+                        ->setDescription($faker->sentence($nbWords = 10, $variableNbWords = true));
+            // on récupère un nombre aléatoire de user dans un tableau
+            $randomUser = (array) array_rand($users, rand(1, count($users)));
+            //on lie un producer à un user
+            foreach ($randomUser as $key => $value) {
+                $producer->setUser($users[$key]);
+            }
+               
+                
+            $manager->persist($producer);
+            $producers[]= $producer;
+        }
+
+
+        //Créer 1 Product
+
+        //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
+        $products = [];
+
+        $product = new Product();
+
+        $product    ->setName($faker->sentence($nbWords = 4, $variableNbWords = true))
+                    ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
+                    ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
+                    ->setQuantity($faker->numberBetween($min = 0, $max = 50));
+                   
+                    // on récupère un nombre aléatoire de user dans un tableau
+            $randomProducer = (array) array_rand($producers, rand(1, count($producers)));
+            // on lie un producer à un user
+            foreach ($randomProducer as $key => $value) {
+                $product->setProducer($producers[$key]);
+            }
+
+        $manager->persist($product);
+       
         $manager->flush();
     }
    
   
 
     public function randomPostalCode() {
-        $postal =mt_rand(100,900) * 100;
+        $postal = mt_rand(100,900) * 100;
         return $postal;
     }
 }
+
