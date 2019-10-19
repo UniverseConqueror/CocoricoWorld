@@ -5,13 +5,13 @@ namespace App\DataFixtures\Provider\Categories;
 use Faker\Provider\Base;
 
 
-class CategoryViandesProvider extends Base
+class CategoryCharcuteriesProvider extends Base
 {
     protected static $charcuteriesArray = [
         
-        'Boeuf',
-        'Veau',
-        'Agneau',
+        'Foie gras',
+        'Jambon',
+        'Pâtés',
                 
     ];
    

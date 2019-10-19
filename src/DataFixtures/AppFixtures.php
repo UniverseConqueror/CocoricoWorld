@@ -4,8 +4,13 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\DataFixtures\Provider\UniversProvider;
-use App\DataFixtures\Provider\Categories\CategoryFruitsLegumesProvider;
+use App\DataFixtures\Provider\Univers\UniversFruitsLegumes;
+// use App\DataFixtures\Provider\UniversProvider;
+// use App\DataFixtures\Provider\Categories\CategoryFruitsLegumesProvider;
+// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryFruitProvider;
+// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryLegumeProvider;
+// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryHerbeProvider;
+// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryLegumeSecProvider;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Faker;
 use Faker\ORM\Doctrine\Populator;
@@ -14,10 +19,12 @@ use App\Entity\Category;
 use App\Entity\User;
 use App\Entity\Producer;
 use App\Entity\Product;
+use App\Entity\Subcategory;
+
 
 class AppFixtures extends Fixture
 {
-    // MIse en place de l'encodage du password
+    // Mise en place de l'encodage du password
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
@@ -29,20 +36,9 @@ class AppFixtures extends Fixture
         // Paramétrage de Faker pour générer des données en fr
         $faker = Faker\Factory::create('fr_FR');
 
-      
-        $universes = [];
-        // Création des 10 Univers
-        $universarray = UniversProvider::univers();
-        for ($i = 0 ; $i <= 9 ; $i++) {
-            $univers = new Univers();
-            $uni = $universarray[$i];
-            $univers    ->setName($uni)
-                        ->setCreatedAt(new \DateTime());
-
-            $manager->persist($univers);
-            $universes[] = $univers;
-        }
-
+        // Generation des univers avec les categories et subcategories
+      UniversFruitsLegumes::loadunivers($manager);
+       
 
         // Créer 1 user Admin
 
@@ -76,7 +72,7 @@ class AppFixtures extends Fixture
             $user = new User();
             $postal = $this->randomPostalCode();
 
-            $user   ->setEmail($faker->email())
+            $user   ->setEmail($faker->unique()->email())
                     ->setRoles(['ROLE_USER'])
                     ->setFirstname($faker->firstName())
                     ->setLastname($faker->lastName())
@@ -105,7 +101,7 @@ class AppFixtures extends Fixture
       
         for ($i = 0 ; $i <= 4 ; $i++) {
             $producer = new Producer();
-            $producer    ->setEmail($faker->email())
+            $producer   ->setEmail($faker->unique()->email())
                         ->setSocialReason($faker->company(), $faker->companySuffix())
                         ->setSiretNumber($faker->siret())
                         ->setAdress($faker->streetAddress())
@@ -118,11 +114,11 @@ class AppFixtures extends Fixture
                         ->setAvatar($faker->url())
                         ->setDescription($faker->sentence($nbWords = 10, $variableNbWords = true));
             // on récupère un nombre aléatoire de user dans un tableau
-            $randomUser = (array) array_rand($users, rand(1, count($users)));
-            //on lie un producer à un user
-            foreach ($randomUser as $key => $value) {
-                $producer->setUser($users[$key]);
-            }
+            // $randomUser = (array) array_rand($users, rand(1, count($users)));
+            // //on lie un producer à un user
+            // foreach ($randomUser as $key => $value) {
+                $producer->setUser($users[$i]);
+            // }
                
                 
             $manager->persist($producer);
@@ -152,51 +148,8 @@ class AppFixtures extends Fixture
             $manager->persist($product);
             $products[] = $product;
         }
-          
-          
-        // Créer les Catégories de l'univers Fruits et Légumes
-        //Création d'un tableau de catégory pour stocker et réutiliser pour lier aux Univers
-        
-      
-        $flcategories = CategoryFruitsLegumesProvider::categories();
-        $categories = [];
-        for ($i = 0 ; $i <= count($flcategories)-1 ; $i++) {
-            $category = new Category();
-          
-            $cat = $flcategories[$i];
-            $univ =$universarray[0];
-
-            $category   ->setName($cat)
-                        ->setImage($faker->url())
-                        ->setUnivers($universes[0]);
-
-
-
-            $manager->persist($category);
-            $categories [] = $category;
-        }
-
-
-
-        //Créer 1 SubCatégory
-        //Création d'un tableau de catégory pour stocker et réutiliser pour lier aux Univers
-        
-        $subcategories = [];
-
-        $subcategory = new Category();
-
-        $subcategory    ->setName($faker->words($nb = 2, $asText = false))
-                        ->setImage($faker->url());
-
-        
-        
-        
-        $manager->persist($subcategory);
-        $subcategories[] = $subcategory;
-
-
-
-    $manager->flush();
+         
+        $manager->flush();
     }
 
 

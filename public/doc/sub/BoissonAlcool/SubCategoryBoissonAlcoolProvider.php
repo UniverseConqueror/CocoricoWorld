@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataFixtures\Provider\Categories;
+namespace App\DataFixtures\Provider\SubCategories\BoissonAlcool;
 
 use Faker\Provider\Base;
 
 
-class CategoryBoissonAlcoolProvider extends Base
+class SubCategoryBoissonAlcoolProvider extends Base
 {
     protected static $boissonAlcoolArray = [
         

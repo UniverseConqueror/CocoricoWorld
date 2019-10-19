@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataFixtures\Provider\Categories;
+namespace App\DataFixtures\Provider\SubCategories;
 
 use Faker\Provider\Base;
 
 
-class CategoryViandesProvider extends Base
+class SubCategoryCharcuteriesProvider extends Base
 {
     protected static $charcuteriesArray = [
         

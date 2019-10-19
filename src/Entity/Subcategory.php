@@ -39,7 +39,7 @@ class Subcategory
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -58,8 +58,8 @@ class Subcategory
     {
         
         $this->enable = true;
-        $this->created_at = new \DateTime();
-        $this->updated_at = null;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = null;
         $this->products = new ArrayCollection();
     }
 
