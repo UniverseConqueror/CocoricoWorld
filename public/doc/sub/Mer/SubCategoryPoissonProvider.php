@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures\Provider\Subcategories;
+namespace App\DataFixtures\Provider\Subcategories\Mer;
 
 use Faker\Provider\Base;
 
@@ -15,7 +15,7 @@ class SubCategoryPoissonProvider extends Base
         
     ];
    
-    public static function randomSubCategoryPoissons()
+    public static function randomSubCategoryPoisson()
     {
         // on utilise les fonctions fournies par Base pour retourner facilement une données aléatoire
         return static::randomElement(static::$poissonsArray);
