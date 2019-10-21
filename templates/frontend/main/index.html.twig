@@ -1,20 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Hello {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% include 'header.html.twig' %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/Apotheose/cocorico/src/Controller/Frontend/MainController.php'|file_link(0) }}">src/Controller/Frontend/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/Apotheose/cocorico/templates/frontend/main/index.html.twig'|file_link(0) }}">templates/frontend/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+<h1> Bienvenue chez Cocorico World</h1>
+
+<div class="container-fluid homepagecard">
+
+    <div class="card mr-1" style="width: 18rem;">
+        <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Raison sociale</h5>
+                <p>ville</p>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <p class="card-text"> 
+
+                </p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <p class="card-text">
+                    Description
+                </p>
+            </li>
+
+        </ul>
+        <div class="card-body text-center">
+            <a class="btn btn-primary" href="#">Boutique du producteur</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+            <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Raison sociale</h5>
+                    <p>ville</p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p class="card-text"> 
+    
+                    </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <p class="card-text">
+                        Description
+                    </p>
+                </li>
+    
+            </ul>
+            <div class="card-body text-center">
+                <a class="btn btn-primary" href="#">Boutique du producteur</a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+                <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Raison sociale</h5>
+                        <p>ville</p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <p class="card-text"> 
+        
+                        </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <p class="card-text">
+                            Description
+                        </p>
+                    </li>
+        
+                </ul>
+                <div class="card-body text-center">
+                    <a class="btn btn-primary" href="#">Boutique du producteur</a>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Raison sociale</h5>
+                            <p>ville</p>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <p class="card-text"> 
+            
+                            </p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p class="card-text">
+                                Description
+                            </p>
+                        </li>
+            
+                    </ul>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary" href="#">Boutique du producteur</a>
+                    </div>
+                </div>
+</div> 
+
+
+
+{% include 'footer.html.twig' %}
 {% endblock %}

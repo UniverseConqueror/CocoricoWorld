@@ -16,4 +16,13 @@ class ProductController extends AbstractController
             'controller_name' => 'ProductController',
         ]);
     }
+    /**
+     * @Route("/frontend/product/sample", name="frontend_product_sample")
+     */
+    public function sample()
+    {
+        return $this->render('frontend/product/sample.html.twig', [
+            'controller_name' => 'ProductController',
+        ]);
+    }
 }

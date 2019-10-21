@@ -1,0 +1,16 @@
+.footer{
+    background-color: hsla(0, 96%, 52%, 0.979);
+}
+
+.homepagecard{
+    margin:auto auto;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 71%;
+    justify-content: center;
+
+}
+.search{
+    display:flex;
+    justify-content: flex-end;
+}
