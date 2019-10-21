@@ -1,5 +1,7 @@
 # Welcome on Cocorico World !
 
+[![Build Status](https://travis-ci.com/O-clock-Universe/projet-Cocorico.svg?token=CAPpxc67BXy796Kiygmo&branch=master)](https://travis-ci.com/O-clock-Universe/projet-Cocorico)
+
 Cocorico World company wants to be an actor of the development of the local commerce on the French market, from producer to consumer, to contribute to the development of the French economy.
 
 The website is intended to be a marketplace. Producers will be able to create and manage their own store and sell all kinds of food products. 
