@@ -54,28 +54,35 @@ abstract class UniversFruitsLegumes extends Fixture
             $categories [] = $category;
        
 
+
+            
             // Créer les SubCategories de l'univers Fruits et Légumes
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarray = [SubCategoryFruitProvider::categories(), SubCategoryHerbeProvider::categories(), SubCategoryLegumeProvider::categories(), SubCategoryLegumeSecProvider::categories()];
-               
+            $provsubcategoriesarrays = [SubCategoryFruitProvider::categories(), SubCategoryHerbeProvider::categories(), SubCategoryLegumeProvider::categories(), SubCategoryLegumeSecProvider::categories()];
+                               
+           
+            $provsubcategoryarray = $provsubcategoriesarrays[$i];
 
-                $provsubcategory = $provsubcategoriesarray[$i];
-
-                foreach ($provsubcategory as $key => $value) {
+                foreach ($provsubcategoryarray as $key => $value) {
                     $subcategory = new SubCategory();
                 
                     $subcategory    ->setName($value)
                                     ->setImage($faker->url())
                                     ->setCategory($category);
+                                    // ->addProduct();
                 
                     $manager->persist($subcategory);
                     $subcategories[] = $subcategory;
                 }
         }
         $manager->flush(); 
+
+        return [
+            "subcategories" => $subcategories,
+        ];
     }
-            
+
 }
 
 
