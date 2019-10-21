@@ -19,22 +19,21 @@ class UniversRepository extends ServiceEntityRepository
         parent::__construct($registry, Univers::class);
     }
 
-    // /**
-    //  * @return Univers[] Returns an array of Univers objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Univers[] Returns an array of Univers objects
+     */
+    public function findAllUniversWithCategoriesAndSubcategories()
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->addSelect('u')
+            ->join('u.categories', 'c')
+            ->addSelect('c')
+            ->join('c.subcategories', 's')
+            ->addSelect('s')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Univers

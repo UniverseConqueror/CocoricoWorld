@@ -22,7 +22,7 @@ class HeaderSubscriber implements EventSubscriberInterface
 
     public function onControllerEvent(ControllerEvent $event)
     {
-        $univers = $this->universRepository->findAll();
+        $univers = $this->universRepository->findAllUniversWithCategoriesAndSubcategories();
 
         $this->twig->addGlobal('universes', $univers);
     }
