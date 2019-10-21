@@ -4,13 +4,16 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\DataFixtures\Provider\Univers\UniversFruitsLegumes;
-// use App\DataFixtures\Provider\UniversProvider;
-// use App\DataFixtures\Provider\Categories\CategoryFruitsLegumesProvider;
-// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryFruitProvider;
-// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryLegumeProvider;
-// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryHerbeProvider;
-// use App\DataFixtures\Provider\Subcategories\FruitLegume\SubCategoryLegumeSecProvider;
+use App\DataFixtures\Provider\Univers\UniversFruitLegume;
+use App\DataFixtures\Provider\Univers\UniversMer;
+use App\DataFixtures\Provider\Univers\UniversBoissonAlcool;
+use App\DataFixtures\Provider\Univers\UniversViande;
+use App\DataFixtures\Provider\Univers\UniversCharcuterie;
+use App\DataFixtures\Provider\Univers\UniversBoissonSansAlcool;
+use App\DataFixtures\Provider\Univers\UniversFromage;
+use App\DataFixtures\Provider\Univers\UniversProduitElabore;
+use App\DataFixtures\Provider\Univers\UniversEpicerieSalee;
+use App\DataFixtures\Provider\Univers\UniversEpicerieSucree;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Faker;
 use Faker\ORM\Doctrine\Populator;
@@ -37,8 +40,16 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // Generation des univers avec les categories et subcategories
-      $subCatArray = UniversFruitsLegumes::loadunivers($manager);
-
+      $subCatArray = UniversFruitLegume::loadunivers($manager);
+      $subCatArray = UniversMer::loadunivers($manager);
+      $subCatArray = UniversBoissonAlcool::loadunivers($manager);
+      $subCatArray = UniversCharcuterie::loadunivers($manager);
+      $subCatArray = UniversEpicerieSalee::loadunivers($manager);
+      $subCatArray = UniversEpicerieSucree::loadunivers($manager);
+      $subCatArray = UniversViande::loadunivers($manager);
+      $subCatArray = UniversBoissonSansAlcool::loadunivers($manager);
+      $subCatArray = UniversProduitElabore::loadunivers($manager);
+      $subCatArray = UniversFromage::loadunivers($manager);
 
         // Créer 1 user Admin
 
@@ -68,7 +79,7 @@ class AppFixtures extends Fixture
 
         //Création d'un tableau de users pour stocker et réutiliser pour lier aux producers
         $users = [];
-        for ($i = 0 ; $i <= 9 ; $i++) {
+        for ($i = 0 ; $i <= 29 ; $i++) {
             $user = new User();
             $postal = $this->randomPostalCode();
 
@@ -99,7 +110,7 @@ class AppFixtures extends Fixture
         //Création d'un CP avec notre méthode personnelle.
         $postalcode = $this->randomPostalCode();
       
-        for ($i = 0 ; $i <= 4 ; $i++) {
+        for ($i = 0 ; $i <= 9 ; $i++) {
             $producer = new Producer();
             $producer   ->setEmail($faker->unique()->email())
                         ->setSocialReason($faker->company(), $faker->companySuffix())
@@ -130,7 +141,7 @@ class AppFixtures extends Fixture
 
         //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
         $products = [];
-        for ($i = 0 ; $i <= 10 ; $i++) {
+        for ($i = 0 ; $i <= 600 ; $i++) {
             $product = new Product();
             $subcategory = mt_rand(0, count($subCatArray["subcategories"]) - 1);
             

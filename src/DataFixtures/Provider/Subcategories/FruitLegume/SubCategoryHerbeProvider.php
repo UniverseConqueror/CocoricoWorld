@@ -9,9 +9,9 @@ class SubCategoryHerbeProvider extends Base
 {
     protected static $herbesArray = [
         
-        'basilic',
-        'ciboulette',
-        'coriandre',
+        'Basilic',
+        'Ciboulette',
+        'Coriandre',
         
     ];
    

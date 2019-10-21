@@ -9,9 +9,9 @@ class SubCategoryFruitProvider extends Base
 {
     protected static $fruitsArray = [
         
-        'pomme',
-        'poire',
-        'orange',
+        'Pomme',
+        'Poire',
+        'Orange',
         
     ];
    

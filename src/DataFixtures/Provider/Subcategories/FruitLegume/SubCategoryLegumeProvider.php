@@ -9,9 +9,9 @@ class SubCategoryLegumeProvider extends Base
 {
     protected static $legumesArray = [
         
-        'tomate',
-        'courgette',
-        'pomme de terre',
+        'Tomate',
+        'Courgette',
+        'Pomme de terre',
         
     ];
    
