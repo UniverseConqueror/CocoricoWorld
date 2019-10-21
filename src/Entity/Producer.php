@@ -25,14 +25,7 @@ class Producer
     private $social_reason;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\Positive
-     * @Assert\Length(
-     * min = 14,
-     * max = 14,
-     * minMessage = "Your Siret need to be 14 numbers long exactly",
-     * maxMessage = "Your Siret need to be 14 numbers long exactly",
-     * )
+     * @ORM\Column(type="string")
      */
     private $siret_number;
 
@@ -74,7 +67,7 @@ class Producer
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=14)
+     * @ORM\Column(type="string", length=21)
      */
     private $telephone;
 
@@ -110,7 +103,7 @@ class Producer
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="producer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
@@ -149,7 +142,7 @@ class Producer
         return $this->siret_number;
     }
 
-    public function setSiretNumber(int $siret_number): self
+    public function setSiretNumber(string $siret_number): self
     {
         $this->siret_number = $siret_number;
 
