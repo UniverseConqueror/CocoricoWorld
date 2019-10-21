@@ -28,3 +28,20 @@ h1 {
 .description {
     height: 150px;
 }
+
+/* --- HEADER --- */
+
+.dropdown {
+    float: left;
+}
+
+.dropdown-list::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.dropdown-category {
+    text-align: center;
+    font-weight: bold;
+}

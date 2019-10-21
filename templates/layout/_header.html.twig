@@ -27,85 +27,85 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
-  
-  {#{% for univers in universelement%}#}
-  <div class="dropdown" style="display:flex">
 
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Univers 1</a> <!-- lien -->
-      <div class="dropdown-menu">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category 1</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Sub-Category 1</a>
-            <a class="dropdown-item" href="#">Sub-Category 2</a>
-            <a class="dropdown-item" href="#">Sub-Category 3</a>
-          </div>
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category 2</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Sub-Category 1</a>
-            <a class="dropdown-item" href="#">Sub-Category 2</a>
-            <a class="dropdown-item" href="#">Sub-Category 3</a>
-          </div>
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Category 3</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Sub-Category 1</a>
-            <a class="dropdown-item" href="#">Sub-Category 2</a>
-            <a class="dropdown-item" href="#">Sub-Category 3</a>
-          </div>
-      </div>
+  <div class="dropdown-list">
 
-</div> 
-  </nav>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    
-  
+  {% for univers in universes %}
+
+  <div class="dropdown">
+
+    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ univers.name }}</a> <!-- lien -->
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+
+    {% for categorie in univers.categories %}
+
+      <a class="dropdown-item dropdown-category" href="#">{{ categorie.name }}</a>
+
+
+      {% for subcategorie in categorie.subcategories %}
+
+        <a class="dropdown-item" href="#">{{ subcategorie.name }}</a>
+
+      {% endfor %}
+
+        <div class="dropdown-divider"></div>
+
+    {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
