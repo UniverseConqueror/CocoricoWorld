@@ -4,119 +4,40 @@
 
 {% block body %}
 
-
-
 <h1> Bienvenue chez Cocorico World</h1>
 
 <div class="container-fluid homepagecard">
 
-    <div class="card mr-1" style="width: 18rem;">
-        <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Raison sociale</h5>
-                <p>ville</p>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="card-text"> 
+    {% for producer in producers %}
 
-                </p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <p class="card-text">
-                    Description
-                </p>
-            </li>
-
-        </ul>
-        <div class="card-body text-center">
-            <a class="btn btn-primary" href="#">Boutique du producteur</a>
-        </div>
-    </div>
-    <div class="card" style="width: 18rem;">
+        <div class="card mr-1" style="width: 18rem;">
             <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Raison sociale</h5>
-                    <p>ville</p>
+                <h5 class="card-title">{{ producer.socialReason }}</h5>
+                    <p>{{ producer.city }}</p>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
-                    <p class="card-text"> 
-    
+                    <p class="card-text">
+
                     </p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <p class="card-text">
-                        Description
+                        <h5>Description</h5>
+                        {{ producer.description }}
                     </p>
                 </li>
-    
+
             </ul>
             <div class="card-body text-center">
                 <a class="btn btn-primary" href="#">Boutique du producteur</a>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
-                <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Raison sociale</h5>
-                        <p>ville</p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <p class="card-text"> 
-        
-                        </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <p class="card-text">
-                            Description
-                        </p>
-                    </li>
-        
-                </ul>
-                <div class="card-body text-center">
-                    <a class="btn btn-primary" href="#">Boutique du producteur</a>
-                </div>
-            </div>
-            <div class="card" style="width: 18rem;">
-                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Raison sociale</h5>
-                            <p>ville</p>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <p class="card-text"> 
-            
-                            </p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <p class="card-text">
-                                Description
-                            </p>
-                        </li>
-            
-                    </ul>
-                    <div class="card-body text-center">
-                        <a class="btn btn-primary" href="#">Boutique du producteur</a>
-                    </div>
-                </div>
-</div> 
-
-
-
+    {% endfor %}
+</div>
 
 {% endblock %}

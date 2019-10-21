@@ -1,5 +1,9 @@
+body {
+    background-color: rgb(235, 209, 175);
+}
+
 .footer{
-    background-color: hsla(0, 96%, 52%, 0.979);
+    background-color: hsla(0, 96%, 52%, 0.600);
 }
 
 .homepagecard{
@@ -13,4 +17,14 @@
 .search{
     display:flex;
     justify-content: flex-end;
+}
+
+h1 {
+    margin:auto auto;
+    margin-bottom: 2rem;;
+    text-align: center;
+}
+
+.description {
+    height: 150px;
 }
