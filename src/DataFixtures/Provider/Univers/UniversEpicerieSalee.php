@@ -58,7 +58,7 @@ abstract class UniversEpicerieSalee extends Fixture
             // Créer les SubCategories de l'univers Epicerie Salée
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarrays = [SubCategoryBocauxProvider::categories(), SubCategoryHuilesProvider::categories(), SubCategorySelPoivreProvider::categories()];
+            $provsubcategoriesarrays = [SubCategoryHuilesProvider::categories(), SubCategorySelPoivreProvider::categories(),SubCategoryBocauxProvider::categories()];
                                
            
             $provsubcategoryarray = $provsubcategoriesarrays[$i];
