@@ -4,25 +4,18 @@ namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/frontend/product", name="frontend_product")
+     * @Route("/product/{id<\d+>}", name="product_show", methods={"GET"})
      */
-    public function index()
+    public function show(Product $product)
     {
-        return $this->render('frontend/product/index.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-    }
-    /**
-     * @Route("/frontend/product/sample", name="frontend_product_sample")
-     */
-    public function sample()
-    {
-        return $this->render('frontend/product/sample.html.twig', [
-            'controller_name' => 'ProductController',
+        return $this->render('frontend/product/show.html.twig', [
+            'product' => $product
         ]);
     }
 }
