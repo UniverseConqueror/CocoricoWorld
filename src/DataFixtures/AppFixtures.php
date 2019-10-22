@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
                     ->setFirstname('admin')
                     ->setLastname('admin')
                     ->setTelephone('03.89.63.25.12')
-                    ->setAdress('35 rue des Poiriers')
+                    ->setAddress('35 rue des Poiriers')
                     ->setPostalCode('25000')
                     ->setCity('Besancon')
                     ->setEnable(true)
@@ -88,7 +88,7 @@ class AppFixtures extends Fixture
                     ->setFirstname($faker->firstName())
                     ->setLastname($faker->lastName())
                     ->setTelephone($faker->phoneNumber())
-                    ->setAdress($faker->streetAddress())
+                    ->setAddress($faker->streetAddress())
                     ->setPostalCode($postal)
                     ->setCity($faker->city())
                           
@@ -115,7 +115,7 @@ class AppFixtures extends Fixture
             $producer   ->setEmail($faker->unique()->email())
                         ->setSocialReason($faker->company(), $faker->companySuffix())
                         ->setSiretNumber($faker->siret())
-                        ->setAdress($faker->streetAddress())
+                        ->setAddress($faker->streetAddress())
                         ->setPostalCode($postalcode)
                         ->setCity($faker->city())
                         ->setFirstname($faker->firstName())
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
             
             
 
-            $product    ->setName($faker->sentence($nbWords = 4, $variableNbWords = true))
+            $product    ->setName($faker->sentence($nbWords = 2, $variableNbWords = true))
                         ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
                         ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
                         ->setQuantity($faker->numberBetween($min = 0, $max = 50))
