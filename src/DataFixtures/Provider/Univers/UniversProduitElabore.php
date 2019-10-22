@@ -59,7 +59,7 @@ abstract class UniversProduitElabore extends Fixture
             // Créer les SubCategories de l'univers
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarrays = [SubCategoryFriandProvider::categories(), SubCategoryPizzaProvider::categories(), SubCategoryPlatPrepareProvider::categories()];
+            $provsubcategoriesarrays = [SubCategoryPlatPrepareProvider::categories(), SubCategoryFriandProvider::categories(), SubCategoryPizzaProvider::categories(), ];
                                
            
             $provsubcategoryarray = $provsubcategoriesarrays[$i];

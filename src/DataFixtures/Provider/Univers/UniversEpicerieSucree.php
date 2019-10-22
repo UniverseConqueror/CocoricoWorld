@@ -59,7 +59,7 @@ abstract class UniversEpicerieSucree extends Fixture
             // Créer les SubCategories de l'univers Fruits et Légumes
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarrays = [SubCategoryConfiserieProvider::categories(), SubCategoryConfitureProvider::categories(), SubCategoryGateauProvider::categories()];
+            $provsubcategoriesarrays = [SubCategoryGateauProvider::categories(), SubCategoryConfitureProvider::categories(), SubCategoryConfiserieProvider::categories()];
                                
            
             $provsubcategoryarray = $provsubcategoriesarrays[$i];

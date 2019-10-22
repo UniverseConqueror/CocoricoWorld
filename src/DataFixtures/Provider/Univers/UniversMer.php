@@ -58,7 +58,7 @@ abstract class UniversMer extends Fixture
             // Créer les SubCategories de l'univers
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarrays = [SubCategoryCoquillageProvider::categories(), SubCategoryCrustaceProvider::categories(),SubCategoryPoissonProvider::categories()];
+            $provsubcategoriesarrays = [SubCategoryPoissonProvider::categories(), SubCategoryCrustaceProvider::categories(), SubCategoryCoquillageProvider::categories()];
                                
            
             $provsubcategoryarray = $provsubcategoriesarrays[$i];

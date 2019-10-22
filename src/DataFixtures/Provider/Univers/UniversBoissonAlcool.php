@@ -58,7 +58,7 @@ abstract class UniversBoissonAlcool extends Fixture
             // Créer les SubCategories de l'univers 
 
             //Implémentation d'un tableau de Subcategories de la Category concernée
-            $provsubcategoriesarrays = [SubCategoryBiereProvider::categories(), SubCategoryCidreProvider::categories(), SubCategoryVinsProvider::categories()];
+            $provsubcategoriesarrays = [SubCategoryVinsProvider::categories(),SubCategoryCidreProvider::categories(),SubCategoryBiereProvider::categories() ];
                                
            
             $provsubcategoryarray = $provsubcategoriesarrays[$i];
