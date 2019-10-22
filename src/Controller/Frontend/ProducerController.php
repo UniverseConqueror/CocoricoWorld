@@ -4,16 +4,22 @@ namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Producer;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\ProducerRepository;
 
 class ProducerController extends AbstractController
 {
     /**
-     * @Route("/frontend/producer", name="frontend_producer")
+     * @Route("/producer/{id<\d+>}", name="producer_show", methods={"GET"})
      */
-    public function index()
+    public function show(Producer $producer, ObjectManager $manager)
     {
-        return $this->render('frontend/producer/index.html.twig', [
-            'controller_name' => 'ProducerController',
+        if (!$producer) {
+            throw $this->createNotFoundException('Producteur introuvable');
+        }
+        return $this->render('frontend/producer/show.html.twig', [
+            'producer' => $producer,
         ]);
     }
 }
