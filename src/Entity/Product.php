@@ -56,7 +56,7 @@ class Product
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $additional_info;
+    private $additionalInfo;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -96,10 +96,10 @@ class Product
 
     public function __construct()
     {
-        $this->rate = 0;
-        $this->enable = true;
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = null;
+        $this->rate          = 0;
+        $this->enable        = true;
+        $this->createdAt     = new \DateTime();
+        $this->updatedAt     = null;
         $this->subcategories = new ArrayCollection();
     }
 
@@ -194,12 +194,12 @@ class Product
 
     public function getAdditionalInfo(): ?string
     {
-        return $this->additional_info;
+        return $this->additionalInfo;
     }
 
-    public function setAdditionalInfo(?string $additional_info): self
+    public function setAdditionalInfo(?string $additionalInfo): self
     {
-        $this->additional_info = $additional_info;
+        $this->additionalInfo = $additionalInfo;
 
         return $this;
     }
@@ -242,24 +242,24 @@ class Product
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

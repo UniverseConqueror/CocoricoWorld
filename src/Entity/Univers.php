@@ -51,9 +51,9 @@ class Univers
 
     public function __construct()
     {
-        $this->enable = true;
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = null;
+        $this->enable     = true;
+        $this->createdAt  = new \DateTime();
+        $this->updatedAt  = null;
         $this->categories = new ArrayCollection();
     }
 
@@ -100,24 +100,24 @@ class Univers
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

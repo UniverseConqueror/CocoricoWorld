@@ -53,7 +53,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=64, nullable=true)
      */
-    private $adress;
+    private $address;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -65,7 +65,7 @@ class User implements UserInterface
      * maxMessage = "Your Postal Code need to be 5 numbers long exactly",
      * )
      */
-    private $postal_code;
+    private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -94,7 +94,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->enable = true;
+        $this->enable    = true;
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
     }
@@ -213,26 +213,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(?string $adress): self
+    public function setAddress(?string $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
 
     public function getPostalCode(): ?int
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostalCode(?int $postal_code): self
+    public function setPostalCode(?int $postalCode): self
     {
-        $this->postal_code = $postal_code;
+        $this->postalCode = $postalCode;
 
         return $this;
     }

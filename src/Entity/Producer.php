@@ -22,17 +22,17 @@ class Producer
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $social_reason;
+    private $socialReason;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $siret_number;
+    private $siretNumber;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $adress;
+    private $address;
 
     /**
      * @ORM\Column(type="integer")
@@ -44,7 +44,7 @@ class Producer
      * maxMessage = "Your Postal Code need to be 5 numbers long exactly",
      * )
      */
-    private $postal_code;
+    private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -114,10 +114,10 @@ class Producer
 
     public function __construct()
     {
-        $this->enable = false;
+        $this->enable    = false;
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
-        $this->products = new ArrayCollection();
+        $this->products  = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -127,48 +127,48 @@ class Producer
 
     public function getSocialReason(): ?string
     {
-        return $this->social_reason;
+        return $this->socialReason;
     }
 
-    public function setSocialReason(string $social_reason): self
+    public function setSocialReason(string $socialReason): self
     {
-        $this->social_reason = $social_reason;
+        $this->socialReason = $socialReason;
 
         return $this;
     }
 
     public function getSiretNumber(): ?int
     {
-        return $this->siret_number;
+        return $this->siretNumber;
     }
 
-    public function setSiretNumber(string $siret_number): self
+    public function setSiretNumber(string $siretNumber): self
     {
-        $this->siret_number = $siret_number;
+        $this->siretNumber = $siretNumber;
 
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress): self
+    public function setAddress(string $address): self
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
 
     public function getPostalCode(): ?int
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostalCode(int $postal_code): self
+    public function setPostalCode(int $postalCode): self
     {
-        $this->postal_code = $postal_code;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
