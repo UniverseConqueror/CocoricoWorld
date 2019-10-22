@@ -1,5 +1,5 @@
 
-<nav class="container-fluid contnav nav>navbar navbar-expand-lg navbar-light bg-primary mb-3  ">
+<nav class="container-fluid contnav nav>navbar navbar-expand-lg navbar-light bg-primary mb-3 ">
     <a class="navbar-brand" href="#">Cocorico.world</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,16 +7,31 @@
     <div class="collapse navbar-collapse d-flex align-items-end flex-column" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <i class="fa fa-home fa-3x ml-2 " aria-hidden="true"></i>
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          {# <i class="fa fa-home fa-3x ml-2 " aria-hidden="true"></i> #}
+          <a class="nav-link" href="#"><i class="fa fa-home fa-3x ml-2 " aria-hidden="true"></i><span class="sr-only">(current)</span></a>
         </li>
+
+              {# Modification affichage en fonction de l'état de la connexion de l'utilisateur#}
+              {% if not app.user %}
+              <li class="nav-item active">
+                
+                <a class="nav-link" href="{{path('app_login')}}"><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
+              </li>
+              {% else %}
+              <li class="nav-item active">
+                {# <i class="fa fa-user fa-3x " aria-hidden="true"></i> #}
+                  <a class="nav-link" href="{{ path('app_logout') }}"><i class="fa fa-sign-out fa-3x " style = "color : red" aria-hidden="true"></i></a>
+              </li>
+              <li class="nav-item active">
+                {# <i class="fa fa-user fa-3x ml-2" aria-hidden="true"></i> #}
+                  <a class="nav-link" href="#"><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
+              </li>
+              {% endif %}
+
+
         <li class="nav-item active">
-          <i class="fa fa-user fa-3x ml-4" aria-hidden="true"></i>
-          <a class="nav-link" href="#">Mon Profil</a>
-        </li>
-        <li class="nav-item active">
-          <i class="fa fa-shopping-cart fa-3x " aria-hidden="true"></i>
-          <a class="nav-link" href="#">Panier</a>
+          {# <i class="fa fa-shopping-cart fa-3x " aria-hidden="true"></i> #}
+          <a class="nav-link" href="#"><i class="fa fa-shopping-cart fa-3x " aria-hidden="true"></i></a>
         </li>
         
       </ul>

@@ -20,7 +20,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Unique
+     * @Assert\Email
      */
     private $email;
 
