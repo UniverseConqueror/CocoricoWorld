@@ -26,7 +26,7 @@
               </li>
               <li class="nav-item active">
                 {# <i class="fa fa-user fa-3x ml-2" aria-hidden="true"></i> #}
-                  <a class="nav-link" href="#" title="My Profil" ><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
+                  <a class="nav-link" href="{{ path('profil_user', {'id' : app.user.id}) }}" title="My Profil" ><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
               </li>
               {% endif %}
 
