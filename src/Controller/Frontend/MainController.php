@@ -24,8 +24,17 @@ class MainController extends AbstractController
     /**
      * @Route("/company", name="company_page")
      */
-    public function companyPresentation()
+    public function showCompanyPresentation()
     {
-        return $this->render('frontend/main/company.html.twig');
+        return $this->render("frontend/main/company.html.twig");
     }
+
+    /**
+     * @Route("/faq", name="faq_page")
+     */
+    public function showFaq()
+    {
+        return $this->render("frontend/main/faq.html.twig");
+    }
+
 }
