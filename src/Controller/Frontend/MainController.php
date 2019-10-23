@@ -20,4 +20,21 @@ class MainController extends AbstractController
             'producers' => $producers,
         ]);
     }
+
+    /**
+     * @Route("/company", name="company_page")
+     */
+    public function showCompanyPresentation()
+    {
+        return $this->render("frontend/main/company.html.twig");
+    }
+
+    /**
+     * @Route("/faq", name="faq_page")
+     */
+    public function showFaq()
+    {
+        return $this->render("frontend/main/faq.html.twig");
+    }
+
 }
