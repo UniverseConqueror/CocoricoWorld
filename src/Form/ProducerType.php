@@ -39,7 +39,7 @@ class ProducerType extends AbstractType
             ->add('lastname',TextType::class, [
                 'label' => 'Nom '
             ])
-            ->add('telephone', IntegerType::class, [
+            ->add('telephone', TextType::class, [
                 'label' => 'Téléphone '
             ])
             ->add('status', TextType::class, [
@@ -56,6 +56,7 @@ class ProducerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Producer::class,
+            'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
 }

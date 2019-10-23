@@ -138,7 +138,7 @@ class Producer
         return $this;
     }
 
-    public function getSiretNumber(): ?int
+    public function getSiretNumber(): ?string
     {
         return $this->siretNumber;
     }

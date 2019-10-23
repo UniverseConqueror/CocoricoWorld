@@ -15,6 +15,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProducerController extends AbstractController
 {
     /**
+     * @Route("/producer/{id<\d+>}/profil", name="producer_profil")
+     */
+    public function index($id, ProducerRepository $producerRepository)
+    {
+        $producer = $producerRepository->find($id);
+
+        return $this->render('frontend/producer/profil.html.twig', [
+            'producer' => $producer,
+        ]);
+    }
+
+    /**
      * @Route("/producer/registration", name="producer_registration", methods={"GET","POST"})
      */
     public function new(Request $request, UserInterface $user): Response
@@ -56,6 +68,34 @@ class ProducerController extends AbstractController
         }
         return $this->render('frontend/producer/show.html.twig', [
             'producer' => $producer,
+        ]);
+    }
+    /**
+     * @Route("/producer/{id<\d+>}/edit", name="producer_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, ObjectManager $manager, Producer $producer ): Response
+    {
+        
+        $form = $this->createForm(ProducerType::class, $producer);
+        $form->handleRequest($request);
+
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash(
+                'info',
+                'Mise à jour effectuée'
+            );
+
+            return $this->redirectToRoute('producer_profil',['id'=>$producer->getId()]);
+        }
+
+        return $this->render('frontend/producer/edit.html.twig', [
+            'producer' => $producer,
+            'form' => $form->createView(),
         ]);
     }
 }
