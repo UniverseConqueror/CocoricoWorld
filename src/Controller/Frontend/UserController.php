@@ -4,16 +4,20 @@ namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+use App\Repository\UserRepository;
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("/frontend/user", name="frontend_user")
+     * @Route("/profil/{id<\d+>}", name="profil_user")
      */
-    public function index()
+    public function profil($id, User $user, UserRepository $userrepository)
     {
-        return $this->render('frontend/user/index.html.twig', [
-            'controller_name' => 'UserController',
+        $user = $userrepository->find($id);
+
+        return $this->render('frontend/user/profil.html.twig', [
+            'user' => $user
         ]);
     }
 }
