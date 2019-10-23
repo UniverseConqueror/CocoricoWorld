@@ -27,17 +27,17 @@ class UserUpdateProfilType extends AbstractType
         ;
     }
 
-    public function onPreSetData(FormEvents $event)
+    public function onPreSetData(FormEvent $event)
     {
         // On récupère notre entite User depuis l'event
         $user = $event->getData();
      
-        // On récupère le form depuis l'event (pour éventuellement le manipuler)
+        // On récupère le form depuis l'event
         $form = $event->getForm();
 
-        // Le user existe ?
+        // Le user n'existe pas ?
         if ($user->getId() === null) {
-            // Si oui => password = obligatoire
+          
             $form->add('password', null, [
                
                 'empty_data' => '',
@@ -59,6 +59,7 @@ class UserUpdateProfilType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'attr' => ['novalidate' => 'novalidate']
         ]);
     }
 
