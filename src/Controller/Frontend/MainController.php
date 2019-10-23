@@ -36,7 +36,7 @@ class MainController extends AbstractController
     {
         return $this->render("frontend/main/faq.html.twig");
     }
-
+  
     /**
      * @Route("/cgv", name="cgv_page")
      */
@@ -52,5 +52,4 @@ class MainController extends AbstractController
     {
         return $this->render("frontend/main/legalsmentions.html.twig");
     }
-
 }
