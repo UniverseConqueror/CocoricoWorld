@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<h2>Modification du profil</h2>
+
+{{ form_start(form) }}
+
+      {{ form_row(form.firstname) }}    
+      {{ form_row(form.email) }}
+
+      <input type="submit" class="btn btn-success" value="Modifier" name="submit" id="submit">
+    
+{{ form_end(form) }}
+
+
+{% endblock %}

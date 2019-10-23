@@ -4,10 +4,13 @@
 
 {% block body %}
 
-{# Message Flash si l'inscription a été correctement effectuée #}
-{% for message in app.flashes('user registred') %}
-    <div class="flash-notice alert alert-success">
-    {{ message }}
+{# Message Flash #}
+{% for label, messages in app.flashes(['user registred', 'profil modified']) %}
+{% for message in messages %}
+  <div class="flash-notice alert alert-success">
+      {{ message }}
+  </div>
+{% endfor %}
 {% endfor %}
 
 </div>
