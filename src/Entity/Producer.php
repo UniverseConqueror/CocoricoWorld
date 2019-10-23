@@ -119,6 +119,7 @@ class Producer
         $this->updatedAt = null;
         $this->products  = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
