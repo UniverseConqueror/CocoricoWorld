@@ -23,31 +23,34 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/company", name="company_page")
      */
+    public function showCompanyPresentation()
+    {
+        return $this->render("frontend/main/company.html.twig");
+    }
 
-     public function contact(Request $request)
-     {
-        $contact = '';
+    /**
+     * @Route("/faq", name="faq_page")
+     */
+    public function showFaq()
+    {
+        return $this->render("frontend/main/faq.html.twig");
+    }
+  
+    /**
+     * @Route("/cgv", name="cgv_page")
+     */
+    public function showCgv()
+    {
+        return $this->render("frontend/main/cgv.html.twig");
+    }
 
-        $form = $this->createForm(ContactFormType::class);
-
-        $form->handleRequest($request);
-
-        //Traitement du form
-        if ($form->isSubmitted() && $form->isValid()) {
-           
-
-            $this->addFlash(
-                'email sent',
-                'Votre email a bien été envoyé !'
-            );
-
-            return $this->redirectToRoute('homepage');
-        }
-
-        return $this->render('frontend/main/contact.html.twig', [
-            'form' => $form->createView()
-            ]);
-     }
+    /**
+     * @Route("/legalsmentions", name="legalsmentions_page")
+     */
+    public function showLegalsMentions()
+    {
+        return $this->render("frontend/main/legalsmentions.html.twig");
+    }
 }

@@ -1,28 +1,28 @@
 <?php
-
 namespace App\Controller\Frontend;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Product;
+use App\Entity\Producer;
+use App\Repository\ProductRepository;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @Route("/frontend/product", name="frontend_product")
-     */
-    public function index()
-    {
-        return $this->render('frontend/product/index.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-    }
-    /**
-     * @Route("/frontend/product/sample", name="frontend_product_sample")
-     */
-    public function sample()
-    {
-        return $this->render('frontend/product/sample.html.twig', [
-            'controller_name' => 'ProductController',
-        ]);
-    }
+   /**
+    * @Route("/product/{id<\d+>}", name="product_show", methods={"GET"})
+    */
+   public function show(Product $product, ProductRepository $productRepository)
+   {
+       $producer = $product->getProducer();
+       $products = $productRepository->findBy(array('producer' => $producer), array(), 5);
+
+       
+       if (!$product) {
+           throw $this->createNotFoundException('Producteur introuvable');
+       }
+       return $this->render('frontend/product/show.html.twig', [
+           'product' => $product,
+           'product_producer'=> $products
+       ]);
+   }
 }
