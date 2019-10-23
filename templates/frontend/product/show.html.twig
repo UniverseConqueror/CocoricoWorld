@@ -109,10 +109,14 @@
        
             </div>
         </div>
+
     </div> 
-</div> 
+</div>
+
+
 <div class="" style="border:1px solid black; display: flex; width:1600px; height:700px; margin: auto">
-    <div class="card mr-1 mb-1" style="width: 18rem;">
+    {% for product in product_producer %}
+    <div class="card mr-1 mb-1" style="width: 18rem">
         <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
@@ -138,6 +142,6 @@
             <a class="btn btn-primary" href="#">Voir Plus</a>
         </div>
     </div>
+    {% endfor %}
 </div>
-
 {% endblock %}
