@@ -65,12 +65,12 @@
 
     {% for categorie in univers.categories %}
 
-      <a class="dropdown-item dropdown-category" href="#">{{ categorie.name }}</a>
+      <a class="dropdown-item dropdown-category" href="{{path('univers_menus', {'id' : categorie.id, 'type' : 'category'})}}">{{ categorie.name }}</a>
 
 
       {% for subcategorie in categorie.subcategories %}
 
-        <a class="dropdown-item" href="#">{{ subcategorie.name }}</a>
+        <a class="dropdown-item" href="{{path('univers_menus', {'id' : categorie.id, 'type' : 'category'})}}">{{ subcategorie.name }}</a>
 
       {% endfor %}
 

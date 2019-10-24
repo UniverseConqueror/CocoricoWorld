@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UniversMenusController!{% endblock %}
+
+{% block body %}
+
+    <div>
+        {% if typeName == "subcategory" %}
+            <h1>Univers : {{type.category.univers.name}}</h1>
+            <h2> Categorie :{{type.category.name}}</h2>
+        {% else %}
+            <h1>{{type.univers.name}}</h1>
+        {% endif %}
+        <h3>{{type.name}}</h3>
+
+        {# Condition d'affichage sur le nombre de produits dans le type #}
+
+        {% if typeName == "subcategory" %}
+            {% if (type.products | length) >= 1 %}
+                <h3>{{ type.products | length }} produits actuellement disponibles dans cette sous categorie</h3>
+            {% else %}
+                Il n'y a aucun produit à afficher
+            {% endif %}
+        {% else %}
+            {# <h3>{{ type.subcategory.products | length }} produits actuellement disponibles dans cette categorie</h3>  #}
+        {% endif %}
+
+        {# {% dump(subcategory) %}  #}
+        <div class="container-fluid homepagecard">
+            {% if typeName == "subcategory" %}
+            {% for product in type.products %}
+
+
+                <div class="card mr-1" style="width: 18rem;">
+                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p>{{ product.producer.city }}</p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <p class="card-text">{{product.producer.socialReason}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p class="card-text">
+                            <h5>Description</h5>
+                            {% if product.description %}
+                                {{ product.description }}
+                            {% else %}
+                                Non communiquée
+                            {% endif %}
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary" href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        {% for subcategory in type.subcategories  %}
+
+
+            {% for product in subcategory.products %}
+
+
+                <div class="card mr-1" style="width: 18rem;">
+                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p>{{ product.producer.city }}</p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <p class="card-text">{{product.producer.socialReason}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p class="card-text">
+                            <h5>Description</h5>
+                            {% if product.description %}
+
+                                {{ product.description }}
+                            {% else %}
+                                Non communiquée
+                            {% endif %}
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="card-body text-center">
+                        <a class="btn btn-primary" href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

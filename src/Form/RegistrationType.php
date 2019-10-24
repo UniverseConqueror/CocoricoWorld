@@ -24,7 +24,7 @@ class RegistrationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            // 'attr' => ['novalidate' => 'novalidate']
+            'attr' => ['novalidate' => 'novalidate']
         ]);
     }
 }
