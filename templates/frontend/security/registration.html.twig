@@ -5,16 +5,17 @@
 {% block body %}
 
 <div class="login-form">
+
     <h1 class="h3 mb-3 font-weight-normal form">Inscrivez vous !</h1>
+
     {{ form_start(form) }}
-    <label for="inputEmail" class="sr-only">{{ form_row(form.email) }}</label>
-    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">{{ form_row(form.password) }}</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-    <button class="btn btn-lg btn-secondary">{{ button_label|default('Inscription') }}</button>
-    
+
+        {{ form_row(form.email) }}
+
+        {{ form_row(form.password) }}
+
+        <button class="btn btn-lg btn-secondary">{{ button_label|default('Inscription') }}</button>
+
     {{ form_end(form) }}
 </div>
 
