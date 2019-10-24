@@ -29,7 +29,7 @@ class ProducerController extends AbstractController
     /**
      * @Route("/producer/registration", name="producer_registration", methods={"GET","POST"})
      */
-    public function new(Request $request, UserInterface $user): Response
+    public function new(Request $request): Response
     {
         $producer = new Producer();
         $form = $this->createForm(ProducerType::class, $producer);
@@ -38,7 +38,7 @@ class ProducerController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $producer->setUser($user);
+            $user = $producer->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($producer);
             $entityManager->flush();
