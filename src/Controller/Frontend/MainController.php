@@ -53,4 +53,34 @@ class MainController extends AbstractController
     {
         return $this->render("frontend/main/legalsmentions.html.twig");
     }
+
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact(Request $request)
+    {
+        $contact;
+
+        $form = $this->createForm(ContactFormType::class);
+
+        $form->handleRequest($request);
+
+        //Traitement du form
+        if ($form->isSubmitted() && $form->isValid()) {
+           
+
+            $this->addFlash(
+                'email sent',
+                'Votre email a bien été envoyé!'
+            );
+
+            return $this->redirectToRoute('homepage');
+        }
+
+
+        return $this->render("frontend/main/contact.html.twig", [
+            'form' => $form->createView()
+            ]);
+    }
+    
 }
