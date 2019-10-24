@@ -5,10 +5,15 @@ namespace App\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class ProductController
+ * @package App\Controller\Backend
+ * @Route("/backend", name="backend_")
+ */
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/backend/product", name="backend_product")
+     * @Route("/product", name="product_list")
      */
     public function index()
     {

@@ -1,0 +1,11 @@
+.admin__header {
+    border-bottom: 1px solid black;
+}
+
+.admin__header--list {
+    list-style: none;
+}
+
+.admin__header--list-item + .admin__header--list-item {
+    margin-left: 1em;
+}

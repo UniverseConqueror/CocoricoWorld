@@ -5,10 +5,15 @@ namespace App\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class UserController
+ * @package App\Controller\Backend
+ * @Route("/backend", name="backend_")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/backend/user", name="backend_user")
+     * @Route("/user", name="user_list")
      */
     public function index()
     {

@@ -5,10 +5,15 @@ namespace App\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class SubCategoryController
+ * @package App\Controller\Backend
+ * @Route("/backend", name="backend_")
+ */
 class SubCategoryController extends AbstractController
 {
     /**
-     * @Route("/backend/sub/category", name="backend_sub_category")
+     * @Route("/subcategory", name="subcategory_list")
      */
     public function index()
     {

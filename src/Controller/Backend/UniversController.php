@@ -5,10 +5,15 @@ namespace App\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class UniversController
+ * @package App\Controller\Backend
+ * @Route("/backend", name="backend_")
+ */
 class UniversController extends AbstractController
 {
     /**
-     * @Route("/backend/univers", name="backend_univers")
+     * @Route("/univers", name="univers_list")
      */
     public function index()
     {
