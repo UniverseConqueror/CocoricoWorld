@@ -75,7 +75,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($admin);
 
-        // Créer 10 users
+        // Créer 30 users
 
         //Création d'un tableau de users pour stocker et réutiliser pour lier aux producers
         $users = [];
@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
             $manager->persist($user);
             $users[] = $user;
         }
-        //Créer 1 producer
+        //Créer 10 producer
         
         //Création d'un tableau de producers pour stocker et réutiliser pour lier aux products
         $producers = [];
@@ -137,7 +137,7 @@ class AppFixtures extends Fixture
         }
 
 
-        //Créer 10 Product
+        //Créer 600 Product
 
         //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
         $products = [];

@@ -4,8 +4,21 @@
 
 {% block body %}
 
+{# Message Flash si l'email orgine contact a été correctement envoyé #}
+{% for message in app.flashes('email sent') %}
+    <div class="flash-notice alert alert-success">
+    {{ message }}
+    </div>
+{% endfor %}
+
+
 <h1> Bienvenue chez Cocorico World</h1>
 
+{# Message Flash si l'email orgine contact a été correctement envoyé #}
+{% for message in app.flashes('email sent') %}
+    <div class="flash-notice alert alert-success">
+    {{ message }}
+{% endfor %}
 
 <div class="container-fluid homepagecard">
 
