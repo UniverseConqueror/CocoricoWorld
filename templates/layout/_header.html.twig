@@ -21,6 +21,9 @@
               </li>
               {% else %}
               <li class="nav-item active">
+                <a class="nav-link" href="{{path('producer_registration')}}"title="Register">Nouveau Producteur</a> {# TODO intégrer un logo#}
+              </li>
+              <li class="nav-item active">
                 {# <i class="fa fa-user fa-3x " aria-hidden="true"></i> #}
                   <a class="nav-link" href="{{ path('app_logout') }}" title="Logout"><i class="fa fa-sign-out fa-3x " style = "color : red" aria-hidden="true"></i></a>
               </li>
@@ -29,6 +32,10 @@
                   <a class="nav-link" href="{{ path('profil_user', {'id' : app.user.id}) }}" title="My Profil" ><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
               </li>
               {% endif %}
+
+              {# TODO {% if is_granted(['ROLE_PRODUCER']) %}#}
+              {#<a class="btn btn my-2 my-sm-0 ml-2" href="{{ path('producer_profil', {'id' : app.user.id})}} "> Profil producteur</a>#}
+              {# {% endif %} #}
 
 
         <li class="nav-item active">
@@ -73,56 +80,3 @@
   {% endfor %}
   </div>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
