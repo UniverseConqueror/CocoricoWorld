@@ -5,13 +5,16 @@
 {% block body %}
 
 <div class="login-form">
+
     <h1 class="h3 mb-3 font-weight-normal form">Inscrivez vous !</h1>
+
     {{ form_start(form) }}
-    {{ form_row(form.email) }}
+    
+        {{ form_row(form.email) }}
 
-    {{ form_row(form.password) }}
+        {{ form_row(form.password) }}
 
-    <button class="btn btn-lg btn-secondary">{{ button_label|default('Inscription') }}</button>
+        <button class="btn btn-lg btn-secondary">{{ button_label|default('Inscription') }}</button>
 
     {{ form_end(form) }}
 </div>
