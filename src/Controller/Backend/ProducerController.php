@@ -2,13 +2,14 @@
 
 namespace App\Controller\Backend;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProducerController extends AbstractController
 {
     /**
-     * @Route("/backend/producer", name="backend_producer")
+     * @Route("/backend/producer", name="backend_producer", )
      */
     public function index()
     {
@@ -16,4 +17,5 @@ class ProducerController extends AbstractController
             'controller_name' => 'ProducerController',
         ]);
     }
+    
 }

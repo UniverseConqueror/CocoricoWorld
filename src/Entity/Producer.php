@@ -119,6 +119,7 @@ class Producer
         $this->updatedAt = null;
         $this->products  = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
@@ -137,7 +138,7 @@ class Producer
         return $this;
     }
 
-    public function getSiretNumber(): ?int
+    public function getSiretNumber(): ?string
     {
         return $this->siretNumber;
     }

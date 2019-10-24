@@ -16,6 +16,14 @@
     <button class="btn btn-lg btn-secondary">{{ button_label|default('Inscription') }}</button>
     
     {{ form_end(form) }}
+    
+<div>
+        <h3>Créer votre compte !</h3>
+     
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">Sauvegarder</button>
+        {{ form_end(form) }}
 </div>
 
 {% endblock %}
