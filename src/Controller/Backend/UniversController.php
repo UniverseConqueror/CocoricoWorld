@@ -26,7 +26,6 @@ class UniversController extends AbstractController
     public function index(UniversRepository $universRepository, Request $request, PaginatorInterface $paginator)
     {
         $q = $request->query->get('q');
-        /** @var Univers[] $universes */
         $queryBuilder = $universRepository->getAllWithSearchQueryBuilder($q);
 
         $pagination = $paginator->paginate(
@@ -44,6 +43,11 @@ class UniversController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($univers);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                'L\'univers a été créée avec succès !'
+            );
 
             return $this->redirectToRoute('backend_univers_list');
         }
@@ -78,8 +82,6 @@ class UniversController extends AbstractController
                 'success',
                 'L\'univers a été supprimé avec succès !'
             );
-
-            return $this->redirectToRoute('backend_univers_list');
         }
         else {
 
@@ -87,9 +89,9 @@ class UniversController extends AbstractController
                 'error',
                 'Une erreur s\'est produite. Veuillez réessayer plus tard !'
             );
-
-            return $this->redirectToRoute('backend_univers_list');
         }
+
+        return $this->redirectToRoute('backend_univers_list');
     }
 
     /**

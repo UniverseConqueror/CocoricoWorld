@@ -80,7 +80,7 @@
                     <tr>
                         <td>{{ univers.id }}</td>
                         <td>{{ univers.name }}</td>
-                        <td>{% if univers.image is not null %}<img src="{{ univers.image }}" alt="{{ univers.name }}"> {% else %} Pas d'image {% endif %}</td>
+                        <td>{% if univers.image is not null %}<img src="" alt="{{ univers.name }}"> {% else %} Pas d'image {% endif %}</td>
                         <td>{{ univers.enable ? "Oui" : "Non" }}</td>
                         <td>{{ univers.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                         <td>{{ univers.updatedAt ? univers.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>
@@ -93,6 +93,10 @@
                                 <button type="submit" class="btn justify-content-center delete__button"><i class="fa fa-trash-o delete__icon"></i></button>
                             </form>
                         </td>
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="8">Aucun résultat !</td>
                     </tr>
                 {% endfor %}
             </tbody>
