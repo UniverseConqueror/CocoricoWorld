@@ -84,7 +84,7 @@ class ProductController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'product blocked',
+                'danger',
                 'La produit a bien été archivé'
             );
         } else {
@@ -93,7 +93,7 @@ class ProductController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'product debloquée',
+                'success',
                 'Le produit a bien été debloquée'
             );
         }

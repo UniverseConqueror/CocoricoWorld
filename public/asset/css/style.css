@@ -63,3 +63,9 @@ h1 {
 .producer_profil {
     display: flex;
 }
+
+.flash {
+    text-align: center;
+    margin : auto auto;
+    width : 50%;
+}

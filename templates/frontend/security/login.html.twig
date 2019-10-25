@@ -5,7 +5,7 @@
 {% block body %}
 
 {# Message Flash #}
-{% for label, messages in app.flashes(['user registred', 'profil modified']) %}
+{% for label, messages in app.flashes(['success']) %}
 {% for message in messages %}
   <div class="flash-notice alert alert-success">
       {{ message }}
