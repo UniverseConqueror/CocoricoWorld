@@ -84,7 +84,7 @@ class Product
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Producer", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Producer", inversedBy="products", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $producer;
@@ -102,6 +102,8 @@ class Product
         $this->updatedAt     = null;
         $this->subcategories = new ArrayCollection();
     }
+
+    
 
     public function getId(): ?int
     {
