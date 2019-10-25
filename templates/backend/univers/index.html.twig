@@ -76,7 +76,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for univers in universesAdmin %}
+                {% for univers in pagination %}
                     <tr>
                         <td>{{ univers.id }}</td>
                         <td>{{ univers.name }}</td>
@@ -97,6 +97,9 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
     </div>
 
 {% endblock %}

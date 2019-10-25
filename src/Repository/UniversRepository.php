@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Univers;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Univers|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,7 +35,12 @@ class UniversRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findAllWithSearch($term)
+
+    /**
+     * @param $term string
+     * @return QueryBuilder
+     */
+    public function getAllWithSearchQueryBuilder($term): QueryBuilder
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -44,10 +50,7 @@ class UniversRepository extends ServiceEntityRepository
             ;
         }
 
-        return $qb
-            ->getQuery()
-            ->getResult()
-        ;
+        return $qb;
     }
 
     /*

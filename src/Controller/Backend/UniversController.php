@@ -6,6 +6,7 @@ use App\Entity\Univers;
 use App\Form\Backend\AddUniversType;
 use App\Form\Backend\EditUniversType;
 use App\Repository\UniversRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,11 +23,17 @@ class UniversController extends AbstractController
      *     name="univers_list",
      *     methods={"GET", "POST"})
      */
-    public function index(UniversRepository $universRepository, Request $request)
+    public function index(UniversRepository $universRepository, Request $request, PaginatorInterface $paginator)
     {
         $q = $request->query->get('q');
         /** @var Univers[] $universes */
-        $universes = $universRepository->findAllWithSearch($q);
+        $queryBuilder = $universRepository->getAllWithSearchQueryBuilder($q);
+
+        $pagination = $paginator->paginate(
+            $queryBuilder,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         $univers = new Univers();
         $addUniversForm = $this->createForm(AddUniversType::class, $univers);
@@ -42,7 +49,7 @@ class UniversController extends AbstractController
         }
 
         return $this->render('backend/univers/index.html.twig', [
-            'universesAdmin' => $universes,
+            'pagination' => $pagination,
             'addUniversForm' => $addUniversForm->createView(),
         ]);
     }
