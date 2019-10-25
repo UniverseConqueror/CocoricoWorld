@@ -5,13 +5,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Entity\Producer;
 use App\Repository\ProductRepository;
-use App\Repository\ProducerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProductType;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\FileUploader;
-
-
+use Doctrine\Common\Persistence\ObjectManager;
 
 class ProductController extends AbstractController
 {
@@ -75,4 +73,32 @@ class ProductController extends AbstractController
 
         ]);
    }
+    /**
+     * @Route("product/disable/{id<\d+>}", name = "disable_product")
+     */
+    public function enable_disable_product(Product $product, ObjectManager $manager)
+    {
+        if ($product->getEnable($product) == true) {
+            $product->setEnable(false);
+            $manager->persist($product);
+            $manager->flush();
+
+            $this->addFlash(
+                'product blocked',
+                'La produit a bien été archivé'
+            );
+        } else {
+            $product->setEnable(true);
+            $manager->persist($product);
+            $manager->flush();
+
+            $this->addFlash(
+                'product debloquée',
+                'Le produit a bien été debloquée'
+            );
+        }
+        return $this->redirectToRoute('producer_profil', [
+            'id' => $product->getProducer()->getId()
+        ]);
+    }
 }
