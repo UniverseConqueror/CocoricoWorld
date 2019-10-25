@@ -55,6 +55,7 @@ class Univers
         $this->createdAt  = new \DateTime();
         $this->updatedAt  = null;
         $this->categories = new ArrayCollection();
+        $this->image      = null;
     }
 
     public function getId(): ?int
