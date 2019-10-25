@@ -6,7 +6,7 @@
 
     <h1 class="text-center mt-4">Modifier l'univers</h1>
 
-    <div class="container text-center col-sm-6">
+    <div class="container text-center col-md-6 col-sm-10">
         {{ form_start(editUniversForm) }}
 
             {{ form_row(editUniversForm.name) }}
@@ -23,7 +23,10 @@
 
             {{ form_row(editUniversForm.createdAt) }}
 
-            <button type="submit" class="btn btn-primary">Modifier</button>
+            <div class="mt-4">
+                <a href="{{ path('backend_univers_list') }}" class="btn btn-secondary">Retour à la liste</a>
+                <button type="submit" class="btn btn-primary">Modifier</button>
+            </div>
 
         {{ form_end(editUniversForm) }}
     </div>

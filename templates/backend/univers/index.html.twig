@@ -8,8 +8,30 @@
 
     <div class="container text-center">
 
-    <div class="clear">
-        <button type="button" class="btn btn-primary float-right mb-4" data-toggle="modal" data-target="#AddUniversModal">➕ Ajouter un univers</button>
+    <div class="d-flex justify-content-around flex-wrap">
+
+        <div class="row">
+            <form>
+                <div class="input-group mb-3">
+
+                    <input type="text" name="q" class="form-control" placeholder="Rechercher par le nom..." value="{{ app.request.query.get("q") }}">
+
+                    <div class="input-group-append">
+
+                        <button type="submit"
+                                class="btn btn-outline-dark">
+                            <span class="fa fa-search"></span>
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+            {% if app.request.query.get("q") is not null %}
+                <a href="{{ path('backend_univers_list') }}" class="btn btn-link">Réinitialiser les filtres</a>
+            {% endif %}
+        </div>
+
+        <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#AddUniversModal">➕ Ajouter un univers</button>
     </div>
 
     <div class="modal fade" id="AddUniversModal" tabindex="-1" role="dialog" aria-labelledby="AddUniversModal" aria-hidden="true">

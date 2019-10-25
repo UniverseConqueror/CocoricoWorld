@@ -24,8 +24,9 @@ class UniversController extends AbstractController
      */
     public function index(UniversRepository $universRepository, Request $request)
     {
-        /** @var Univers $universes */
-        $universes = $universRepository->findAll();
+        $q = $request->query->get('q');
+        /** @var Univers[] $universes */
+        $universes = $universRepository->findAllWithSearch($q);
 
         $univers = new Univers();
         $addUniversForm = $this->createForm(AddUniversType::class, $univers);

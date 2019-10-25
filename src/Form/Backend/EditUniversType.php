@@ -6,6 +6,7 @@ use App\Entity\Univers;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,9 @@ class EditUniversType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
             ])
-            ->add('image') // TODO: Image upload
+            ->add('image', FileType::class, [
+                'disabled' => true,
+            ]) // TODO: Image upload
             ->add('enable', CheckboxType::class, [
                 'label'    => false,
                 'required' => false,

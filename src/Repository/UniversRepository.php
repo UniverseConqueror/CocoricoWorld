@@ -25,11 +25,26 @@ class UniversRepository extends ServiceEntityRepository
     public function findAllUniversWithCategoriesAndSubcategories()
     {
         return $this->createQueryBuilder('u')
-            ->addSelect('u')
             ->join('u.categories', 'c')
             ->addSelect('c')
             ->join('c.subcategories', 's')
             ->addSelect('s')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findAllWithSearch($term)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        if ($term) {
+            $qb->andWhere('u.name LIKE :term')
+                ->setParameter('term', '%'.$term.'%')
+            ;
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;
