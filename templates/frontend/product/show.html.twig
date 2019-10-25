@@ -2,6 +2,9 @@
 
 {% block body %}
 
+{% if product.enable == 1 %}
+
+
 <div class="d-flex">
 
     <div class="container jumbotron" style="border:1px solid black; display: flex; width:800px; height:700px; position:relative">
@@ -144,4 +147,7 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+    <p>Le produit est archivé</p>
+{% endif %}
 {% endblock %}

@@ -8,10 +8,11 @@
 {% if app.user.email == producer.user.email %}
 
 
-<h1>Profil User</h1>
+<div class="producer_profil">
 
 {# Détails du profil du Producer loggué #}
 <div class="producer-form">
+    <h1>Profil User</h1>
     <p>Avatar:{{producer.avatar}}</p>
     <p>Raison social: {{producer.socialReason}}</p>
     <p>Siret: {{producer.siretNumber}}</p>
@@ -34,6 +35,51 @@
   <p>Vous ne pouvez pas vous connecter à un autre profil que le vôtre voyons !!! Petit voyou !!</p>
 {% endif %} 
 
+{# Mise en place de la liste des produits du producer avec accès view/edit/delete#}
 
+<div class="container  producer-form">
+        <h1> My Products Index </h1>
+    <a href="#" class="btn btn-success"> 
+        Ajouter un produit
+        <i class="fa fa-plus-circle"></i> 
+    </a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in producer.products %}
+            <tr>
+            
+                 <td>{{ product.name }}</td>
+                 <td>
+                    <a href="{{ path('product_show', {'id' : product.id})}}" class="btn btn-success">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="{{ path('disable_product', {'id' : product.id})}}" class="btn btn-warning">
+                        <i class="fa fa-eye-slash"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="fa fa-times"></i>
+                    </a>
+                  </td>
+            </tr>
+        
+        {% else %}
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+</div>
 
 {% endblock %}
