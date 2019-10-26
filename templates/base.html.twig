@@ -11,17 +11,18 @@
         <title>{% block title %}{% endblock %} - Cocorico </title>
     </head>
     <body>
-        <div>
-            {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+       
         </div>
         
         {% block header%}{% include 'layout/_header.html.twig' %} {% endblock %}
+        <div>
+                {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} flash">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         {% block body %}{% endblock %}
         {% block footer %} {% include 'layout/_footer.html.twig' %} {% endblock %}
         

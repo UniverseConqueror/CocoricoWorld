@@ -63,9 +63,17 @@ h1 {
 .producer_profil {
     display: flex;
 }
+
 a {
     color: black;
 }
+
 .btn {
     text-transform: uppercase;
+}  
+
+.flash {
+    text-align: center;
+    margin : auto auto;
+    width : 50%;
 }
