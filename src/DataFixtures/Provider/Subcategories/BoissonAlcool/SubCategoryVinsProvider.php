@@ -9,9 +9,9 @@ class SubCategoryVinsProvider extends Base
 {
     protected static $vinsArray = [
         
-        'Bordeaux rouge',
+        'Bordeaux Rouge',
         'Alsace Blanc',
-        'Anjou rosè',
+        'Anjou Rosé',
     ];
    
     public static function randomSubCategoryVins()

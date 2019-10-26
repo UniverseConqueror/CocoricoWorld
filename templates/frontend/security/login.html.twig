@@ -4,17 +4,15 @@
 
 {% block body %}
 
-{# Message Flash #}
-{% for label, messages in app.flashes(['user registred', 'profil modified']) %}
+
+    {# Message Flash #}
+{% for label, messages in app.flashes(['success']) %}
 {% for message in messages %}
   <div class="flash-notice alert alert-success">
       {{ message }}
   </div>
 {% endfor %}
 {% endfor %}
-
-</div>
-
 
 <form method="post" class="login-form">
     {% if error %}
@@ -51,5 +49,7 @@
     <button class="btn btn-lg btn-secondary" type="submit">
         Connexion
     </button>
+
 </form>
+
 {% endblock %}

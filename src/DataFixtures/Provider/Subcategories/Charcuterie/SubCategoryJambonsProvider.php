@@ -9,9 +9,9 @@ class SubCategoryJambonsProvider extends Base
 {
     protected static $jambonsArray = [
         
-        'Jambon cru fumè',
-        'Jambon blanc fumè',
-        'Lardons fumès',
+        'Jambon cru fumé',
+        'Jambon blanc fumé',
+        'Lardons fumés',
     ];
    
     public static function randomSubCategoryJambons()

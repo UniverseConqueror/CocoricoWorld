@@ -9,7 +9,7 @@ class CategoryProduitElaboreProvider extends Base
 {
     protected static $ProduitsElaborésArray = [
         
-        'Plats prèparés',
+        'Plats préparés',
         'Friands',
         'Pizzas',
                 
