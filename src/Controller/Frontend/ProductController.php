@@ -73,6 +73,36 @@ class ProductController extends AbstractController
 
         ]);
    }
+   
+    /**
+     * @Route("/product/{id<\d+>}/edit", name="product_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, ObjectManager $manager, Product $product ): Response
+    {
+        
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            $this->addFlash(
+                'info',
+                'Mise à jour effectuée'
+            );
+
+            return $this->redirectToRoute('product_show',['id'=>$product->getId()]);
+        }
+
+        return $this->render('frontend/product/edit.html.twig', [
+            'product' => $product,
+            'form' => $form->createView(),
+        ]);
+    }
+    
     /**
      * @Route("product/disable/{id<\d+>}", name = "disable_product")
      */
@@ -99,6 +129,27 @@ class ProductController extends AbstractController
         }
         return $this->redirectToRoute('producer_profil', [
             'id' => $product->getProducer()->getId()
+        ]);
+    }
+
+     /**
+     * @Route("/product/{id}", name="product_delete", methods={"DELETE"}, requirements={"id"="\d+"})
+     */
+    public function delete(Request $request, Product $product): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($product);
+            $entityManager->flush();
+
+            $this->addFlash(
+                'sucess',
+                'Suppression effectuée'
+            );
+        }
+
+        return $this->redirectToRoute('producer_show', [
+            'id'=>$product->getProducer()->getId(),
         ]);
     }
 }
