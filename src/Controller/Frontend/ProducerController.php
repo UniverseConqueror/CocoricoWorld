@@ -98,7 +98,7 @@ class ProducerController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'info',
+                'success',
                 'Mise à jour effectuée'
             );
 
