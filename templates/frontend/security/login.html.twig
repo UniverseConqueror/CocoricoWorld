@@ -13,9 +13,6 @@
 {% endfor %}
 {% endfor %}
 
-</div>
-
-
 <form method="post" class="login-form">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -51,5 +48,7 @@
     <button class="btn btn-lg btn-secondary" type="submit">
         Connexion
     </button>
+
 </form>
+
 {% endblock %}

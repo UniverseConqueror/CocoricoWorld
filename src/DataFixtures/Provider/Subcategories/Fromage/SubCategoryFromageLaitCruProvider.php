@@ -9,7 +9,7 @@ class SubCategoryFromageLaitCruProvider extends Base
 {
     protected static $fromageLaitCruArray = [
         
-        'Comtè',
+        'Comté',
         'Emmental',
         'Tomme de Savoie',
     ];

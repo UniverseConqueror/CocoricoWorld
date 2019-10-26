@@ -8,7 +8,7 @@ use App\Repository\SubcategoryRepository;
 class UniversMenusController extends AbstractController
 {
     /**
-     * @Route("/{type<(subcategory|category)>}/{id<\d+>}", name="univers_menus")
+     * @Route("/{type<(subcategory|category)>}/{id<\d+>}", name="showlist")
      */
     public function index($id, $type, UniversRepository $universrepository, CategoryRepository $cat, SubcategoryRepository $sub)
     {
@@ -20,7 +20,7 @@ class UniversMenusController extends AbstractController
                 $cat = $cat->find($id);
                 break;
         }
-        return $this->render('frontend/univers_menus/show.html.twig', [
+        return $this->render('frontend/univers_menus/showlist.html.twig', [
             'type' => $cat,
             'typeName' => $type,
 
