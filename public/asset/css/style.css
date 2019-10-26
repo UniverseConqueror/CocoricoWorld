@@ -63,3 +63,9 @@ h1 {
 .producer_profil {
     display: flex;
 }
+a {
+    color: black;
+}
+.btn {
+    text-transform: uppercase;
+}
