@@ -143,13 +143,13 @@ class ProductController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'danger',
+                'sucess',
                 'Suppression effectuée'
             );
         }
 
         return $this->redirectToRoute('producer_show', [
-            'id' => $user->getProducer()->getId(),
+            'id'=>$product->getProducer()->getId(),
         ]);
     }
 }
