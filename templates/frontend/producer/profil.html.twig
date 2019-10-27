@@ -31,9 +31,7 @@
     </a>
 
 </div>
-{% else %}
-  <p>Vous ne pouvez pas vous connecter à un autre profil que le vôtre voyons !!! Petit voyou !!</p>
-{% endif %} 
+
 
 {# Mise en place de la liste des produits du producer avec accès view/edit/delete#}
 
@@ -88,5 +86,10 @@
 
 </div>
 </div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+        Vous n'êtes pas autorisé à accéder aux informations d'un autre compte
+      </div>
+{% endif %} 
 
 {% endblock %}
