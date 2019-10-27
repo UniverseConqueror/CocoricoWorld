@@ -1,5 +1,6 @@
 body {
-    background-color: rgb(235, 209, 175);
+    background-image: url('../doc/Background/bodybackground2.png');
+    background-size: cover;
 }
 
 .footer{
