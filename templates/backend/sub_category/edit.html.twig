@@ -9,6 +9,7 @@
     <h1 class="text-center mt-4">Modifier la sous-catégorie</h1>
 
     <div class="container text-center col-md-6 col-sm-10">
+        {% form_theme editSubcategoryForm with ['bootstrap_4_horizontal_layout.html.twig'] only %}
         {{ form_start(editSubcategoryForm) }}
 
         {{ form_row(editSubcategoryForm.name) }}

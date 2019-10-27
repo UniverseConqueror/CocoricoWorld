@@ -28,6 +28,7 @@ class SubCategoryController extends AbstractController
         $q = $request->query->get('q');
         $queryBuilder = $subcategoryRepository->getAllWithSearchQueryBuilder($q);
 
+        /** @var Subcategory[] $pagination */
         $pagination = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),

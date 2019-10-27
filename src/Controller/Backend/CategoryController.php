@@ -28,6 +28,7 @@ class CategoryController extends AbstractController
         $q = $request->query->get('q');
         $queryBuilder = $categoryRepository->getAllWithSearchQueryBuilder($q);
 
+        /** @var Category[] $pagination */
         $pagination = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),

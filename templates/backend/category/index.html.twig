@@ -43,6 +43,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    {% form_theme addCategoryForm with ['bootstrap_4_horizontal_layout.html.twig'] only %}
                     {{ form_start(addCategoryForm) }}
                     <div class="modal-body">
                         {{ form_row(addCategoryForm.name) }}

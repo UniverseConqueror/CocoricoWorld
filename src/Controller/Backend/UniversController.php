@@ -28,6 +28,8 @@ class UniversController extends AbstractController
         $q = $request->query->get('q');
         $queryBuilder = $universRepository->getAllWithSearchQueryBuilder($q);
 
+
+        /** @var Univers[] $pagination */
         $pagination = $paginator->paginate(
             $queryBuilder,
             $request->query->getInt('page', 1),
