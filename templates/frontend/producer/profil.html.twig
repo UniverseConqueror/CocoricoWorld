@@ -4,8 +4,7 @@
 
 {% block body %}
 
-{# Condition pour vérifier que le user loggué est bien le titulaire du profil #}
-{% if app.user.email == producer.user.email %}
+
 
 
 <div class="producer_profil">
@@ -86,10 +85,6 @@
 
 </div>
 </div>
-{% else %}
-<div class="alert alert-danger" role="alert">
-        Vous n'êtes pas autorisé à accéder aux informations d'un autre compte
-      </div>
-{% endif %} 
+
 
 {% endblock %}

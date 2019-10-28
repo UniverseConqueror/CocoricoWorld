@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+// use Symfony\Component\HttpFoundation\File\Exception\FileException;
+// use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProducerController extends AbstractController
 {
@@ -22,11 +24,18 @@ class ProducerController extends AbstractController
      */
     public function index($id, ProducerRepository $producerRepository)
     {
-        $producer = $producerRepository->find($id);
+        
+        $user = $this->getUser();
+        $producer = $user->getProducer();
 
-        return $this->render('frontend/producer/profil.html.twig', [
+        if ($id == $producer->getId()) {
+            return $this->render('frontend/producer/profil.html.twig', [
             'producer' => $producer,
-        ]);
+            ]);
+        }
+
+        throw new AccessDeniedException();
+    
     }
 
     /**
