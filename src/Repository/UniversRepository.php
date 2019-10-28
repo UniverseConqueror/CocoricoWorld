@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Univers;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Univers|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,7 +26,6 @@ class UniversRepository extends ServiceEntityRepository
     public function findAllUniversWithCategoriesAndSubcategories()
     {
         return $this->createQueryBuilder('u')
-            ->addSelect('u')
             ->join('u.categories', 'c')
             ->addSelect('c')
             ->join('c.subcategories', 's')
@@ -33,6 +33,24 @@ class UniversRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+
+    /**
+     * @param $term string
+     * @return QueryBuilder
+     */
+    public function getAllWithSearchQueryBuilder($term): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        if ($term) {
+            $qb->andWhere('u.name LIKE :term')
+                ->setParameter('term', '%'.$term.'%')
+            ;
+        }
+
+        return $qb;
     }
 
     /*

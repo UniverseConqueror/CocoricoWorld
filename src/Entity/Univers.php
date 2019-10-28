@@ -55,11 +55,14 @@ class Univers
         $this->createdAt  = new \DateTime();
         $this->updatedAt  = null;
         $this->categories = new ArrayCollection();
+        $this->image      = null;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->name;
     }
+
     public function getId(): ?int
     {
         return $this->id;

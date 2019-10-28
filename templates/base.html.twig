@@ -4,9 +4,12 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="{{ asset('asset/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('asset/css/font-awesome.min.css') }}">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('asset/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('asset/css/font-awesome.min.css') }}">
+        {% endblock %}
 
         <title>{% block title %}{% endblock %} - Cocorico </title>
     </head>
@@ -26,10 +29,11 @@
         {% block body %}{% endblock %}
         {% block footer %} {% include 'layout/_footer.html.twig' %} {% endblock %}
         
-        {% block javascripts %}{% endblock %}
-        <script src="{{ asset('asset/js/jquery.min.js') }}" ></script>
-        <script src="{{ asset('asset/js/popper.min.js') }}" ></script>
-        <script src="{{ asset('asset/js/bootstrap.min.js') }}" ></script>
+        {% block javascripts %}
+            <script src="{{ asset('asset/js/jquery.min.js') }}" ></script>
+            <script src="{{ asset('asset/js/popper.min.js') }}" ></script>
+            <script src="{{ asset('asset/js/bootstrap.min.js') }}" ></script>
+        {% endblock %}
         
     </body>
 </html>

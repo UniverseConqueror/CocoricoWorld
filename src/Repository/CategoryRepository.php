@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,22 @@ class CategoryRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+    }
+
+    public function getAllWithSearchQueryBuilder($term): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->innerJoin('c.univers', 'u')
+            ->addSelect('u')
+        ;
+
+        if ($term) {
+            $qb->andWhere('c.name LIKE :term OR u.name LIKE :term')
+                ->setParameter('term', '%'.$term.'%')
+        ;
+        }
+
+        return $qb;
     }
 
     // /**
