@@ -11,21 +11,9 @@
         <div class="d-flex justify-content-around flex-wrap">
 
             <div class="row">
-                <form>
-                    <div class="input-group mb-3">
 
-                        <input type="text" name="q" class="form-control" placeholder="Rechercher par le nom..." value="{{ app.request.query.get("q") }}">
+                {% include 'backend/layout/_admin_search_form.html.twig' %}
 
-                        <div class="input-group-append">
-
-                            <button type="submit"
-                                    class="btn btn-outline-dark">
-                                <span class="fa fa-search"></span>
-                            </button>
-
-                        </div>
-                    </div>
-                </form>
                 {% if app.request.query.get("q") is not null %}
                     <a href="{{ path('backend_user_list') }}" class="btn btn-link">Réinitialiser les filtres</a>
                 {% endif %}
