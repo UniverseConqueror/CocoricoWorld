@@ -15,6 +15,7 @@ class AppExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('truncate', [$this, 'truncate']),
+            new TwigFilter('json_decode', [$this, 'json_decode']),
         ];
     }
 
@@ -39,5 +40,19 @@ class AppExtension extends AbstractExtension
 
             return $value;
         }
+    }
+
+    /**
+     * Convert the given json string into a single php displayable string.
+     *
+     * {{ user.roles|json_decode }}
+     *
+     * @param array $json The json string which will be converted into a simple php string
+     *
+     * @return mixed
+     */
+    public function json_decode(array $json)
+    {
+        return implode(" ", $json);
     }
 }
