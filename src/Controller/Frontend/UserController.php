@@ -56,7 +56,7 @@ class UserController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                    'profil modified',
+                    'success',
                     'Votre modification de profil a bien été enregistrée - Veuillez vous reconnecter'
                 );
 

@@ -4,13 +4,13 @@
 
 {% block body %}
 
-<div>
-        <h3>Contactez nous !</h3>
-     
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-primary">Envoyer</button>
-        {{ form_end(form) }}
+<div class="login-form">
+    <h3>Contactez nous !</h3>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
 </div>
 
 {% endblock %}

@@ -68,13 +68,7 @@ class MainController extends AbstractController
         //Traitement du form
         if ($form->isSubmitted() && $form->isValid()) {
            
-
-            $this->addFlash(
-                'email sent',
-                'Votre email a bien été envoyé!'
-            );
-
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('mail');
         }
 
 

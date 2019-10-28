@@ -47,10 +47,10 @@
         
       </ul>
     </div>
-    <div class="container search"></div>
+    <div class="container search">
       <form class="form-inline d-flex align-items-end ">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
 
@@ -65,12 +65,12 @@
 
     {% for categorie in univers.categories %}
 
-      <a class="dropdown-item dropdown-category" href="#">{{ categorie.name }}</a>
+      <a class="dropdown-item dropdown-category" href="{{path('showlist', {'id' : categorie.id, 'type' : 'category'})}}">{{ categorie.name }}</a>
 
 
       {% for subcategorie in categorie.subcategories %}
 
-        <a class="dropdown-item" href="#">{{ subcategorie.name }}</a>
+        <a class="dropdown-item" href="{{path('showlist', {'id' : categorie.id, 'type' : 'category'})}}">{{ subcategorie.name }}</a>
 
       {% endfor %}
 

@@ -108,7 +108,7 @@ class Producer
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="producer", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="producer", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $products;
 

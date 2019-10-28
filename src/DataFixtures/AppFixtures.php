@@ -39,17 +39,6 @@ class AppFixtures extends Fixture
         // Paramétrage de Faker pour générer des données en fr
         $faker = Faker\Factory::create('fr_FR');
 
-        // Generation des univers avec les categories et subcategories
-      $subCatArray = UniversFruitLegume::loadunivers($manager);
-      $subCatArray = UniversMer::loadunivers($manager);
-      $subCatArray = UniversBoissonAlcool::loadunivers($manager);
-      $subCatArray = UniversCharcuterie::loadunivers($manager);
-      $subCatArray = UniversEpicerieSalee::loadunivers($manager);
-      $subCatArray = UniversEpicerieSucree::loadunivers($manager);
-      $subCatArray = UniversViande::loadunivers($manager);
-      $subCatArray = UniversBoissonSansAlcool::loadunivers($manager);
-      $subCatArray = UniversProduitElabore::loadunivers($manager);
-      $subCatArray = UniversFromage::loadunivers($manager);
 
         // Créer 1 user Admin
 
@@ -136,43 +125,51 @@ class AppFixtures extends Fixture
             $producers[]= $producer;
         }
 
+        $univers = [
+            UniversFruitLegume::loadunivers($manager),
+            UniversMer::loadunivers($manager),
+            UniversBoissonAlcool::loadunivers($manager),
+            UniversCharcuterie::loadunivers($manager),
+            UniversEpicerieSalee::loadunivers($manager),
+            UniversEpicerieSucree::loadunivers($manager),
+            UniversViande::loadunivers($manager),
+            UniversBoissonSansAlcool::loadunivers($manager),
+            UniversProduitElabore::loadunivers($manager),
+            UniversFromage::loadunivers($manager)
+        ];
 
-        //Créer 600 Product
+        //Créer 50 Products par Univers
+        foreach($univers as $key => $value) {
+            //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
+            $products = [];
+            for ($i = 0 ; $i <= 9; $i++) {
+                $product = new Product();
+                $subcategory = mt_rand(0, count($univers[$key]["subcategories"]) - 1);
 
-        //Création d'un tableau de products pour stocker et réutiliser pour lier aux Subcatégories
-        $products = [];
-        for ($i = 0 ; $i <= 600 ; $i++) {
-            $product = new Product();
-            $subcategory = mt_rand(0, count($subCatArray["subcategories"]) - 1);
-            
-            
 
-            $product    ->setName($faker->sentence($nbWords = 2, $variableNbWords = true))
-                        ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
-                        ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
-                        ->setQuantity($faker->numberBetween($min = 0, $max = 50))
-                        ->addSubCategory($subCatArray["subcategories"][$subcategory]);
-                       
-                   
-            // on récupère un nombre aléatoire de user dans un tableau
-            $randomProducer = (array) array_rand($producers, rand(1, count($producers))); // TODO: A corriger, peut provoquer un Undefined Offset
-            // on lie un producer à un user
-            foreach ($randomProducer as $key => $value) {
-                $product->setProducer($producers[$key]);
+                $product    ->setName($faker->sentence($nbWords = 2, $variableNbWords = true))
+                    ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
+                    ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
+                    ->setQuantity($faker->numberBetween($min = 0, $max = 50))
+                    ->addSubCategory($univers[$key]["subcategories"][$subcategory]);
+
+
+                // on récupère un nombre aléatoire de producer dans un tableau
+                $randomProducer = (array) array_rand($producers, rand(1, count($producers))); // TODO: A corriger, peut provoquer un Undefined Offset
+                // on lie un producer à un user
+                foreach ($randomProducer as $key => $value) {
+                    $product->setProducer($producers[$key]);
+                }
+                $manager->persist($product);
+                $products[] = $product;
             }
-
-            $manager->persist($product);
-            $products[] = $product;
         }
-         
         $manager->flush();
-    }
 
+    }
 
     public function randomPostalCode() {
         $postal = mt_rand(100,900) * 100;
         return $postal;
     }
-
 }
-

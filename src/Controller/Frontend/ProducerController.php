@@ -4,13 +4,16 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Producer;
 use App\Form\ProducerType;
+use App\Service\FileUploader;
 use App\Repository\ProducerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProducerController extends AbstractController
 {
@@ -29,7 +32,7 @@ class ProducerController extends AbstractController
     /**
      * @Route("/producer/registration", name="producer_registration", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FileUploader $fileUploader): Response
     {
         $producer = new Producer();
         $form = $this->createForm(ProducerType::class, $producer);
@@ -38,6 +41,15 @@ class ProducerController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère l'image du formaulaire
+            $avatar = $form['avatar']->getData();
+            if ($avatar) {
+                // on récupère le nom de l'avatar saisi dans le formulaire
+                $avatarName = $fileUploader->upload($avatar);
+                 // on envoi le nom de l'avatar à la bdd
+                $producer->setAvatar($avatarName);
+            }
+            
             $user = $producer->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($producer);
@@ -86,7 +98,7 @@ class ProducerController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash(
-                'info',
+                'success',
                 'Mise à jour effectuée'
             );
 

@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
             $manager->flush();
 
             $this->addFlash(
-                'user registred',
+                'success',
                 'Votre inscription est effectuée!'
             );
 
