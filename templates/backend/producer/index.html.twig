@@ -112,7 +112,7 @@
                     <td>{{ producer.telephone }}</td>
                     <td>{{ producer.status ?? "Pas de status" }}</td>
                     <td>{{ producer.enable ? "Oui" : "Non" }}</td>
-                    <td>{% if producer.avatar is not null %}<img src="" alt="{{ producer.firstname ~ " " ~ producer.lastname }}"> {% else %} Pas d'avatar {% endif %}</td>
+                    <td>{% if producer.avatar is not null %}<img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname ~ " " ~ producer.lastname }}"> {% else %} Pas d'avatar {% endif %}</td>
                     <td>{{ producer.description ? producer.description|truncate(15, "...")}}</td>
                     <td>{{ producer.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                     <td>{{ producer.updatedAt ? producer.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>

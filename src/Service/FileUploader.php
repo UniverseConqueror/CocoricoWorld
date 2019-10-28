@@ -15,10 +15,10 @@ class FileUploader
 
     public function upload(UploadedFile $file)
     {
-        // on récupère le nom qui sera transmis à la bdd
+        // We recover the name that will be sent to the database
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-        // on envoie le fichier récupéré dansle dossier cible
+        //We send the recovered file to the target folder
         try {
             $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {

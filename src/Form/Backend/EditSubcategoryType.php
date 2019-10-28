@@ -3,16 +3,33 @@
 namespace App\Form\Backend;
 
 use App\Entity\Subcategory;
+use App\Service\FileUploader;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EditSubcategoryType extends AbstractType
 {
+    /** @var FileUploader */
+    public $fileUploader;
+
+    /**
+     * @param FileUploader $fileUploader
+     *
+     * @Required
+     */
+    public function setFileUploader(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -20,8 +37,17 @@ class EditSubcategoryType extends AbstractType
                 'label' => 'Nom',
             ])
             ->add('image', FileType::class, [
-                'disabled'   => true,
-                'data_class' => null,
+                'mapped'      => false,
+                'required'    => false,
+                'constraints' => [
+                    new File([
+                        'maxSize'          => '1024k',
+                        'mimeTypesMessage' => 'Please upload a valid PNG file',
+                        'mimeTypes'        => [
+                            'image/png',
+                        ],
+                    ]),
+                ],
             ])
             ->add('category')
             ->add('enable', CheckboxType::class, [
@@ -34,6 +60,10 @@ class EditSubcategoryType extends AbstractType
                 'date_format'    => 'dd MMM yyyy',
                 'with_seconds'   => true,
             ])
+            ->addEventListener(
+                FormEvents::POST_SUBMIT,
+                [$this, 'onPostSubmit']
+            )
         ;
     }
 
@@ -42,5 +72,15 @@ class EditSubcategoryType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Subcategory::class,
         ]);
+    }
+
+    public function onPostSubmit(FormEvent $event)
+    {
+        $subcategory = $event->getData();
+        $image = $event->getForm()->get('image')->getNormData();
+
+        if ($image) {
+            $subcategory->setImage($this->fileUploader->upload($image));
+        }
     }
 }

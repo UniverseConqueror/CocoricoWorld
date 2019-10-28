@@ -99,7 +99,7 @@
                     <td>{{ product.price }} €</td>
                     <td>{{ product.weight }} kg</td>
                     <td>{{ product.quantity }}</td>
-                    <td>{% if product.image is not null %}<img src="" alt="{{ product.name }}"> {% else %} Pas d'image {% endif %}</td>
+                    <td>{% if product.image is not null %}<img src="{{ asset('uploads/avatar/' ~ product.image) }}" alt="{{ product.name }}"> {% else %} Pas d'image {% endif %}</td>
                     <td>{{ product.description ? product.description|truncate(15, "...") : "Pas de description" }}</td>
                     <td>{{ product.composition ? product.composition|truncate(15, "...") : "Pas de composition" }}</td>
                     <td>{{ product.additionalInfo ? product.additionalInfo|truncate(15, "...") : "Pas d'informations additionnelles" }}</td>

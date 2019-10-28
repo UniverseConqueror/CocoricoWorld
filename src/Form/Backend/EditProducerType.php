@@ -3,6 +3,7 @@
 namespace App\Form\Backend;
 
 use App\Entity\Producer;
+use App\Service\FileUploader;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -11,10 +12,26 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EditProducerType extends AbstractType
 {
+    /** @var FileUploader */
+    public $fileUploader;
+
+    /**
+     * @param FileUploader $fileUploader
+     *
+     * @Required
+     */
+    public function setFileUploader(FileUploader $fileUploader)
+    {
+        $this->fileUploader = $fileUploader;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -47,8 +64,17 @@ class EditProducerType extends AbstractType
                 'required' => false,
             ])
             ->add('avatar', FileType::class, [
-                'data_class' => null,
-                'disabled'   => true,
+                'mapped'      => false,
+                'required'    => false,
+                'constraints' => [
+                    new File([
+                        'maxSize'          => '1024k',
+                        'mimeTypesMessage' => 'Please upload a valid PNG file',
+                        'mimeTypes'        => [
+                            'image/png',
+                        ],
+                    ]),
+                ],
             ])
             ->add('description')
             ->add('createdAt', DateTimeType::class, [
@@ -61,6 +87,10 @@ class EditProducerType extends AbstractType
                 'class' => 'App\Entity\User',
                 'label' => 'Utilisateur',
             ])
+            ->addEventListener(
+                FormEvents::POST_SUBMIT,
+                [$this, 'onPostSubmit']
+            )
         ;
     }
 
@@ -69,5 +99,15 @@ class EditProducerType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Producer::class,
         ]);
+    }
+
+    public function onPostSubmit(FormEvent $event)
+    {
+        $producer = $event->getData();
+        $avatar = $event->getForm()->get('avatar')->getNormData();
+
+        if ($avatar) {
+            $producer->setAvatar($this->fileUploader->upload($avatar));
+        }
     }
 }
