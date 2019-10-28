@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{ univers.id }}</td>
                         <td>{{ univers.name }}</td>
-                        <td>{% if univers.image is not null %}<img src="{{ asset('uploads/avatar/' ~ univers.image) }}" alt="{{ univers.name }}"> {% else %} Pas d'image {% endif %}</td>
+                        <td>{% if univers.image is not null %}<img src="{{ asset('/uploads/avatar/' ~ univers.image) | imagine_filter("admin_thumbnails") }}" alt="{{ univers.name }}"> {% else %} Pas d'image {% endif %}</td>
                         <td>{{ univers.enable ? "Oui" : "Non" }}</td>
                         <td>{{ univers.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                         <td>{{ univers.updatedAt ? univers.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>

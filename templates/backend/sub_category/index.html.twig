@@ -72,7 +72,7 @@
                     <td>{{ subcategory.id }}</td>
                     <td>{{ subcategory.category.name }}</td>
                     <td>{{ subcategory.name }}</td>
-                    <td>{% if subcategory.image is not null %}<img src="{{ asset('uploads/avatar/' ~ subcategory.image) }}" alt="{{ subcategory.name }}"> {% else %} Pas d'image {% endif %}</td>
+                    <td>{% if subcategory.image is not null %}<img src="{{ asset('uploads/avatar/' ~ subcategory.image) | imagine_filter("admin_thumbnails") }}" alt="{{ subcategory.name }}"> {% else %} Pas d'image {% endif %}</td>
                     <td>{{ subcategory.enable ? "Oui" : "Non" }}</td>
                     <td>{{ subcategory.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                     <td>{{ subcategory.updatedAt ? subcategory.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>

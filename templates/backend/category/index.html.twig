@@ -72,7 +72,7 @@
                     <td>{{ category.id }}</td>
                     <td>{{ category.univers.name }}</td>
                     <td>{{ category.name }}</td>
-                    <td>{% if category.image is not null %}<img src="{{ asset('uploads/avatar/' ~ category.image) }}" alt="{{ category.name }}"> {% else %} Pas d'image {% endif %}</td>
+                    <td>{% if category.image is not null %}<img src="{{ asset('uploads/avatar/' ~ category.image) | imagine_filter("admin_thumbnails") }}" alt="{{ category.name }}"> {% else %} Pas d'image {% endif %}</td>
                     <td>{{ category.enable ? "Oui" : "Non" }}</td>
                     <td>{{ category.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                     <td>{{ category.updatedAt ? category.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>
