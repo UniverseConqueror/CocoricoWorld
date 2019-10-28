@@ -61,9 +61,6 @@ class Category
         $this->updatedAt     = null;
         $this->subcategories = new ArrayCollection();
     }
-    public function __toString() {
-        return $this->name;
-    }
 
     public function __toString()
     {
