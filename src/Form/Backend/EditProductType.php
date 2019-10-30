@@ -56,6 +56,9 @@ class EditProductType extends AbstractType
                         'maxSize'          => '1024k',
                         'mimeTypesMessage' => 'Please upload a valid PNG file',
                         'mimeTypes'        => [
+                            'image/jpeg',
+                            'image/pjpeg',
+                            'image/gif',
                             'image/png',
                         ],
                     ]),

@@ -43,7 +43,7 @@
             {% for product in producer.products %}
         
                 <div class="card mr-1 mb-1" style="width: 18rem;">
-                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+                    <img src="{{ product.image }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                             <p>{{ product.price }} euros</p>
