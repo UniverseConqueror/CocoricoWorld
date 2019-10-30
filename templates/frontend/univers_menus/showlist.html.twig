@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UniversMenusController!{% endblock %}
+{% block title %}Univers{% endblock %}
 
 {% block body %}
 
     <div>
         {% if typeName == "subcategory" %}
-            <h1>Univers : {{type.category.univers.name}}</h1>
-            <h2> Categorie :{{type.category.name}}</h2>
+            <h1 class="universtitle">Univers : {{type.category.univers.name}}</h1>
+            <h3> Categorie : {{type.category.name}}</h3>
         {% else %}
-            <h1>{{type.univers.name}}</h1>
+            <h1 class="universtitle" > Categorie : {{type.univers.name}}</h1>
         {% endif %}
-        <h3>{{type.name}}</h3>
+        <h3> Sous catégorie : {{type.name}}</h3>
 
         {# Condition d'affichage sur le nombre de produits dans le type #}
 
@@ -25,15 +25,15 @@
             {# <h3>{{ type.subcategory.products | length }} produits actuellement disponibles dans cette categorie</h3>  #}
         {% endif %}
 
-        {# {% dump(subcategory) %}  #}
+    
         <div class="container-fluid homepagecard">
             {% if typeName == "subcategory" %}
             {% for product in type.products %}
 
 
                 <div class="card mr-1" style="width: 18rem;">
-                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
-                    <div class="card-body">
+                    <img src="http://placehold.it/200x200" class="card-img-top" title = "{{product.name}}" alt="{{product.name}} image">
+                    <div class="card-body label-product-card ">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p>{{ product.producer.city }}</p>
                         <span class="fa fa-star checked"></span>
@@ -43,7 +43,7 @@
                         <span class="fa fa-star"></span>
                         <p class="card-text">{{product.producer.socialReason}}</p>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group">
                         <li class="list-group-item">
                             <p class="card-text">
                             <h5>Description</h5>
@@ -56,7 +56,7 @@
                         </li>
                     </ul>
                     <div class="card-body text-center">
-                        <a class="btn btn-primary" href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
+                        <a class="btn btn-danger product-button " href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
                     </div>
                 </div>
             {% endfor %}
@@ -70,8 +70,8 @@
 
 
                 <div class="card mr-1" style="width: 18rem;">
-                    <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
-                    <div class="card-body">
+                    <img src="http://placehold.it/200x200" class="card-img-top" title = "{{product.name}}" alt="{{product.name}} image">
+                    <div class="card-body label-product-card">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p>{{ product.producer.city }}</p>
                         <span class="fa fa-star checked"></span>
@@ -81,7 +81,7 @@
                         <span class="fa fa-star"></span>
                         <p class="card-text">{{product.producer.socialReason}}</p>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group">
                         <li class="list-group-item">
                             <p class="card-text">
                             <h5>Description</h5>
@@ -95,7 +95,7 @@
                         </li>
                     </ul>
                     <div class="card-body text-center">
-                        <a class="btn btn-primary" href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
+                        <a class="btn btn-danger product-button" href="{{ path('producer_show', {'id': product.producer.id}) }}">Boutique du producteur</a>
                     </div>
                 </div>
             {% endfor %}

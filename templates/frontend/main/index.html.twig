@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {% endblock %}
+{% block title %}Cocorico World Home {% endblock %}
 
 {% block body %}
 
 
-<h1> Bienvenue chez Cocorico World</h1>
+<h1 id="cocorico"> Bienvenue chez Cocorico World</h1>
 
 {# Message Flash si l'email orgine contact a été correctement envoyé #}
 {% for message in app.flashes('email sent') %}
@@ -43,7 +43,7 @@
 
             </ul>
             <div class="card-body text-center">
-                <a class="btn btn-primary" href="{{ url }}">Boutique du producteur</a>
+                <a class="btn btn-warning producter-button-shop" href="{{ url }}">Boutique du producteur</a>
             </div>
         </div>
     {% endfor %}

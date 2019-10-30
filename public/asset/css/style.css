@@ -20,10 +20,32 @@ body {
     justify-content: flex-end;
 }
 
-h1 {
-    margin:auto auto;
+h1, h2, h3 {
+    margin: 2% auto auto;
+    width: 50%;
+    padding: 0.3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+h3 {
+    background-color: rgb(241, 180, 172);
+    width: 25%;
+}
+
+#cocorico {
+    margin: 2% auto auto;
     margin-bottom: 2rem;;
     text-align: center;
+    background-color: blue;
+    color: white;
+}
+
+.universtitle {
+
+    text-align: center;
+    background-color: blue;
+    color: white;
 }
 
 .description {
@@ -39,12 +61,38 @@ h1 {
 }
 
 .label-product-card {
-    background-color: rgb(243, 141, 127);
+    background-color: rgb(241, 180, 172);
+    height: 190px;
 }
+
 
 .producer-card-product {
     height: 40%;
 }
+
+.product-button {
+    background-color: rgb(241, 180, 172);
+    margin-right: 0.4rem;
+}
+
+.product-block {
+    display: flex;
+    justify-content: space-around;
+   
+    padding-left : 0px;
+}
+
+.product-button-seemore {
+    background-color: rgb(241, 180, 172);
+    margin: 10px;
+}
+
+.producter-button-shop {
+    background-color: rgb(243, 241, 136);
+    color: black;
+}
+
+
 
 
 /* --- HEADER --- */
