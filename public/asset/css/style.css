@@ -42,7 +42,7 @@ h1, h2, h3 {
 
 h3 {
     background-color: rgb(241, 180, 172);
-    width: 25%;
+    width: 40%;
     border-radius: 50px;
 }
 
@@ -58,6 +58,7 @@ h3 {
 .universtitle {
 
     text-align: center;
+    width: 70%;
     background-color: blue;
     color: white;
     border-radius: 50px;

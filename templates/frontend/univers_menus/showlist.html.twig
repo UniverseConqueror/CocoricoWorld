@@ -6,12 +6,12 @@
 
     <div>
         {% if typeName == "subcategory" %}
-            <h1 class="universtitle">Univers : {{type.category.univers.name}}</h1>
-            <h3> Categorie : {{type.category.name}}</h3>
+            <h1 class="universtitle">Univers  {{type.category.univers.name}}</h1>
+            <h3> Categorie  {{type.category.name}}</h3>
         {% else %}
-            <h1 class="universtitle" > Univers : {{type.univers.name}}</h1>
+            <h1 class="universtitle" > Univers {{type.univers.name}}</h1>
         {% endif %}
-        <h3> Catégorie : {{type.name}}</h3>
+        <h3> Catégorie  {{type.name}}</h3>
 
         {# Condition d'affichage sur le nombre de produits dans le type #}
 
