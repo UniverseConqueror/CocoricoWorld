@@ -7,6 +7,10 @@ body {
     background-color: rgba(48, 103, 107, 0.6)
 }
 
+#logo {
+    width: 10%;
+}
+
 .homepagecard{
     margin:auto auto;
     display: flex;
@@ -28,9 +32,18 @@ h1, h2, h3 {
     text-align: center;
 }
 
+.product-title {
+    margin:0 auto 0 0;
+    text-align: left;
+    width: 100%;
+}
+
+
+
 h3 {
     background-color: rgb(241, 180, 172);
     width: 25%;
+    border-radius: 50px;
 }
 
 #cocorico {
@@ -39,6 +52,7 @@ h3 {
     text-align: center;
     background-color: blue;
     color: white;
+    border-radius: 50px;
 }
 
 .universtitle {
@@ -46,6 +60,7 @@ h3 {
     text-align: center;
     background-color: blue;
     color: white;
+    border-radius: 50px;
 }
 
 .description {

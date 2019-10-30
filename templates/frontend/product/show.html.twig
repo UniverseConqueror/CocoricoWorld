@@ -22,7 +22,7 @@
             
         <div style="margin-left:30px">
 
-            <h1>{{ product.name }}</h1>
+            <h1 class = "product-title">{{ product.name }}</h1>
                 
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
@@ -134,7 +134,7 @@
 <div class="" style="display: flex; width:1600px; height:600px; margin: auto">
     {% for product in product_producer %}
     <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
-        <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+        <a href="{{ path('product_show', {'id' : product.id})}}"><img src="http://placehold.it/200x200" class="card-img-top" alt="{{product.name}} image" title = "{{product.name}}"></a> 
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
                 <p>{{ product.price }} euros</p>
@@ -161,7 +161,7 @@
                 </li>
             </ul>
         <div class=" text-center">
-            <a class="btn btn-danger product-button-seemore" href="#">Voir Plus</a>
+            <a class="btn btn-danger product-button-seemore" href="{{ path('product_show', {'id' : product.id})}} ">Voir Plus</a>
         </div>
     </div>
     {% endfor %}
