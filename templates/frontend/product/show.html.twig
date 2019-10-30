@@ -5,9 +5,11 @@
 {% if product.enable == 1 %}
 
 <div class="row">
+{% if is_granted('ROLE_PRODUCER') %}
 <div class="btn btn btn-secondary col-md-4 mx-auto " >
         <a href="{{ path('product_edit', {'id':product.id}) }}">Modifier le produit</a>
 </div>
+{% endif %}
 
 <div class="d-flex m-2 col-md-10 mx-auto"> 
     
