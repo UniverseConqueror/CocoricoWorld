@@ -8,7 +8,11 @@
 <div class="card mx-auto" style="max-width: 540px;">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img src="http://placehold.it/100x100" class="card-img " alt="Producer Avatar">
+              {% if producer.avatar matches '#^https://#' %}
+                  <img src="{{ producer.avatar }}" alt="{{ producer.firstname }}">
+              {% else %}
+                  <img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}">
+              {% endif %}
           </div>
           <div class="col-md-8">
             <div class="card-body text-center">
@@ -43,7 +47,11 @@
             {% for product in producer.products %}
         
                 <div class="card mr-1 mb-1" style="width: 18rem;">
-                    <img src="{{ product.image }}" class="card-img-top" alt="...">
+                    {% if product.image matches '#^https://#' %}
+                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ product.name }}</h5>
                             <p>{{ product.price }} euros</p>

@@ -18,7 +18,11 @@
     {% for producer in producers %}
 
         <div class="card mr-1" style="width: 18rem;">
-            <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+            {% if producer.avatar matches '#^https://#' %}
+                <img src="{{ producer.avatar }}" alt="{{ producer.firstname }}">
+            {% else %}
+                <img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ producer.socialReason }}</h5>
                     <p>{{ producer.city }}</p>

@@ -114,7 +114,7 @@ class AppFixtures extends Fixture
                         ->setLastname($faker->lastName())
                         ->setTelephone($faker->phoneNumber())
                         ->setStatus(null)
-                        ->setAvatar($faker->url())
+                        ->setAvatar('https://i.pravatar.cc/200?u='.$faker->numberBetween(0, 65000))
                         ->setDescription($faker->sentence($nbWords = 10, $variableNbWords = true));
             // on récupère un nombre aléatoire de user dans un tableau
             // $randomUser = (array) array_rand($users, rand(1, count($users)));

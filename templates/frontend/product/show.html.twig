@@ -14,8 +14,12 @@
     <div class="container jumbotron" style="border:1px solid black; display: flex; width:800px; height:700px; position:relative">
         
         <div style="width:500px; height:350px; border: 1px solid black">
-          
-            <p>Image du produit</p>
+
+            {% if product.image matches '#^https://#' %}
+                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+                <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
 
         </div>
             
@@ -72,9 +76,13 @@
 
     <div class="container jumbotron" style="width:500px; height:700px;border:1px solid black; text-align:center">
         
-        <div style="border:1px solid black; width:150px; height:150px; border-radius:50%; margin:auto">
-            
-            <p>Avatar</p>
+        <div style="width:150px; height:150px; border-radius:50%; margin:auto">
+
+            {% if product.producer.avatar matches '#^https://#' %}
+                <img src="{{ product.producer.avatar }}" class="card-img-top" alt="{{ product.producer.firstname }}">
+            {% else %}
+                <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" alt="{{ product.producer.firstname }}">
+            {% endif %}
        
         </div>
            
@@ -124,7 +132,11 @@
 <div class="" style="border:1px solid black; display: flex; width:1600px; height:700px; margin: auto">
     {% for product in product_producer %}
     <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
-        <img src="http://placehold.it/200x200" class="card-img-top" alt="...">
+        {% if product.image matches '#^https://#' %}
+            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+        {% else %}
+            <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+        {% endif %}
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
                 <p>{{ product.price }} euros</p>
