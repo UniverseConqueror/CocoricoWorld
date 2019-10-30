@@ -27,8 +27,25 @@ h1 {
 }
 
 .description {
-    height: 150px;
+    height: 100px;
 }
+
+.label-producer-homepage {
+    background-color: rgb(243, 241, 136);
+}
+
+.description-producer-homepage {
+    height: 185px;
+}
+
+.label-product-card {
+    background-color: rgb(243, 141, 127);
+}
+
+.producer-card-product {
+    height: 40%;
+}
+
 
 /* --- HEADER --- */
 
@@ -87,6 +104,17 @@ a {
 .search form button {
     color: red;
 }
+
+.list-group-flush {
+    height: 300px;
+}
+
+
+
+
+
+
+
 
 @media (max-width: 1200px) {
 .navbar-nav {
