@@ -4,191 +4,184 @@
 
 {% block body %}
 
-{% if product.enable == 1 %}
+    {% if product.enable == 1 %}
 
-<div class="row">
-
-{% if is_granted('ROLE_PRODUCER') %}
-<div class="btn btn btn-secondary col-md-4 mx-auto " >
-        <a href="{{ path('product_edit', {'id':product.id}) }}">Modifier le produit</a>
-</div>
-{% endif %}
-
-<div class="d-flex col-md-10 "> 
-    
-    <div class="container jumbotron " style="display: flex; width:50%; height:25%; position:relative">
-        
-        <div style="width:500px; height:350px; border: 1px solid black">
-
-            {% if product.image matches '#^https://#' %}
-                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
-            {% else %}
-                <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
-            {% endif %}
-
-     
-            
-        <div style="margin-left:30px">
-
-            <h1 class = "product-title">{{ product.name }}</h1>
-                
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-
-            <div class="btn-group-vertical mb-3 d-flex">
-                       
-                <span class="mt-4 mb-4"><b>Choisir une quantité</b></span>
-
-                <div class="d-flex">
-                
-                    <div class="dropdown show mr-2">
-                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Poids
-                        </a>
-                      
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="#">à définir</a>
-                          
-                        </div>
-                      </div>
-                      <div class="dropdown show">
-                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Quantité
-                        </a>
-                      
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                          <a class="dropdown-item" href="#">1</a>
-                          <a class="dropdown-item" href="#">2</a>
-                          <a class="dropdown-item" href="#">3</a>
-                        </div>
-                      </div>
-                           
-                </div> 
-
-                
-
-               
-                            
-                <div class="mt-4">
-                            
-                    <div class="btn btn-danger">{{ product.price }} €</div>
-        
-                    <span class="ml-1">Conditionnement : {{ product.weight }} kg</span>
-                    
-                </div> 
-                <button class="btn btn-success mt-3" href="#" type="submit">Ajouter au panier</button>  
-            </div> 
-        </div> 
-
-        
-        <div class="btn-group pb-2 product-block" role="group" aria-label="First group"style="position:absolute; bottom:0">
-   
-            <button type="button" class="btn btn-warning product-button">Description</button>
-            <button type="button" class="btn btn-warning product-button">Composition</button>
-            <button type="button" class="btn btn-warning product-button">Livraison</button>
-            <button type="button" class="btn btn-warning product-button">Conservation</button>
-            <button type="button" class="btn btn-warning product-button">Conditionnement</button>
+        <div class="row">
 
         </div>
-    </div>          
 
-   
+        <div class="d-flex col-md-10 ">
+
+            <div class="container jumbotron " style="display: flex; width:50%; height:25%; position:relative">
+
+
+
+                {% if product.image matches '#^https://#' %}
+                    <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                {% endif %}
+
+
+
+                <div style="margin-left:30px">
+
+                    <h1 class = "product-title">{{ product.name }}</h1>
+
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+
+                    <div class="btn-group-vertical mb-3 d-flex">
+
+                        <span class="mt-4 mb-4"><b>Choisir une quantité</b></span>
+
+                        <div class="d-flex">
+
+                            <div class="dropdown show mr-2">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Poids
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">à définir</a>
+
+                                </div>
+                            </div>
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Quantité
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">1</a>
+                                    <a class="dropdown-item" href="#">2</a>
+                                    <a class="dropdown-item" href="#">3</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="mt-4">
+
+                            <div class="btn btn-danger">{{ product.price }} €</div>
+
+                            <span class="ml-1">Conditionnement : {{ product.weight }} kg</span>
+
+                        </div>
+                        <button class="btn btn-success mt-3" href="#" type="submit">Ajouter au panier</button>
+                    </div>
+                </div>
+
+
+                <div class="btn-group pb-2 product-block" role="group" aria-label="First group"style="position:absolute; bottom:0">
+
+                    <button type="button" class="btn btn-warning product-button">Description</button>
+                    <button type="button" class="btn btn-warning product-button">Composition</button>
+                    <button type="button" class="btn btn-warning product-button">Livraison</button>
+                    <button type="button" class="btn btn-warning product-button">Conservation</button>
+                    <button type="button" class="btn btn-warning product-button">Conditionnement</button>
+
+                </div>
+            </div>
+
+
             <div class="card producer-card-product" style="max-width: 30%">
-                    <a href="{{path('producer_show', {'id' : product.producer.id})}}">
+                <a href="{{path('producer_show', {'id' : product.producer.id})}}">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="http://placehold.it/100x100" class="card-img " alt="Producer Avatar">
+                            {% if product.producer.avatar matches '#^https://#' %}
+                                <img src="{{ product.producer.avatar }}" class="card-img" alt="{{ product.producer.firstname }}">
+                            {% else %}
+                                <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" class="card-img" alt="{{ product.producer.firstname }}">
+                            {% endif %}
                         </div>
                         <div class="col-md-8 label-producer-homepage">
-                                <div class="card-body text-center ">
-                                    <h5 class="card-title">{{ product.producer.socialReason }}</h5>
-                                    <p>{{ product.producer.city }}</p>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span> 
-                                </div>
+                            <div class="card-body text-center ">
+                                <h5 class="card-title">{{ product.producer.socialReason }}</h5>
+                                <p>{{ product.producer.city }}</p>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
                         </div>
                         <div class="text-center col-md-12">
                             <ul class="list-group ">
-                        
-                                    <p class="card-text mb-3">
-                                        <h5>Description</h5> 
-                                        {% if product.producer.description %}
-                                        {{ product.producer.description }}
-                                        {% else %}
-                                        <p>Non communiquée</p> 
-                                        {% endif %} 
-                                    </p>
-                                    
-                              
+
+                                <p class="card-text mb-3">
+                                <h5>Description</h5>
+                                {% if product.producer.description %}
+                                    {{ product.producer.description }}
+                                {% else %}
+                                    <p>Non communiquée</p>
+                                {% endif %}
+                                </p>
+
+
                             </ul>
                         </div>
                     </div>
                 </a>
-                </div>   
-
-        <div style="width:150px; height:150px; border-radius:50%; margin:auto">
-
-            {% if product.producer.avatar matches '#^https://#' %}
-                <img src="{{ product.producer.avatar }}" class="card-img-top" alt="{{ product.producer.firstname }}">
-            {% else %}
-                <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" alt="{{ product.producer.firstname }}">
-            {% endif %}
-       
-       
-
-   
-</div>
+            </div>
 
 
-<div class="" style="display: flex; width:1600px; height:600px; margin: auto">
-    {% for product in product_producer %}
-    <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
-    
-        {% if product.image matches '#^https://#' %}
-            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
-        {% else %}
-            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}"></a>
-        {% endif %}
-        
-        <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-                <p>{{ product.price }} euros</p>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="card-text">
 
-                </p>
+
+
         </div>
-        <ul class="list-group ">
-                <li class="list-group-item">
-                    <p class="card-text">
-                        <h5>Description</h5>
-                        {% if product.description %}
-                            {{ product.description }}
+
+
+        <div class="" style="display: flex; width:1600px; height:600px; margin: auto">
+            {% for product in product_producer %}
+                <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
+                    <a href="{{ path('product_show', {'id' : product.id})}}">
+                        {% if product.image matches '#^https://#' %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
                         {% else %}
-                            <p>Non communiquée</p> 
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
                         {% endif %}
-                       
-                    </p>
-                </li>
-            </ul>
-        <div class=" text-center">
-            <a class="btn btn-danger product-button-seemore" href="{{ path('product_show', {'id' : product.id})}} ">Voir Plus</a>
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p>{{ product.price }} euros</p>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <p class="card-text">
+
+                        </p>
+                    </div>
+                    <ul class="list-group ">
+                        <li class="list-group-item">
+                            <p class="card-text">
+                            <h5>Description</h5>
+                            {% if product.description %}
+                                {{ product.description }}
+                            {% else %}
+                                <p>Non communiquée</p>
+                            {% endif %}
+
+                            </p>
+                        </li>
+                    </ul>
+                    <div class=" text-center">
+                        <a class="btn btn-danger product-button-seemore" href="{{ path('product_show', {'id' : product.id})}} ">Voir Plus</a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
-</div>
-</div>
-{% else %}
-    <p>Le produit est archivé</p>
-{% endif %}
+        </div>
+    {% else %}
+        <p>Le produit est archivé</p>
+    {% endif %}
 {% endblock %}

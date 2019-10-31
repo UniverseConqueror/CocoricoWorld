@@ -33,7 +33,13 @@
 
                 <div class="card mr-1" style="width: 18rem;">
                     {# <img src="http://placehold.it/200x200" class="card-img-top" title = "{{product.name}}" alt="{{product.name}} image"> #}
-                    <a href="{{ path('product_show', {'id' : product.id})}}"><img src="http://placehold.it/200x200" class="card-img-top" alt="{{product.name}} image" title = "{{product.name}}"></a> 
+                    <a href="{{ path('product_show', {'id' : product.id})}}">
+                        {% if product.image matches '#^https://#' %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
+                        {% else %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
+                        {% endif %}
+                    </a>
                     <div class="card-body label-product-card ">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p>{{ product.producer.city }}</p>
@@ -72,7 +78,13 @@
 
                 <div class="card mr-1" style="width: 18rem;">
                     {# <img src="http://placehold.it/200x200" class="card-img-top" title = "{{product.name}}" alt="{{product.name}} image"> #}
-                    <a href="{{ path('product_show', {'id' : product.id})}}"><img src="http://placehold.it/200x200" class="card-img-top" alt="{{product.name}} image" title = "{{product.name}}"></a> 
+                    <a href="{{ path('product_show', {'id' : product.id})}}">
+                        {% if product.image matches '#^https://#' %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
+                        {% else %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}" title="{{ product.name }}"></a>
+                        {% endif %}
+                    </a>
                     <div class="card-body label-product-card">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p>{{ product.producer.city }}</p>
