@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProducerController!{% endblock %}
+{% block title %}{{ producer.socialReason }}{% endblock %}
 
 {% block body %}
 
 
-<div class="card mx-auto" style="max-width: 540px;">
+<div class="card mx-auto mt-3 mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
           <div class="col-md-4">
               {% if producer.avatar matches '#^https://#' %}
@@ -24,22 +24,34 @@
             <span class="fa fa-star"></span>
             <span class="fa fa-star"></span>
             
-            </div>
         </div>
-               <div class="text-center col-md-12">
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <p class="card-text">
-                    <h5>Description</h5>
-                    {{ producer.description }}
-                </p>
-            </li>
-    
+        <div class="col-md-8 label-producer-homepage">
+                <div class="card-body text-center ">
+                    <h5 class="card-title">{{ producer.socialReason }}</h5>
+                    <p>{{ producer.city }}</p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span> 
+                </div>
+        </div>
+        <div class="text-center col-md-12">
+            <ul class="list-group ">
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <h5>Description</h5>  
+                    </p>
+                    {% if producer.description %}
+                        {{ producer.description }}
+                    {% else %}
+                        <p>Non communiquée</p> 
+                    {% endif %}
+                </li>
             </ul>
-   
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
 
       <div class="container-fluid homepagecard">
@@ -48,11 +60,11 @@
         
                 <div class="card mr-1 mb-1" style="width: 18rem;">
                     {% if product.image matches '#^https://#' %}
-                        <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+                        <a href="{{ path('product_show', {'id' : product.id}) }}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
                     {% else %}
-                        <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+                        <a href="{{ path('product_show', {'id' : product.id}) }}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}"></a>
                     {% endif %}
-                    <div class="card-body">
+                    <div class="card-body label-product-card">
                         <h5 class="card-title">{{ product.name }}</h5>
                             <p>{{ product.price }} euros</p>
                             <span class="fa fa-star checked"></span>
@@ -64,16 +76,21 @@
         
                             </p>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group ">
                         <li class="list-group-item">
                             <p class="card-text">
                                 <h5>Description</h5>
-                                {{ product.description }}
+                                {% if product.description %}
+                                    {{ product.description }}
+                                {% else %}
+                                    <p>Non communiquée</p> 
+                                {% endif %}
+                               
                             </p>
                         </li>
                     </ul>
-                    <div class="card-body text-center">
-                        <a class="btn btn-primary" href="{{ path('product_show', {'id':product.id}) }}">Voir Plus</a>
+                    <div class="card-body text-center ">
+                        <a class="btn btn-danger product-button-seemore" href="{{ path('product_show', {'id':product.id}) }}">Voir Plus</a>
                     </div>
                 </div>
             {% endfor %}

@@ -10,7 +10,7 @@
 <h1>Profil User</h1>
 
 {# Détails du profil du User loggué #}
-<div class="profilblock">
+<div class="login-form">
     <p>Username : {{app.user.username}}</p>
     <p>Email : {{app.user.email}}</p>
     <p>Crée le : {{app.user.createdAt | date('d-m-Y')}}</p>
@@ -32,5 +32,5 @@
     {% else %}
   <p>Vous ne pouvez pas vous connecter à un autre profil que le vôtre voyons !!! Petit voyou !!</p>
 {% endif %} 
-
+</div>
 {% endblock %}

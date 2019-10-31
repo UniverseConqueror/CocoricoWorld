@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {% endblock %}
+{% block title %}Cocorico World Home {% endblock %}
 
 {% block body %}
 
 
-<h1> Bienvenue chez Cocorico World</h1>
+<h1 id="cocorico"> Bienvenue chez Cocorico World</h1>
 
 {# Message Flash si l'email orgine contact a été correctement envoyé #}
 {% for message in app.flashes('email sent') %}
@@ -16,14 +16,16 @@
 <div class="container-fluid homepagecard">
 
     {% for producer in producers %}
+    {% set url = path('producer_show', {'id': producer.id}) %}
 
-        <div class="card mr-1" style="width: 18rem;">
-            {% if producer.avatar matches '#^https://#' %}
-                <img src="{{ producer.avatar }}" alt="{{ producer.firstname }}">
+        <div class="card mr-1 mb-1" style="width: 18rem;">
+           {% if producer.avatar matches '#^https://#' %}
+                <a href="{{ url }}"><img src="{{ producer.avatar }}" alt="{{ producer.firstname }}"></a>
             {% else %}
-                <img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}">
+                <a href="{{ url }}"><img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}"></a>
             {% endif %}
-            <div class="card-body">
+            <div  class="card-body label-producer-homepage">
+                <a href="{{ url }}">
                 <h5 class="card-title">{{ producer.socialReason }}</h5>
                     <p>{{ producer.city }}</p>
                     <span class="fa fa-star checked"></span>
@@ -31,12 +33,12 @@
                     <span class="fa fa-star checked"></span>
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
-                    <p class="card-text">
+                    <p class="card-text"> </p>
 
-                    </p>
+                   </a>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+            <ul class="list-group">
+                <li class="list-group-item description-producer-homepage">
                     <p class="card-text">
                         <h5>Description</h5>
                         {{ producer.description }}
@@ -45,7 +47,7 @@
 
             </ul>
             <div class="card-body text-center">
-                <a class="btn btn-primary" href="{{ path('producer_show', {'id': producer.id}) }}">Boutique du producteur</a>
+                <a class="btn btn-warning producter-button-shop" href="{{ url }}">Boutique du producteur</a>
             </div>
         </div>
     {% endfor %}

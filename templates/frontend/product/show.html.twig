@@ -1,19 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{product.name}}{% endblock %}
+
 {% block body %}
 
 {% if product.enable == 1 %}
 
 <div class="row">
+
 {% if is_granted('ROLE_PRODUCER') %}
 <div class="btn btn btn-secondary col-md-4 mx-auto " >
         <a href="{{ path('product_edit', {'id':product.id}) }}">Modifier le produit</a>
 </div>
 {% endif %}
 
-<div class="d-flex m-2 col-md-10 mx-auto"> 
+<div class="d-flex col-md-10 "> 
     
-    <div class="container jumbotron" style="border:1px solid black; display: flex; width:800px; height:700px; position:relative">
+    <div class="container jumbotron " style="display: flex; width:50%; height:25%; position:relative">
         
         <div style="width:500px; height:350px; border: 1px solid black">
 
@@ -23,17 +26,17 @@
                 <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
             {% endif %}
 
-        </div>
+     
             
-        <div style="margin-left:50px">
+        <div style="margin-left:30px">
 
-            <h1>{{ product.name }}</h1>
+            <h1 class = "product-title">{{ product.name }}</h1>
                 
-            <span>&#10033</span>
-            <span>&#10033</span>
-            <span>&#10033</span>
-            <span>&#10033</span>
-            <span>&#10034</span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
 
             <div class="btn-group-vertical mb-3 d-flex">
                        
@@ -41,43 +44,94 @@
 
                 <div class="d-flex">
                 
-                    <button class="btn btn-default btn-sm dropdown-toggle mb-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"style="display:inline">
-                     500g <span class="caret"></span>
-                    </button>
-
-                    <button class="btn btn-default btn-sm dropdown-toggle mb-4 ml-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     1 <span class="caret"></span>
-                    </button>
+                    <div class="dropdown show mr-2">
+                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Poids
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="#">à définir</a>
+                          
+                        </div>
+                      </div>
+                      <div class="dropdown show">
+                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Quantité
+                        </a>
+                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                      </div>
                            
                 </div> 
 
-                <input type="text" aria-label="First name" class="mb-4" placeholder="Prix">
+                
 
-                <button class="btn btn-primary" type="submit">Ajouter au panier</button>
+               
                             
-                <div class="d-flex mt-4">
+                <div class="mt-4">
                             
-                    <span>{{ product.price }} €</span>
+                    <div class="btn btn-danger">{{ product.price }} €</div>
         
-                    <span class="ml-4">{{ product.weight }} kg</span>
+                    <span class="ml-1">Conditionnement : {{ product.weight }} kg</span>
                     
-                </div>   
+                </div> 
+                <button class="btn btn-success mt-3" href="#" type="submit">Ajouter au panier</button>  
             </div> 
         </div> 
+
         
-        <div class="btn-group pb-2" role="group" aria-label="First group"style="position:absolute; bottom:0">
+        <div class="btn-group pb-2 product-block" role="group" aria-label="First group"style="position:absolute; bottom:0">
    
-            <button type="button" class="btn btn-primary">Description</button>
-            <button type="button" class="btn btn-primary">Composition</button>
-            <button type="button" class="btn btn-primary">Livraison</button>
-            <button type="button" class="btn btn-primary">Conservation</button>
-            <button type="button" class="btn btn-primary">Conditionnement</button>
+            <button type="button" class="btn btn-warning product-button">Description</button>
+            <button type="button" class="btn btn-warning product-button">Composition</button>
+            <button type="button" class="btn btn-warning product-button">Livraison</button>
+            <button type="button" class="btn btn-warning product-button">Conservation</button>
+            <button type="button" class="btn btn-warning product-button">Conditionnement</button>
 
         </div>
     </div>          
 
-    <div class="container jumbotron" style="width:500px; height:700px;border:1px solid black; text-align:center">
-        
+   
+            <div class="card producer-card-product" style="max-width: 30%">
+                    <a href="{{path('producer_show', {'id' : product.producer.id})}}">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="http://placehold.it/100x100" class="card-img " alt="Producer Avatar">
+                        </div>
+                        <div class="col-md-8 label-producer-homepage">
+                                <div class="card-body text-center ">
+                                    <h5 class="card-title">{{ product.producer.socialReason }}</h5>
+                                    <p>{{ product.producer.city }}</p>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span> 
+                                </div>
+                        </div>
+                        <div class="text-center col-md-12">
+                            <ul class="list-group ">
+                        
+                                    <p class="card-text mb-3">
+                                        <h5>Description</h5> 
+                                        {% if product.producer.description %}
+                                        {{ product.producer.description }}
+                                        {% else %}
+                                        <p>Non communiquée</p> 
+                                        {% endif %} 
+                                    </p>
+                                    
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+                </div>   
+
         <div style="width:150px; height:150px; border-radius:50%; margin:auto">
 
             {% if product.producer.avatar matches '#^https://#' %}
@@ -86,59 +140,22 @@
                 <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" alt="{{ product.producer.firstname }}">
             {% endif %}
        
-        </div>
-           
-        <h2 class="mt-4">{{ product.producer.firstname }} {{ product.producer.lastname }}</h2>
-
-        <span>&#10033</span>
-        <span>&#10033</span>
-        <span>&#10033</span>
-        <span>&#10033</span>
-        <span>&#10034</span>
-
-        <div style="width:150px; height:75px; border: 1px solid black; margin: auto; margin-top:40px; margin-bottom:40px">
-            
-            <p>Région</p>
-
-        </div>
-     
-        <span style="margin-top:20px"><b>500 avis</b></span>
        
-        <button style="margin:auto" class="btn btn-primary d-block mt-4">Tous nos produits</button>
-       
-        <div style="display: flex; justify-content:center; margin-top:40px">
-        
-            <div style="width:50px; height:50px; border:1px solid black; margin-right:10px">
 
-            <p>Image univers</p>
-        
-            </div>
-
-            {% for subcategory in product.subcategories %}
-            
-                <span>{{ subcategory.category.name }}</span>
-
-            {% endfor %}
-        
-            <div style="width:50px; height:50px; border:1px solid black; border-radius:50%; margin-left:10px">
-           
-            <p>25</p>
-       
-            </div>
-        </div>
-
-    </div> 
+   
 </div>
 
 
-<div class="" style="border:1px solid black; display: flex; width:1600px; height:700px; margin: auto">
+<div class="" style="display: flex; width:1600px; height:600px; margin: auto">
     {% for product in product_producer %}
     <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
+    
         {% if product.image matches '#^https://#' %}
-            <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
         {% else %}
-            <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}"></a>
         {% endif %}
+        
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
                 <p>{{ product.price }} euros</p>
@@ -151,16 +168,21 @@
 
                 </p>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <p class="card-text">
-                    <h5>Description</h5>
-                    {{ product.description }}
-                </p>
-            </li>
-        </ul>
-        <div class="card-body text-center">
-            <a class="btn btn-primary" href="#">Voir Plus</a>
+        <ul class="list-group ">
+                <li class="list-group-item">
+                    <p class="card-text">
+                        <h5>Description</h5>
+                        {% if product.description %}
+                            {{ product.description }}
+                        {% else %}
+                            <p>Non communiquée</p> 
+                        {% endif %}
+                       
+                    </p>
+                </li>
+            </ul>
+        <div class=" text-center">
+            <a class="btn btn-danger product-button-seemore" href="{{ path('product_show', {'id' : product.id})}} ">Voir Plus</a>
         </div>
     </div>
     {% endfor %}
