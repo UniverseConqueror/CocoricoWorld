@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Service\FileUploader;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\DataFixtures\Provider\Univers\UniversFruitLegume;
@@ -16,21 +17,23 @@ use App\DataFixtures\Provider\Univers\UniversEpicerieSalee;
 use App\DataFixtures\Provider\Univers\UniversEpicerieSucree;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Faker;
-use Faker\ORM\Doctrine\Populator;
-use App\Entity\Univers;
-use App\Entity\Category;
 use App\Entity\User;
 use App\Entity\Producer;
 use App\Entity\Product;
-use App\Entity\Subcategory;
 
 
 class AppFixtures extends Fixture
 {
     // Mise en place de l'encodage du password
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    /**
+     * @var FileUploader
+     */
+    private $uploader;
+
+    public function __construct(UserPasswordEncoderInterface $encoder, FileUploader $uploader)
     {
         $this->encoder = $encoder;
+        $this->uploader = $uploader;
     }
     
     
@@ -111,7 +114,7 @@ class AppFixtures extends Fixture
                         ->setLastname($faker->lastName())
                         ->setTelephone($faker->phoneNumber())
                         ->setStatus(null)
-                        ->setAvatar($faker->url())
+                        ->setAvatar('https://i.pravatar.cc/200?u='.$faker->numberBetween(0, 65000))
                         ->setDescription($faker->sentence($nbWords = 10, $variableNbWords = true));
             // on récupère un nombre aléatoire de user dans un tableau
             // $randomUser = (array) array_rand($users, rand(1, count($users)));
@@ -146,11 +149,11 @@ class AppFixtures extends Fixture
                 $product = new Product();
                 $subcategory = mt_rand(0, count($univers[$key]["subcategories"]) - 1);
 
-
                 $product    ->setName($faker->sentence($nbWords = 2, $variableNbWords = true))
                     ->setPrice($faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 40))
                     ->setWeight($faker->randomFloat($nbMaxDecimals = 3, $min = 0, $max = 5))
                     ->setQuantity($faker->numberBetween($min = 0, $max = 50))
+                    ->setImage('https://loremflickr.com/200/200/nutriment?lock='.$faker->numberBetween(0, 60000))
                     ->addSubCategory($univers[$key]["subcategories"][$subcategory]);
 
 

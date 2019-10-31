@@ -14,6 +14,12 @@ class CategoryViandeProvider extends Base
         'Agneau',
                 
     ];
+
+    protected static $viandesImages = [
+        'viande.jpg',
+        'veau.jpg',
+        'viande-agneau.jpg',
+    ];
    
     public static function randomCategoryViandes()
     {
@@ -26,7 +32,8 @@ class CategoryViandeProvider extends Base
         return static::$viandesArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$viandesImages;
+    }
 }

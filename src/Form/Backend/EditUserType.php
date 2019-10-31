@@ -41,6 +41,7 @@ class EditUserType extends AbstractType
                 'choices' => [
                     'Utilisateur'    => 'ROLE_USER',
                     'Administrateur' => 'ROLE_ADMIN',
+                    'producteur'     => 'ROLE_PRODUCER',
                 ],
             ])
             ->add('password', PasswordType::class, [

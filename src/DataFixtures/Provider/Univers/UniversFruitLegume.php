@@ -32,6 +32,7 @@ abstract class UniversFruitLegume extends Fixture
       
         $univers =  new Univers();
         $univers    ->setName('Fruit et Legume')
+                    ->setImage('fruits-et-legumes.jpg')
                     ->setCreatedAt(new \DateTime());
 
         $manager    ->persist($univers);
@@ -40,6 +41,7 @@ abstract class UniversFruitLegume extends Fixture
         // Créer les Categories de l'univers 
             
         $provcategoriesarray = CategoryFruitLegumeProvider::categories();
+        $images = CategoryFruitLegumeProvider::images();
   
         for ($i = 0 ; $i <= count($provcategoriesarray)-1 ; $i++) {
             $category = new Category();
@@ -47,7 +49,7 @@ abstract class UniversFruitLegume extends Fixture
             $cat = $provcategoriesarray[$i];
                     
             $category   ->setName($cat)
-                        ->setImage($faker->url())
+                        ->setImage($images[$i])
                         ->setUnivers($univers);
 
             $manager->persist($category);

@@ -31,6 +31,7 @@ abstract class UniversBoissonAlcool extends Fixture
       
         $univers =  new Univers();
         $univers    ->setName('Boisson alcoolisée')
+                    ->setImage('boissons-alcoolises.jpg')
                     ->setCreatedAt(new \DateTime());
 
         $manager    ->persist($univers);
@@ -39,6 +40,7 @@ abstract class UniversBoissonAlcool extends Fixture
         // Créer les Categories de l'univers alcoolisée
             
         $provcategoriesarray = CategoryBoissonAlcoolProvider::categories();
+        $images = CategoryBoissonAlcoolProvider::images();
   
         for ($i = 0 ; $i <= count($provcategoriesarray)-1 ; $i++) {
             $category = new Category();
@@ -46,7 +48,7 @@ abstract class UniversBoissonAlcool extends Fixture
             $cat = $provcategoriesarray[$i];
                     
             $category   ->setName($cat)
-                        ->setImage($faker->url())
+                        ->setImage($images[$i])
                         ->setUnivers($univers);
 
             $manager->persist($category);

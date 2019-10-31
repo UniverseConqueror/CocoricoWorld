@@ -6,9 +6,23 @@
 
 
 <div class="card mx-auto mt-3 mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="http://placehold.it/100x100" class="card-img " alt="Producer Avatar">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+              {% if producer.avatar matches '#^https://#' %}
+                  <img src="{{ producer.avatar }}" alt="{{ producer.firstname }}">
+              {% else %}
+                  <img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}">
+              {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ producer.socialReason }}</h5>
+            <p>{{ producer.city }}</p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
             
         </div>
         <div class="col-md-8 label-producer-homepage">
@@ -45,7 +59,11 @@
             {% for product in producer.products %}
         
                 <div class="card mr-1 mb-1" style="width: 18rem;">
-                    <a href="{{ path('product_show', {'id' : product.id}) }}"><img src="http://placehold.it/200x200" class="card-img-top" alt="Product Avatar"></a>
+                    {% if product.image matches '#^https://#' %}
+                        <a href="{{ path('product_show', {'id' : product.id}) }}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
+                    {% else %}
+                        <a href="{{ path('product_show', {'id' : product.id}) }}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}"></a>
+                    {% endif %}
                     <div class="card-body label-product-card">
                         <h5 class="card-title">{{ product.name }}</h5>
                             <p>{{ product.price }} euros</p>

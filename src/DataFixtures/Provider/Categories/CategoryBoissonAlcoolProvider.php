@@ -14,6 +14,12 @@ class CategoryBoissonAlcoolProvider extends Base
         'Bières',
                 
     ];
+
+    protected static $boissonAlcoolImages = [
+        'vin.jpg',
+        'cidre.jpg',
+        'bieres.jpg',
+    ];
    
     public static function randomCategoryBoissonAlcool()
     {
@@ -26,7 +32,8 @@ class CategoryBoissonAlcoolProvider extends Base
         return static::$boissonAlcoolArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$boissonAlcoolImages;
+    }
 }

@@ -31,6 +31,7 @@ abstract class UniversEpicerieSalee extends Fixture
       
         $univers =  new Univers();
         $univers    ->setName('Epicerie Salée')
+                    ->setImage('epicerie-salee.jpg')
                     ->setCreatedAt(new \DateTime());
 
         $manager    ->persist($univers);
@@ -39,6 +40,7 @@ abstract class UniversEpicerieSalee extends Fixture
         // Créer les Categories de l'univers Epicerie Salée
             
         $provcategoriesarray = CategoryEpicerieSaleeProvider::categories();
+        $images = CategoryEpicerieSaleeProvider::images();
   
         for ($i = 0 ; $i <= count($provcategoriesarray)-1 ; $i++) {
             $category = new Category();
@@ -46,7 +48,7 @@ abstract class UniversEpicerieSalee extends Fixture
             $cat = $provcategoriesarray[$i];
                     
             $category   ->setName($cat)
-                        ->setImage($faker->url())
+                        ->setImage($images[$i])
                         ->setUnivers($univers);
 
             $manager->persist($category);

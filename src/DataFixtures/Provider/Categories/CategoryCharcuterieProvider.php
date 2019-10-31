@@ -14,6 +14,12 @@ class CategoryCharcuterieProvider extends Base
         'Pâtés',
                 
     ];
+
+    protected static $charcuterieImages = [
+        'foie-gras.jpg',
+        'jambon.jpg',
+        'pate.jpg',
+    ];
    
     public static function randomCategoryCharcuterie()
     {
@@ -26,7 +32,8 @@ class CategoryCharcuterieProvider extends Base
         return static::$charcuterieArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$charcuterieImages;
+    }
 }

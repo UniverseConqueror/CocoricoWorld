@@ -11,18 +11,18 @@
 
 {# Détails du profil du Producer loggué #}
 <div class="producer-form">
-    <h1>Profil User</h1>
-    <p>Avatar:{{producer.avatar}}</p>
-    <p>Raison social: {{producer.socialReason}}</p>
-    <p>Siret: {{producer.siretNumber}}</p>
-    <p>Status: {{producer.status}}</p>
+    <h1>Profil producteur</h1>
+    <p>Avatar :{{producer.avatar}}</p>
+    <p>Raison sociale : {{producer.socialReason}}</p>
+    <p>Siret : {{producer.siretNumber}}</p>
+    <p>Statut : {{producer.status}}</p>
     <p>Email : {{producer.email}}</p>
     <p>Crée le : {{producer.createdAt | date('d-m-Y')}}</p>
     <p>Mis à jour le : {{producer.updatedAt | date('d-m-Y')}}</p>
-    <p>Prenom : {{producer.firstname}}</p>
+    <p>Prénom : {{producer.firstname}}</p>
     <p>Nom : {{producer.lastname}}</p>
     <p>Adresse : {{producer.address}} - {{producer.postalCode}} - {{producer.city}}</p>
-    <p>Telephone : {{producer.telephone}}</p>
+    <p>Téléphone : {{producer.telephone}}</p>
         
     <a href="{{path('producer_edit',{'id': producer.id})}}" class="btn btn-success"> 
         Modifier mon Profil
@@ -35,7 +35,7 @@
 {# Mise en place de la liste des produits du producer avec accès view/edit/delete#}
 
 <div class="container  producer-form">
-        <h1> My Products Index </h1>
+        <h1>Mes produits </h1>
     <a href="#" class="btn btn-success"> 
         Ajouter un produit
         <i class="fa fa-plus-circle"></i> 

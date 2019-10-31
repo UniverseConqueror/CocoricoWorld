@@ -8,15 +8,23 @@
 
 <div class="row">
 
+{% if is_granted('ROLE_PRODUCER') %}
+<div class="btn btn btn-secondary col-md-4 mx-auto " >
+        <a href="{{ path('product_edit', {'id':product.id}) }}">Modifier le produit</a>
 </div>
+{% endif %}
 
 <div class="d-flex col-md-10 "> 
     
     <div class="container jumbotron " style="display: flex; width:50%; height:25%; position:relative">
         
- 
-          
-         <img src="http://placehold.it/200x200" class="card-img-top" alt="Producer Avatar">
+        <div style="width:500px; height:350px; border: 1px solid black">
+
+            {% if product.image matches '#^https://#' %}
+                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+                <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
 
      
             
@@ -123,7 +131,14 @@
                     </div>
                 </a>
                 </div>   
-        
+
+        <div style="width:150px; height:150px; border-radius:50%; margin:auto">
+
+            {% if product.producer.avatar matches '#^https://#' %}
+                <img src="{{ product.producer.avatar }}" class="card-img-top" alt="{{ product.producer.firstname }}">
+            {% else %}
+                <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" alt="{{ product.producer.firstname }}">
+            {% endif %}
        
        
 
@@ -134,7 +149,13 @@
 <div class="" style="display: flex; width:1600px; height:600px; margin: auto">
     {% for product in product_producer %}
     <div class="card mr-1 mb-1 mx-auto" style="width: 18rem">
-        <a href="{{ path('product_show', {'id' : product.id})}}"><img src="http://placehold.it/200x200" class="card-img-top" alt="{{product.name}} image" title = "{{product.name}}"></a> 
+    
+        {% if product.image matches '#^https://#' %}
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
+        {% else %}
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}"></a>
+        {% endif %}
+        
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
                 <p>{{ product.price }} euros</p>

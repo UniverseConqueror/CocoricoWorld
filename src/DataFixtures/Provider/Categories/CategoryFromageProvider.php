@@ -13,6 +13,11 @@ class CategoryFromageProvider extends Base
         'Cremerie',
                 
     ];
+
+    protected static $fromagesImages = [
+        'fromages2.jpg',
+        'cremerie.jpg',
+    ];
    
     public static function randomCategoryFromages()
     {
@@ -25,7 +30,8 @@ class CategoryFromageProvider extends Base
         return static::$FromagesArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$fromagesImages;
+    }
 }

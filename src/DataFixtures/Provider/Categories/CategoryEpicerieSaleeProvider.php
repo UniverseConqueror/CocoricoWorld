@@ -14,6 +14,12 @@ class CategoryEpicerieSaleeProvider extends Base
         'Bocaux',
                 
     ];
+
+    protected static $epicerieSaleeImages = [
+        'oil.jpg',
+        'sel-et-poivres.jpg',
+        'bocaux.jpg',
+    ];
    
     public static function randomCategoryEpicerieSalée()
     {
@@ -26,7 +32,8 @@ class CategoryEpicerieSaleeProvider extends Base
         return static::$epicerieSaléeArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$epicerieSaleeImages;
+    }
 }

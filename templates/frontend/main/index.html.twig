@@ -19,7 +19,11 @@
     {% set url = path('producer_show', {'id': producer.id}) %}
 
         <div class="card mr-1 mb-1" style="width: 18rem;">
-           <a href="{{ url }}"> <img src="http://placehold.it/200x200" class="card-img-top" alt="Producer Avatar"></a>
+           {% if producer.avatar matches '#^https://#' %}
+                <a href="{{ url }}"><img src="{{ producer.avatar }}" alt="{{ producer.firstname }}"></a>
+            {% else %}
+                <a href="{{ url }}"><img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}"></a>
+            {% endif %}
             <div  class="card-body label-producer-homepage">
                 <a href="{{ url }}">
                 <h5 class="card-title">{{ producer.socialReason }}</h5>

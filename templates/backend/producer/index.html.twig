@@ -100,7 +100,17 @@
                     <td>{{ producer.telephone }}</td>
                     <td>{{ producer.status ?? "Pas de status" }}</td>
                     <td>{{ producer.enable ? "Oui" : "Non" }}</td>
-                    <td>{% if producer.avatar is not null %}<img src="{{ asset('uploads/avatar/' ~ producer.avatar) | imagine_filter("admin_thumbnails") }}" alt="{{ producer.firstname ~ " " ~ producer.lastname }}"> {% else %} Pas d'avatar {% endif %}</td>
+                    <td>
+                        {% if producer.avatar is not null %}
+                            {% if producer.avatar matches '#^https://#' %}
+                                <img src="{{ producer.avatar|replace({'200':'80'}) }}" alt="{{ producer.firstname ~ " " ~ producer.lastname }}">
+                            {% else %}
+                                <img src="{{ asset('uploads/avatar/' ~ producer.avatar) | imagine_filter("admin_thumbnails") }}" alt="{{ producer.firstname ~ " " ~ producer.lastname }}">
+                            {% endif %}
+                        {% else %}
+                            Pas d'avatar
+                        {% endif %}
+                    </td>
                     <td>{{ producer.description ? producer.description|truncate(15, "...")}}</td>
                     <td>{{ producer.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                     <td>{{ producer.updatedAt ? producer.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>
