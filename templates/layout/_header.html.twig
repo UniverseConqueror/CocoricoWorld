@@ -1,53 +1,53 @@
-<nav class="container-fluid contnav nav>navbar navbar-expand-lg navbar-light pt-5 pt-5 shadow-lg">
+<nav class="container-fluid contnav nav>navbar navbar-expand-lg navbar-light pt-5 pt-5 shadow-lg header">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <img src="{{ asset('asset/image/logococo.png') }}" alt="Logo Cocorico World" id="logo"><a class="navbar-brand p-auto" href="{{ path('homepage') }}">Cocorico.world</a>
+      <a class="navbar-brand p-auto d-none d-sm-block d-md-block" href="{{ path('homepage') }}"> <img src="{{ asset('asset/image/logococo.png') }}" alt="Logo Cocorico World" id="logo"></a>
       
 
       <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item active">
+        <li class="nav-item ">
         <a class="nav-link" href="{{ path('homepage') }}" title="Homepage"><i class="fa fa-home fa-3x"aria-hidden="true"></i></a>
         </li>
         
         {% if not app.user %}
-        <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="{{path('app_registration')}}"title="Register"><i class="fa fa-pencil-square fa-3x" aria-hidden="true"></i></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="{{path('app_login')}}" title="Login"><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
         </li>
         {% else %}
 
         {% if is_granted(['ROLE_PRODUCER']) == false %}
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="{{path('producer_registration')}}"title="New producer"><i class="fa fa-user-circle fa-3x" aria-hidden="true"></i></a> 
         </li>
         {% endif %}
 
-        <li class="nav-item active"> 
+        <li class="nav-item "> 
           <a class="nav-link" href="{{ path('profil_user', {'id' : app.user.id}) }}" title="My Profil" ><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
         </li>
 
-        <li class="nav-item active">
+        <li class="nav-item ">
             <a class="nav-link" href="{{ path('app_logout') }}" title="Logout"><i class="fa fa-sign-out fa-3x " style = "color : red" aria-hidden="true"></i></a>
         </li>
 
         {% if is_granted(['ROLE_PRODUCER']) %}
-        <a class="btn btn my-2 my-sm-0 ml-2" href="{{ path('producer_profil', {'id' : app.user.producer.id})}} " title="My Producer profil"> <i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
+        <a class="nav-link" href="{{ path('producer_profil', {'id' : app.user.producer.id})}} " title="My Producer profil"> <i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
         {% endif %}
 
         {% if is_granted(['ROLE_ADMIN'])  %}
-        <a class="btn btn my-2 my-sm-0 ml-2" href="{{ path('admin_home') }} " title="Admin"> <i class="fa fa-user-secret fa-3x" aria-hidden="true"></i>
+        <a class="nav-link" href="{{ path('admin_home') }} " title="Admin"> <i class="fa fa-user-secret fa-3x" aria-hidden="true"></i>
         </a>
         {% endif %}
 
         {% endif %}
        
-        <li class="nav-item active">
+        <li class="nav-item ">
           <a class="nav-link" href="#" title="Shopping Cart"><i class="fa fa-shopping-cart fa-3x " aria-hidden="true"></i></a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="{{ path('contact') }}" title="Contact Us"><i class="fa fa-envelope fa-3x " aria-hidden="true"></i></a>
         </li>
 
@@ -56,12 +56,12 @@
     
       <form class="form-inline mr-auto mb-2">
         <input class="form-control ml-auto " type="search" placeholder="Rechercher" aria-label="Search">
-        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+        <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
       </form>
     <div class="dropdown-list pt-3 pb-2 ">
         {% for univers in universes %}  
       <div class="dropdown">
-        <a class="nav-link dropdown-toggle text-white btn btn-dark ml-1 mt-1" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ univers.name }}</a>
+        <a class="nav-link dropdown-toggle btn btn-outline-secondary text-dark ml-1 mt-1" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ univers.name }}</a>
         <!-- lien -->
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
           {% for categorie in univers.categories %}

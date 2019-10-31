@@ -1,14 +1,30 @@
+*{
+    box-sizing: border-box;
+}
 body {
-    background-image: url('../doc/Background/bodybackground2.png');
+    background-color: white;
     background-size: cover;
+    color: black;
 }
 
 .footer{
-    background-color: rgba(48, 103, 107, 0.6)
+    
+    color: black;
+    border-top: 1rem solid;
+    background-image: url(/asset/doc/Background/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.header{
+    background-image: url(/asset/doc/Background/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #logo {
-    width: 10%;
+    width: 30%;
+    margin-left: 20%;
 }
 
 .homepagecard{
@@ -41,7 +57,7 @@ h1, h2, h3 {
 
 
 h3 {
-    background-color: rgb(241, 180, 172);
+    background-color: #A9E7FE;
     width: 40%;
     border-radius: 50px;
 }
@@ -50,8 +66,10 @@ h3 {
     margin: 2% auto auto;
     margin-bottom: 2rem;;
     text-align: center;
-    background-color: blue;
-    color: white;
+    background-image: url(/asset/doc/Background/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: black;
     border-radius: 50px;
 }
 
@@ -59,8 +77,8 @@ h3 {
 
     text-align: center;
     width: 70%;
-    background-color: blue;
-    color: white;
+    background-color: #A9E7FE;
+    color: black;
     border-radius: 50px;
 }
 
@@ -69,15 +87,16 @@ h3 {
 }
 
 .label-producer-homepage {
-    background-color: rgb(243, 241, 136);
+    background-color:#A9E7FE;
 }
 
 .description-producer-homepage {
     height: 185px;
+    overflow:hidden;
 }
 
 .label-product-card {
-    background-color: rgb(241, 180, 172);
+    background-color: #A9E7FE;
     height: 190px;
 }
 
@@ -87,7 +106,7 @@ h3 {
 }
 
 .product-button {
-    background-color: rgb(241, 180, 172);
+    background-color: #A9E7FE;
     margin-right: 0.4rem;
 }
 
@@ -99,12 +118,12 @@ h3 {
 }
 
 .product-button-seemore {
-    background-color: rgb(241, 180, 172);
+    background-color: #A9E7FE;
     margin: 10px;
 }
 
 .producter-button-shop {
-    background-color: rgb(243, 241, 136);
+    background-color: #A9E7FE;
     color: black;
 }
 

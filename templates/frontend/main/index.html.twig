@@ -19,11 +19,13 @@
     {% set url = path('producer_show', {'id': producer.id}) %}
 
         <div class="card mr-1 mb-1" style="width: 18rem;">
+            <div class="text-center">
            {% if producer.avatar matches '#^https://#' %}
                 <a href="{{ url }}"><img src="{{ producer.avatar }}" alt="{{ producer.firstname }}"></a>
             {% else %}
                 <a href="{{ url }}"><img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}"></a>
             {% endif %}
+            </div>
             <div  class="card-body label-producer-homepage">
                 <a href="{{ url }}">
                 <h5 class="card-title">{{ producer.socialReason }}</h5>
@@ -47,7 +49,7 @@
 
             </ul>
             <div class="card-body text-center">
-                <a class="btn btn-warning producter-button-shop" href="{{ url }}">Boutique du producteur</a>
+                <a class="btn btn-info producter-button-shop" href="{{ url }}">Boutique du producteur</a>
             </div>
         </div>
     {% endfor %}
