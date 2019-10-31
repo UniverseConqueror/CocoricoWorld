@@ -14,6 +14,12 @@ class CategoryMerProvider extends Base
         'Coquillages',
                 
     ];
+
+    protected static $merImages = [
+        'poissons.jpg',
+        'crustaces.jpg',
+        'coquillages.jpg',
+    ];
    
     public static function randomCategoryMer()
     {
@@ -26,7 +32,8 @@ class CategoryMerProvider extends Base
         return static::$merArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$merImages;
+    }
 }

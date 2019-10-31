@@ -14,6 +14,12 @@ class CategoryEpicerieSucreeProvider extends Base
         'Confiseries',
                 
     ];
+
+    protected static $epicerieSucreeImages = [
+        'gateaux.jpg',
+        'confiture.jpg',
+        'confiseries.jpg',
+    ];
    
     public static function randomCategoryEpicerieSucrée()
     {
@@ -26,7 +32,8 @@ class CategoryEpicerieSucreeProvider extends Base
         return static::$epicerieSucréeArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$epicerieSucreeImages;
+    }
 }

@@ -14,6 +14,12 @@ class CategoryBoissonSansAlcoolProvider extends Base
         'Boissons Bio',
                 
     ];
+
+    protected static $boissonsSansAlcoolImages = [
+        'jus-de-fruit.jpg',
+        'boissons-gazeuses.jpg',
+        'boissons-bio.jpg',
+    ];
    
     public static function randomCategoryBoissonSansAlcool()
     {
@@ -26,7 +32,8 @@ class CategoryBoissonSansAlcoolProvider extends Base
         return static::$boissonSansAlcoolArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$boissonsSansAlcoolImages;
+    }
 }

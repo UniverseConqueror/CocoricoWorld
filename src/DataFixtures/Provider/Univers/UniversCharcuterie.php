@@ -31,6 +31,7 @@ abstract class UniversCharcuterie extends Fixture
       
         $univers =  new Univers();
         $univers    ->setName('Charcuterie')
+                    ->setImage('charcuterie.jpg')
                     ->setCreatedAt(new \DateTime());
 
         $manager    ->persist($univers);
@@ -39,6 +40,7 @@ abstract class UniversCharcuterie extends Fixture
         // Créer les Categories de l'univers Charcuterie
             
         $provcategoriesarray = CategoryCharcuterieProvider::categories();
+        $images = CategoryCharcuterieProvider::images();
   
         for ($i = 0 ; $i <= count($provcategoriesarray)-1 ; $i++) {
             $category = new Category();
@@ -46,7 +48,7 @@ abstract class UniversCharcuterie extends Fixture
             $cat = $provcategoriesarray[$i];
                     
             $category   ->setName($cat)
-                        ->setImage($faker->url())
+                        ->setImage($images[$i])
                         ->setUnivers($univers);
 
             $manager->persist($category);

@@ -14,6 +14,12 @@ class CategoryProduitElaboreProvider extends Base
         'Pizzas',
                 
     ];
+
+    protected static $produitElaboresImages = [
+        'plat-prepares.jpg',
+        'friand.jpg',
+        'pizza.jpg',
+    ];
    
     public static function randomCategoryProduitsElaborés()
     {
@@ -26,7 +32,8 @@ class CategoryProduitElaboreProvider extends Base
         return static::$ProduitsElaborésArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$produitElaboresImages;
+    }
 }

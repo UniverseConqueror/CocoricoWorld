@@ -15,6 +15,13 @@ class CategoryFruitLegumeProvider extends Base
         'Légumes Secs'
         
     ];
+
+    protected static $fruitsLegumesImages = [
+        'fruits.jpg',
+        'legumes.jpg',
+        'herbes-aromatiques.jpg',
+        'legumes-secs.jpg',
+    ];
    
     public static function randomCategoryFruitsLegumes()
     {
@@ -27,7 +34,8 @@ class CategoryFruitLegumeProvider extends Base
         return static::$fruitsLegumesArray;
     }
 
-
-
-   
+    public static function images()
+    {
+        return self::$fruitsLegumesImages;
+    }
 }
