@@ -11,7 +11,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProducerController extends AbstractController
 {
@@ -20,11 +19,10 @@ class ProducerController extends AbstractController
      */
     public function index($id, ProducerRepository $producerRepository)
     {
-        
         $user = $this->getUser();
         $producer = $user->getProducer();
 
-        if ($id == $producer->getId()) {
+        if ($producer !== null && $id == $producer->getId()) {
             return $this->render('frontend/producer/profil.html.twig', [
             'producer' => $producer,
             ]);

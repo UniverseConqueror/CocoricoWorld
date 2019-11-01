@@ -21,7 +21,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     /**
      * AccessDeniedHandler constructor.
      *
-     * @param Environment $environment
+     * @param Environment       $environment
      * @param UniversRepository $universRepository
      */
     public function __construct(Environment $environment, UniversRepository $universRepository)
@@ -37,7 +37,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
      *     throw new AccessDeniedException('You are not allowed to access this page');
      * }
      *
-     * @param  Request $request
+     * @param  Request               $request
      * @param  AccessDeniedException $accessDeniedException
      *
      * @return Response|null
@@ -50,7 +50,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     {
         $univers = $this->universRepository->findAllUniversWithCategoriesAndSubcategories();
         $this->environment->addGlobal('universes', $univers);
-        dd($accessDeniedException);
 
         return new Response(
             $this->environment->render('bundles/TwigBundle/Exception/error403.html.twig'),

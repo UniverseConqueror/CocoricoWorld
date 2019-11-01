@@ -8,6 +8,11 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
+    /**
+     * Returns an array of twig filters to make them available for use in templates.
+     *
+     * @return array
+     */
     public function getFilters(): array
     {
         return [
@@ -15,7 +20,7 @@ class AppExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('truncate', [$this, 'truncate']),
-            new TwigFilter('json_decode', [$this, 'json_decode']),
+            new TwigFilter('json_array_decode', [$this, 'json_array_decode']),
         ];
     }
 
@@ -24,17 +29,25 @@ class AppExtension extends AbstractExtension
      *
      * {{ post.description|truncate(15, "...") }}
      *
+     * @author Michaël Coutin <michael.coutin62@gmail.com>
+     *
      * @param string $value     The string that will be formatted
      * @param int    $length    The maximum length of the string
      * @param string $separator The separator that will be displayed at the end of the chain if it is too long
      *
      * @return string The formatted string
+     *
+     * @throws \LogicException when the specified string size is negative.
      */
-    public function truncate(string $value, int $length, string $separator)
+    public function truncate(string $value, int $length, string $separator): string
     {
+        if ($length < 0) {
+            throw new \LogicException('The value of the string size can not be less than 0.');
+        }
+
         if (strlen($value) > $length) {
 
-            return substr($value, 0, $length - 1) . $separator;
+            return substr($value, 0, $length) . $separator;
         }
         else {
 
@@ -47,11 +60,13 @@ class AppExtension extends AbstractExtension
      *
      * {{ user.roles|json_decode }}
      *
-     * @param array $json The json string which will be converted into a simple php string
+     * @author Michaël Coutin <michael.coutin62@gmail.com>
      *
-     * @return mixed
+     * @param array $json The json array which will be converted into a simple php string
+     *
+     * @return string|null
      */
-    public function json_decode(array $json)
+    public function json_array_decode(array $json): ?string
     {
         return implode(" ", $json);
     }
