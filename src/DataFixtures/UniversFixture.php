@@ -42,7 +42,8 @@ class UniversFixture extends BaseFixture
             $universInfos = $provider::getUnivers();
             $univers = new Univers();
             $univers->setName($universInfos['name'])
-                ->setImage($universInfos['image']);
+                ->setImage($universInfos['image'])
+            ;
 
             $manager->persist($univers);
 
@@ -52,8 +53,8 @@ class UniversFixture extends BaseFixture
                 $category = new Category();
                 $category->setName($cat['name'])
                     ->setImage($cat['image'])
-                    ->setUnivers($univers);
-
+                    ->setUnivers($univers)
+                ;
                 $manager->persist($category);
 
                 $subCategories = $provider::getSubcategories()[$cat['name']];
@@ -61,8 +62,8 @@ class UniversFixture extends BaseFixture
 
                     $subcategory = new Subcategory();
                     $subcategory->setName($subCat['name'])
-                        ->setCategory($category);
-
+                        ->setCategory($category)
+                    ;
                     $manager->persist($subcategory);
                 }
             }
