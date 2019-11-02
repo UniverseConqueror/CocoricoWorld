@@ -42,7 +42,7 @@ class FruitLegumeProvider extends BaseProvider
      * {@inheritDoc}
      */
     protected const SUBCATEGORIES = [
-        "Fruits" => [
+        'Fruits' => [
             [
                 'name'  => 'Pomme',
             ],
@@ -53,7 +53,7 @@ class FruitLegumeProvider extends BaseProvider
                 'name'  => 'Orange',
             ],
         ],
-        "Légumes" => [
+        'Légumes' => [
             [
                 'name'  => 'Tomate',
             ],
@@ -64,7 +64,7 @@ class FruitLegumeProvider extends BaseProvider
                 'name'  => 'Pomme de terre',
             ],
         ],
-        "Herbes aromatiques" => [
+        'Herbes aromatiques' => [
             [
                 'name'  => 'Basilic',
             ],
@@ -75,7 +75,7 @@ class FruitLegumeProvider extends BaseProvider
                 'name'  => 'Coriandre',
             ],
         ],
-        "Légumes Secs" => [
+        'Légumes Secs' => [
             [
                 'name'  => 'Lentilles',
             ],
