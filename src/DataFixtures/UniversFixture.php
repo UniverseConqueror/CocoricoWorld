@@ -37,6 +37,7 @@ class UniversFixture extends BaseFixture
 
     public function loadData(ObjectManager $manager)
     {
+        $count = 0;
         foreach ($this->universProviders as $provider) {
 
             $universInfos = $provider::getUnivers();
@@ -65,6 +66,8 @@ class UniversFixture extends BaseFixture
                         ->setCategory($category)
                     ;
                     $manager->persist($subcategory);
+                    $this->addReference(sprintf('%s_%d', 'main_subcategory', $count), $subcategory);
+                    $count++;
                 }
             }
         }
