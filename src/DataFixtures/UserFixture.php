@@ -55,7 +55,7 @@ class UserFixture extends BaseFixture implements DependentFixtureInterface
 
             $producer = new Producer();
             $producer->setEmail($this->faker->unique()->email)
-                ->setSocialReason(sprintf('%s %s', $this->faker->company, $this->faker->companySuffix))
+                ->setSocialReason($this->faker->company)
                 ->setSiretNumber($this->faker->siret)
                 ->setAddress($this->faker->streetAddress)
                 ->setPostalCode($this->faker->numberBetween(1000, 9000) * 10)
