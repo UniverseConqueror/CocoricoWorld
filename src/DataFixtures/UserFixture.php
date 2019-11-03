@@ -32,6 +32,16 @@ class UserFixture extends BaseFixture implements DependentFixtureInterface
 
         $manager->persist($admin);
 
+        // Creation of a simple user without associated producer for functional tests
+        $user = new User();
+        $user->setEmail('user@email.com')
+            ->setRoles(['ROLE_USER'])
+        ;
+        $passwordHash = $this->encoder->encodePassword($user, 'password');
+        $user->setPassword($passwordHash);
+
+        $manager->persist($user);
+
         $this->createMany(30, 'main_user', function ($count) {
 
             $user = new User();
