@@ -7,18 +7,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ProducerRepository;
 use App\Form\ContactFormType;
+use App\Repository\ProductRepository;
 
 class MainController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(Request $request, ProducerRepository $producerRepository)
+    public function index(Request $request, ProducerRepository $producerRepository, ProductRepository $productRepository )
     {
         $producers = $producerRepository->findAll();
-
+        $lastproducts = $productRepository->lastRelease();
+       
         return $this->render('frontend/main/index.html.twig', [
             'producers' => $producers,
+            'lastproducts' => $lastproducts
         ]);
     }
 
@@ -59,7 +62,7 @@ class MainController extends AbstractController
      */
     public function contact(Request $request)
     {
-        $contact;
+     
 
         $form = $this->createForm(ContactFormType::class);
 
