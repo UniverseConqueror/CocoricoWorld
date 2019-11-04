@@ -81,7 +81,7 @@
 	{# Mise en place de la liste des produits du producer avec accès view/edit/delete#}
 	<div class="container  producer-form">
 		<h1>Mes produits </h1>
-		<a href="#" class="btn btn-info">         Ajouter un produit        <i class="fa fa-plus-circle"></i></a>
+		<a href="{{path('product_new')}}" class="btn btn-info">         Ajouter un produit        <i class="fa fa-plus-circle"></i></a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -98,13 +98,13 @@
 					</td>
 					<td>
 						<a href="{{ path('product_show', {'id' : product.id})}}" class="btn btn-success"><i class="fa fa-eye" title="Voir la fiche produit"></i></a>
-						<a href="#" class="btn btn-primary"><i class="fa fa-edit" title="Modifier le produit"></i></a>
+						<a href="{{path('product_edit')}}" class="btn btn-primary"><i class="fa fa-edit" title="Modifier le produit"></i></a>
 						                    {# Mise en place des conditions pour affichage différent si le produit est enable ou disable #}                    {% if product.enable == true %}                    
 						<a href="{{ path('disable_product', {'id' : product.id})}}" class="btn btn-success"><i class="fa fa-eye-slash" title="Desactiver le produit"></i></a>
 						                    {% else %}                    
 						<a href="{{ path('disable_product', {'id' : product.id})}}" class="btn btn-warning"><i class="fa fa-eye-slash" title="Activer le produit"></i></a>
 						                    {% endif %}                      
-						<a href="#" class="btn btn-danger"><i class="fa fa-times" title="Supprimer le produit"></i></a>
+						<a href="{{path('product_delete')}}" class="btn btn-danger"><i class="fa fa-times" title="Supprimer le produit"></i></a>
 					</td>
 				</tr>
 				                {% else %}            
