@@ -36,6 +36,24 @@ class CategoryRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getRubricWithProducts($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.univers', 'u')
+            ->addSelect('u')
+            ->innerJoin('c.subcategories', 's')
+            ->addSelect('s')
+            ->innerJoin('s.products', 'p')
+            ->addSelect('p')
+            ->innerJoin('p.producer', 'pr')
+            ->addSelect('pr')
+            ->andWhere('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

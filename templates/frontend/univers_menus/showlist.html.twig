@@ -5,7 +5,7 @@
 {% block body %}
 
     <div>
-        {% if typeName == "subcategory" %}
+        {% if type_name == "subcategory" %}
             <h1 class="universtitle">Univers  {{type.category.univers.name}}</h1>
             <h3> Categorie  {{type.category.name}}</h3>
         {% else %}
@@ -15,7 +15,7 @@
 
         {# Condition d'affichage sur le nombre de produits dans le type #}
 
-        {% if typeName == "subcategory" %}
+        {% if type_name == "subcategory" %}
             {% if (type.products | length) >= 1 %}
                 <h3>{{ type.products | length }} produits actuellement disponibles dans cette sous categorie</h3>
             {% else %}
@@ -27,7 +27,7 @@
 
     
         <div class="container-fluid homepagecard">
-            {% if typeName == "subcategory" %}
+            {% if type_name == "subcategory" %}
             {% for product in type.products %}
 
 

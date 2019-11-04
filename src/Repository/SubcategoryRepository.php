@@ -36,6 +36,24 @@ class SubcategoryRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getRubricWithProducts($id)
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.category', 'c')
+            ->addSelect('c')
+            ->innerJoin('c.univers', 'u')
+            ->addSelect('u')
+            ->innerJoin('s.products', 'p')
+            ->addSelect('p')
+            ->innerJoin('p.producer', 'pr')
+            ->addSelect('pr')
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Subcategory[] Returns an array of Subcategory objects
     //  */
