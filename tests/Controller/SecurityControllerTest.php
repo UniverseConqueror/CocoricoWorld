@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
+    /**
+     * Method to test the routing of a user with ROLE_USER through the home page,
+     * the producers' store and the admin interface
+     */
     public function testSimpleUserAccess()
     {
         $client = static::createClient();
@@ -37,6 +41,11 @@ class SecurityControllerTest extends WebTestCase
         $this->assertEquals('403', $client->getResponse()->getStatusCode());
     }
 
+    /**
+     * Method to test the application with an administrator with the ROLE_ADMIN.
+     * The administrator is moved to the admin interface, creates a new subcategory,
+     * uses the search bar, and deletes the previously created item
+     */
     public function testAdminAccess()
     {
         $client = static::createClient();
@@ -76,6 +85,6 @@ class SecurityControllerTest extends WebTestCase
         $crawler = $client->submit($form);
 
         $crawler = $client->request('GET', $searchRequest);
-        $this->assertSelectorTextContains('td[colspan="9"]', 'ucun résultat !');
+        $this->assertSelectorTextContains('td[colspan="9"]', 'Aucun résultat !');
     }
 }

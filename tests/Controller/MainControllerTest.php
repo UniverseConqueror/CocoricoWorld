@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class MainControllerTest extends WebTestCase
 {
     /**
+     * Test if the differents routes of the MainController are accessible for
+     * an anonymous user
+     *
      * @dataProvider provideUrls
      */
     public function testPagesAccess($url)
@@ -35,6 +38,10 @@ class MainControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
     }
 
+    /**
+     * Check that the paths to the administration interface and the editing of a
+     * producer profile are redirected to the login page as an anonymous user
+     */
     public function testUnauthorizedAccess()
     {
         $client = static::createClient();
@@ -58,6 +65,11 @@ class MainControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isRedirect());
     }
 
+    /**
+     * Method that returns all MainController urls.
+     *
+     * @return array
+     */
     public function provideUrls()
     {
         return [
