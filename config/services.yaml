@@ -28,3 +28,7 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%avatar_directory%'
+
+    App\Service\Mailer:
+        arguments:
+            $sender: '%env(MAILER_SENDER)%'
