@@ -3,22 +3,28 @@
 namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use App\Form\UserUpdateProfilType;
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("/profil/{id<\d+>}", name="profil_user")
+     * @Route("/profil",
+     *     name="profil_user",
+     *     methods={"GET"})
+     *
+     * @return Response
      */
-    public function profil($id, User $user, UserRepository $userrepository)
+    public function profile()
     {
-        $user = $userrepository->find($id);
+        if (!$user = $this->getUser()) {
+
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
+        }
 
         return $this->render('frontend/user/profil.html.twig', [
             'user' => $user
@@ -26,46 +32,36 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profil/update/{id<\d+>}", name="profil_update")
-     * 
+     * @Route("/profil/update",
+     *     name="profil_update",
+     *     methods={"GET", "POST"})
+     *
+     * @param Request $request
+     * @return RedirectResponse|Response
      */
-    public function profilupdate(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, ObjectManager $manager) {
+    public function profileUpdate(Request $request)
+    {
+        if (!$user = $this->getUser()) {
 
-        // On stocke le mot de passe courant
-        $currentPassword = $user->getPassword();
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous connectez pour accéder à cette page');
+        }
+        $updateForm = $this->createForm(UserUpdateProfilType::class, $user);
+        $updateForm->handleRequest($request);
 
-        $form = $this->createForm(UserUpdateProfilType::class, $user);
-        // Ici, le nouveau mot de passe sera renseigné dans $user
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // Si le mot de passe n'est pas modifié, on conserve l'ancien
-            if (empty($user->getPassword())) {
-                $user->setPassword($currentPassword);
-            // Sinon, on encode le nouveau mot de passe
-            } else {
-                // Mot de passe qui vient du formulaire
-                $password = $user->getPassword();
-                // On l'encode via le passwordEncoder reçu depuis la méthode du contrôleur
-                $encodedPassword = $passwordEncoder->encodePassword($user, $password);
-                // On écrase le mot de passe avec le mot de passe encodé
-                $user->setPassword($encodedPassword);
-            }
-              
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
             $manager->flush();
 
             $this->addFlash(
                     'success',
-                    'Votre modification de profil a bien été enregistrée - Veuillez vous reconnecter'
-                );
+                    'Votre modification de profil a bien été enregistrée'
+            );
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('profil_user');
         }
 
         return $this->render('frontend/user/profil_update.html.twig', [
-            'user' => $user,
-            'form' => $form->createView()
+            'update_form' => $updateForm->createView()
         ]);
     }
 }

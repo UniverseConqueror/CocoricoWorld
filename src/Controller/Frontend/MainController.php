@@ -17,7 +17,7 @@ class MainController extends AbstractController
      *     name="homepage",
      *     methods={"GET"})
      *
-     * @param Request $request
+     * @param Request            $request
      * @param ProducerRepository $producerRepository
      *
      * @return Response
@@ -32,9 +32,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/company",
+     * @Route("/a-propos",
      *     name="company_page",
      *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showCompanyPresentation()
     {
@@ -45,6 +47,8 @@ class MainController extends AbstractController
      * @Route("/faq",
      *     name="faq_page",
      *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showFaq()
     {
@@ -55,6 +59,8 @@ class MainController extends AbstractController
      * @Route("/cgv",
      *     name="cgv_page",
      *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showCgv()
     {
@@ -65,6 +71,8 @@ class MainController extends AbstractController
      * @Route("/mentions-legales",
      *     name="legalsmentions_page",
      *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showLegalsMentions()
     {
