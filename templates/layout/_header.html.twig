@@ -23,11 +23,12 @@
         <li class="nav-item">
           <a class="nav-link" href="{{path('producer_registration')}}"title="New producer"><i class="fa fa-user-circle fa-3x" aria-hidden="true"></i></a> 
         </li>
-        {% endif %}
-
+        
         <li class="nav-item "> 
           <a class="nav-link" href="{{ path('profil_user', {'id' : app.user.id}) }}" title="My Profil" ><i class="fa fa-user fa-3x " aria-hidden="true"></i></a>
         </li>
+        {% endif %}
+
 
         <li class="nav-item ">
             <a class="nav-link" href="{{ path('app_logout') }}" title="Logout"><i class="fa fa-sign-out fa-3x " style = "color : red" aria-hidden="true"></i></a>

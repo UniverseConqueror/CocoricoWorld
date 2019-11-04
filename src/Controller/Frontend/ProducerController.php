@@ -2,6 +2,7 @@
 
 namespace App\Controller\Frontend;
 
+
 use App\Entity\Producer;
 use App\Form\ProducerType;
 use App\Service\FileUploader;
@@ -12,9 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 // use Symfony\Component\HttpFoundation\File\Exception\FileException;
 // use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProducerController extends AbstractController
@@ -22,7 +23,7 @@ class ProducerController extends AbstractController
     /**
      * @Route("/producer/{id<\d+>}/profil", name="producer_profil")
      */
-    public function index($id, ProducerRepository $producerRepository)
+    public function index($id)
     {
         
         $user = $this->getUser();
@@ -31,6 +32,7 @@ class ProducerController extends AbstractController
         if ($id == $producer->getId()) {
             return $this->render('frontend/producer/profil.html.twig', [
             'producer' => $producer,
+            'user' => $user,
             ]);
         }
 
