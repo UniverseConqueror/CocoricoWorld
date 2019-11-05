@@ -30,12 +30,11 @@ class ProductController extends AbstractController
 
            throw $this->createNotFoundException('La page que vous recherchez n\'existe pas !');
        }
-       $producer = $product->getProducer();
-       $products = $productRepository->findBy(array('producer' => $producer), array(), 5);
+       $products = $productRepository->getProductsWithoutTheOneDisplayed($product->getId());
 
        return $this->render('frontend/product/show.html.twig', [
            'product'          => $product,
-           'product_producer' => $products
+           'product_producer' => $products,
        ]);
    }
 
@@ -48,7 +47,6 @@ class ProductController extends AbstractController
      *
      * @return RedirectResponse|Response
      */
-
    public function new(Request $request)
    {
        if (!$producer = $this->getUser()->getProducer()) {
@@ -119,54 +117,79 @@ class ProductController extends AbstractController
             'form'    => $productForm->createView(),
         ]);
     }
-    
+
     /**
-     * @Route("product/disable/{id<\d+>}", name = "disable_product")
+     * @Route("product/disable/{id<\d+>}",
+     *     name = "disable_product",
+     *     methods={"GET", "POST"})
+     *
+     * @param ObjectManager $manager
+     * @param Product|null  $product
+     *
+     * @return RedirectResponse
      */
-    public function enable_disable_product(Product $product, ObjectManager $manager)
+    public function toggleProduct(ObjectManager $manager, Product $product = null)
     {
-        if ($product->getEnable($product) == true) {
-            $product->setEnable(false);
-            $manager->persist($product);
-            $manager->flush();
+        if (!$product) {
 
-            $this->addFlash(
-                'danger',
-                'La produit a bien été archivé'
-            );
-        } else {
-            $product->setEnable(true);
-            $manager->persist($product);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Le produit a bien été debloquée'
-            );
+            throw $this->createNotFoundException('La page que vous recherchez n\'existe pas');
         }
+        if ($product->getProducer() != $this->getUser()->getProducer()) {
+
+            throw $this->createAccessDeniedException();
+        }
+
+        $toggle = !$product->getEnable();
+        $product->setEnable($toggle);
+        $manager->flush();
+
+        $this->addFlash(
+            $toggle ? 'success' : 'danger',
+            $toggle ? 'Le produit a bien été debloquée' : 'La produit a bien été archivé'
+        );
+
         return $this->redirectToRoute('producer_profil', [
             'id' => $product->getProducer()->getId()
         ]);
     }
 
-     /**
-     * @Route("/product/{id}", name="product_delete", methods={"DELETE"}, requirements={"id"="\d+"})
+    /**
+     * @Route("/product/{id<\d+>}/delete",
+     *     name="product_delete",
+     *     methods={"POST"})
+     *
+     * @param Request      $request
+     * @param Product|null $product
+     *
+     * @return RedirectResponse
      */
-    public function delete(Request $request, Product $product): Response
+    public function delete(Request $request, Product $product = null)
     {
+        if (!$product) {
+
+            throw $this->createNotFoundException('La page que vous recherchez n\'existe pas');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($product);
-            $entityManager->flush();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($product);
+            $manager->flush();
 
             $this->addFlash(
                 'sucess',
                 'Suppression effectuée'
             );
+        } else {
+
+            $this->addFlash(
+                'danger',
+                'Une erreur s\'est produite, veuillez réessayer ultérieurement'
+            );
         }
 
+        // TODO: Add producer profil redirection
         return $this->redirectToRoute('producer_show', [
-            'id'=>$product->getProducer()->getId(),
+            'id' => $product->getProducer()->getId(),
         ]);
     }
 }
