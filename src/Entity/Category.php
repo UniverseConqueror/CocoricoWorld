@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -19,6 +21,8 @@ class Category
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * 
      * @ORM\Column(type="string", length=64)
      */
     private $name;
@@ -29,11 +33,15 @@ class Category
     private $image;
 
     /**
+     * @Assert\NotBlank
+     * 
      * @ORM\Column(type="boolean")
      */
     private $enable;
 
     /**
+     * @Assert\NotBlank
+     * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
