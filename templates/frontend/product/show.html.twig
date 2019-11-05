@@ -4,86 +4,86 @@
 
 {% block body %}
 {% if product.enable == 1 %}
-<div class="d-flex jumbotron ">
-    <div class="card col-sm-4 col-lg-6 h-200 ">
-            <div class="d-flex">
-                <div class="mx-auto my-auto col-sm-4 col-lg-6 p-4" >
+<div class="d-flex jumbotron">
+    <div class="card col-sm-12 col-md-6 col-lg-6 mx-auto overflow-hidden">
+            <div class="row col-auto d-flex">
+                <div class="card-img-responsive mx-auto my-auto text-center" >
                     {% if product.image matches '#^https://#' %}
-                    <img src="{{ product.image }}" class="card-img " style="width:100%" alt="{{ product.name }}">
+                    <img src="{{ product.image }}"   alt="{{ product.name }}">
                     {% else %}
-                    <img src="{{ asset('uploads/avatar/' ~ product.image) }}" class="card-img"
+                    <img src="{{ asset('uploads/avatar/' ~ product.image) }}" 
                         alt="{{ product.name }}">
                     {% endif %}
                 </div> <!--End of div image-->  
-                <div class="d-block col-sm-4 col-lg-6 my-auto">
-                    <h1 class="card-title col-auto">{{ product.name }}</h1>
+                <div class="col-auto my-auto text-center">
+                    <h1 class="card-title">{{ product.name }}</h1>
 
                     <div class="btn btn-secondary ">{{ product.price }} €</div><!--End of div price--> 
                     <div>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                     </div><!--End of span div-->  
                     
                     
                     <div class="">Conditionnement : {{ product.weight }} </div>
                     
-                    <form>
-                            <div class="form-row align-items-center">
-                                <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Choisir une quantité</label>
-                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                    <option selected>Choisir une quantité</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                </select>
-                                </div>
-                                <div class="col-auto my-1">
-                                <button type="submit" class="btn btn-secondary">Ajouter au Panier</button>
-                                </div>
+                    <form >
+                        <div class="form align-items-center">
+                            <div class="col-auto my-1 mx-1">
+                            <label class=" sr-only d-block" for="inlineFormCustomSelect">Choisir une quantité</label>
+                            <select class="custom-select col-auto " id="inlineFormCustomSelect">
+                                <option selected>Choisir une quantité</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
                             </div>
+                            <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-secondary">Ajouter au Panier</button>
+                            </div>
+                        </div>
                     </form>
                 </div> <!--end of block-->
             </div>
-                <div class="d-flex justify-content-between col-auto ">
+                <div class="d-flex navbar  ">
                         <p>
-                            <button class="btn btn-info overflow: hidden" type="button" data-toggle="collapse" data-target="#description" aria-expanded="false" aria-controls="description">                                  Description                </button>
+                            <button class="btn btn-info navbar-toggle " type="button" data-toggle="collapse" data-target="#description" aria-expanded="false" aria-controls="description">                                  Description                </button>
                         </p>
-                        <div class="collapse overflow: hidden" id="description">
+                        <div class="collapse " id="description">
                             <div class="card card-body">
                                                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur illum maxime qui reprehenderit harum minus atque laudantium placeat? Voluptas similique in est quisquam ex reprehenderit dicta sapiente nobis distinctio.                                
                             </div>
                         </div>
                         <p>
-                            <button class="btn btn-info overflow: hidden" type="button" data-toggle="collapse" data-target="#composition" aria-expanded="false" aria-controls="composition">                                      Composition                                    </button>
+                            <button class="btn btn-info navbar-toggle" type="button" data-toggle="collapse" data-target="#composition" aria-expanded="false" aria-controls="composition">                                      Composition                                    </button>
                         </p>
-                        <div class="collapse overflow: hidden" id="composition">
+                        <div class="collapse" id="composition">
                             <div class="card card-body">
                                                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur illum maxime qui reprehenderit harum minus atque laudantium placeat? Voluptas similique in est quisquam ex reprehenderit dicta sapiente nobis distinctio.                                    
                             </div>
                         </div>
                         <p>
-                            <button class="btn btn-info overflow: hidden" type="button" data-toggle="collapse" data-target="#Livraison" aria-expanded="false" aria-controls="Livraison">                                          Livraison                                        </button>
+                            <button class="btn btn-info navbar-toggle" type="button" data-toggle="collapse" data-target="#Livraison" aria-expanded="false" aria-controls="Livraison">                                          Livraison                                        </button>
                         </p>
-                        <div class="collapse overflow: hidden" id="Livraison">
+                        <div class="collapse" id="Livraison">
                             <div class="card card-body">
                                                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur illum maxime qui reprehenderit harum minus atque laudantium placeat? Voluptas similique in est quisquam ex reprehenderit dicta sapiente nobis distinctio.                                        
                             </div>
                         </div>
                         <p>
-                            <button class="btn btn-info overflow: hidden" type="button" data-toggle="collapse" data-target="#Conservation" aria-expanded="false" aria-controls="Conservation">                                              Conservation                                            </button>
+                            <button class="btn btn-info navbar-toggle" type="button" data-toggle="collapse" data-target="#Conservation" aria-expanded="false" aria-controls="Conservation">                                              Conservation                                            </button>
                         </p>
-                        <div class="collapse overflow: hidden" id="Conservation">
+                        <div class="collapse" id="Conservation">
                             <div class="card card-body">
                                                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur illum maxime qui reprehenderit harum minus atque laudantium placeat? Voluptas similique in est quisquam ex reprehenderit dicta sapiente nobis distinctio.                                            
                             </div>
                         </div>
                         <p>
-                            <button class="btn btn-info overflow: hidden" type="button" data-toggle="collapse" data-target="#Conditionnement" aria-expanded="false" aria-controls="Conditionnement">                                    Conditionnement                                </button>
+                            <button class="btn btn-info navbar-toggle" type="button" data-toggle="collapse" data-target="#Conditionnement" aria-expanded="false" aria-controls="Conditionnement">                                    Conditionnement                                </button>
                         </p>
-                        <div class="collapse overflow: hidden" id="Conditionnement">
+                        <div class="collapse" id="Conditionnement">
                             <div class="card card-body">
                                                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur illum maxime qui reprehenderit harum minus atque laudantium placeat? Voluptas similique in est quisquam ex reprehenderit dicta sapiente nobis distinctio.                                
                             </div>
@@ -92,7 +92,7 @@
     </div><!--End of product-card -->
         
 
-    <div class=" card col-sm-2 col-lg-4 h-100" > 
+    <div class="card col-md-4 h-100 d-none d-md-block d-lg-block" > 
 
         <div class="row no-gutters" >
             <div class="col-md-4">
@@ -128,6 +128,55 @@
    
     
 </div><!--End of container-->
+
+<h1>Les dernières nouveautés de {{ product.producer.socialReason }} </h1>
+<div class="container d-flex row text-center mx-auto">
+    
+    {% for product in product_producer %}
+    <div class="card justify-content-center mx-auto">
+        <a href="{{ path('product_show', {'id' : product.id})}}">
+            {% if product.image matches '#^https://#' %}
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class=""
+                    alt="{{ product.name }}" title="{{ product.name }}"></a>
+            {% else %}
+            <a href="{{ path('product_show', {'id' : product.id})}}"><img
+                    src="{{ asset('uploads/avatar/' ~ product.image) }}" class="" alt="{{ product.name }}"
+                    title="{{ product.name }}"></a>
+            {% endif %}
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p>{{ product.price }} euros</p>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <p class="card-text">
+
+            </p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <p class="card-text">
+                    <h5>Description</h5>
+                    {% if product.description %}
+                    {{ product.description }}
+                    {% else %}
+                    <p>Non communiquée</p>
+                    {% endif %}
+
+                </p>
+            </li>
+        </ul>
+        <div class="text-center">
+            <a class="btn btn-info product-button-seemore" href="{{ path('product_show', {'id' : product.id})}} ">Voir
+                Plus</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
 {% else %}
     <p>Le produit est archivé</p>
 {% endif %}
