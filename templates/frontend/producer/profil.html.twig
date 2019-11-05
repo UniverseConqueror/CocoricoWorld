@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}{% block title %}My profil {% endblock %}{% block body %}
 	<div class="producer_profil">
 		<div class="producer-form">
-			{# Condition pour vérifier que le user loggué est bien le titulaire du profil #}{% if app.user.email == user.email %}
+
 				<h1>Profil User</h1>
 				{# Détails du profil du User loggué #}
 				<p>
@@ -29,16 +29,11 @@
 					Telephone : {{app.user.telephone}}
 				</p>
 				<p>
-					Droits :       {% for role in user.roles %}
+					Droits :       {% for role in app.user.roles %}
 						<span> - {{ role }}  </span>
 					{% endfor %}
 				</p>
 				<a href="{{ path('profil_update', {'id' : app.user.id}) }}" class="btn btn-info">         Modifier mon Profil        <i class="fas"></i></a>
-			{% else %}
-				<p>
-					Vous ne pouvez pas vous connecter à un autre profil que le vôtre voyons !!! Petit voyou !!
-				</p>
-			{% endif %}
 		</div>
 		{# Détails du profil du Producer loggué #}
 		<div class="producer-form">

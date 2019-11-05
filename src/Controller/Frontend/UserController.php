@@ -18,6 +18,8 @@ class UserController extends AbstractController
      *     methods={"GET"})
      *
      * @return Response
+     *
+     * @throws UnauthorizedHttpException when the user is not logged in
      */
     public function profile()
     {
@@ -39,6 +41,8 @@ class UserController extends AbstractController
      * @param Request $request
      *
      * @return RedirectResponse|Response
+     *
+     * @throws UnauthorizedHttpException when the user is not logged in
      */
     public function profileUpdate(Request $request)
     {

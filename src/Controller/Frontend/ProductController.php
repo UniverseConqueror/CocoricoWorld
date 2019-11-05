@@ -3,14 +3,15 @@ namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProductType;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\FileUploader;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProductController extends AbstractController
 {
@@ -23,6 +24,8 @@ class ProductController extends AbstractController
      * @param Product|null      $product
      *
      * @return Response
+     *
+     * @throws NotFoundHttpException when the desired product is not existing
      */
    public function show(ProductRepository $productRepository, Product $product = null)
    {
@@ -46,6 +49,8 @@ class ProductController extends AbstractController
      * @param Request $request
      *
      * @return RedirectResponse|Response
+     *
+     * @throws AccessDeniedException when the user is not registered as a producer
      */
    public function new(Request $request)
    {
@@ -88,6 +93,8 @@ class ProductController extends AbstractController
      * @param Product|null $product
      *
      * @return RedirectResponse|Response
+     *
+     * @throws NotFoundHttpException when the desired product does not exist
      */
     public function edit(Request $request, Product $product = null)
     {
@@ -127,6 +134,8 @@ class ProductController extends AbstractController
      * @param Product|null  $product
      *
      * @return RedirectResponse
+     *
+     * @throws NotFoundHttpException when the desired product does not exist
      */
     public function toggleProduct(ObjectManager $manager, Product $product = null)
     {
@@ -162,6 +171,8 @@ class ProductController extends AbstractController
      * @param Product|null $product
      *
      * @return RedirectResponse
+     *
+     * @throws NotFoundHttpException when the desired product does not exist
      */
     public function delete(Request $request, Product $product = null)
     {
@@ -187,9 +198,6 @@ class ProductController extends AbstractController
             );
         }
 
-        // TODO: Add producer profil redirection
-        return $this->redirectToRoute('producer_show', [
-            'id' => $product->getProducer()->getId(),
-        ]);
+        return $this->redirectToRoute('producer_profil');
     }
 }

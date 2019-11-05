@@ -104,7 +104,7 @@ class MainController extends AbstractController
         }
 
         return $this->render('frontend/main/contact.html.twig', [
-                'contact_form' => $contactForm->createView(),
-            ]);
+            'contact_form' => $contactForm->createView(),
+        ]);
     }
 }
