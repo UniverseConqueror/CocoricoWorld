@@ -111,7 +111,7 @@
                             Pas d'avatar
                         {% endif %}
                     </td>
-                    <td>{{ producer.description ? producer.description|truncate(15, "...")}}</td>
+                    <td>{{ producer.description ? producer.description|truncate(15, "...") : "Pas de description"}}</td>
                     <td>{{ producer.createdAt|date("d M Y, H:i:s", "Europe/Paris") }}</td>
                     <td>{{ producer.updatedAt ? producer.updatedAt|date("d M Y, H:i:s", "Europe/Paris") : 'Aucune date' }}</td>
                     <td class="table__data--edit">

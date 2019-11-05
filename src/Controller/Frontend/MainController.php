@@ -3,6 +3,8 @@
 namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ProducerRepository;
@@ -11,7 +13,14 @@ use App\Form\ContactFormType;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/",
+     *     name="homepage",
+     *     methods={"GET"})
+     *
+     * @param Request            $request
+     * @param ProducerRepository $producerRepository
+     *
+     * @return Response
      */
     public function index(Request $request, ProducerRepository $producerRepository)
     {
@@ -23,7 +32,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/company", name="company_page")
+     * @Route("/a-propos",
+     *     name="company_page",
+     *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showCompanyPresentation()
     {
@@ -31,7 +44,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/faq", name="faq_page")
+     * @Route("/faq",
+     *     name="faq_page",
+     *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showFaq()
     {
@@ -39,7 +56,11 @@ class MainController extends AbstractController
     }
   
     /**
-     * @Route("/cgv", name="cgv_page")
+     * @Route("/cgv",
+     *     name="cgv_page",
+     *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showCgv()
     {
@@ -47,7 +68,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/legalsmentions", name="legalsmentions_page")
+     * @Route("/mentions-legales",
+     *     name="legalsmentions_page",
+     *     methods={"GET"})
+     *
+     * @return Response
      */
     public function showLegalsMentions()
     {
@@ -55,26 +80,31 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact",
+     *     name="contact",
+     *     methods={"GET", "POST"})
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function contact(Request $request)
     {
-        $contact;
+        $contactForm = $this->createForm(ContactFormType::class);
+        $contactForm->handleRequest($request);
 
-        $form = $this->createForm(ContactFormType::class);
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
 
-        $form->handleRequest($request);
+            $this->addFlash(
+                'success',
+                'L\'email a été envoyé avec succès !'
+            );
 
-        //Traitement du form
-        if ($form->isSubmitted() && $form->isValid()) {
-           
-            return $this->redirectToRoute('mail');
+            return $this->redirectToRoute('homepage');
         }
 
-
-        return $this->render("frontend/main/contact.html.twig", [
-            'form' => $form->createView()
+        return $this->render('frontend/main/contact.html.twig', [
+                'contact_form' => $contactForm->createView(),
             ]);
     }
-    
 }

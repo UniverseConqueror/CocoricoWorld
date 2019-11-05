@@ -43,9 +43,10 @@ class EditCategoryType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize'          => '1024k',
-                        'mimeTypesMessage' => 'Please upload a valid PNG file',
+                        'mimeTypesMessage' => 'Please upload a valid PNG or JPEG file',
                         'mimeTypes'        => [
                             'image/png',
+                            'image/jpeg',
                         ],
                     ]),
                 ],

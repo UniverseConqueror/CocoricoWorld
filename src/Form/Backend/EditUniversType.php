@@ -43,9 +43,10 @@ class EditUniversType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize'          => '1024k',
-                        'mimeTypesMessage' => 'Please upload a valid PNG file',
+                        'mimeTypesMessage' => 'Please upload a valid PNG or JPEG file',
                         'mimeTypes'        => [
                             'image/png',
+                            'image/jpeg',
                         ],
                     ]),
                 ],
@@ -62,7 +63,7 @@ class EditUniversType extends AbstractType
             ])
             ->addEventListener(
                 FormEvents::POST_SUBMIT,
-                [$this, 'onPreSubmit']
+                [$this, 'onPostSubmit']
             )
         ;
     }
@@ -74,7 +75,7 @@ class EditUniversType extends AbstractType
         ]);
     }
 
-    public function onPreSubmit(FormEvent $event)
+    public function onPostSubmit(FormEvent $event)
     {
         $univers = $event->getData();
         $image = $event->getForm()->get('image')->getNormData();

@@ -94,7 +94,9 @@ class EditUserType extends AbstractType
 
     public function onSubmit(FormEvent $event)
     {
+        /** @var User $user */
         $user = $event->getData();
+
         $form = $event->getForm();
         $password = $form->get('password')->getNormData();
 

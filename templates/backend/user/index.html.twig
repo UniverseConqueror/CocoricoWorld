@@ -77,7 +77,7 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.roles|json_decode }}</td>
+                    <td>{{ user.roles|json_array_decode }}</td>
                     <td>{{ user.password|truncate(15, "...") }}</td>
                     <td>{{ user.firstname ?? "Pas de prénom"}}</td>
                     <td>{{ user.lastname ?? "Pas de nom"}}</td>

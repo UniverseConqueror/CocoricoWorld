@@ -1,9 +1,10 @@
 <?php
 namespace App\Controller\Frontend;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
-use App\Entity\Producer;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProductType;
@@ -13,93 +14,109 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class ProductController extends AbstractController
 {
-   /**
-    * @Route("/product/{id<\d+>}", name="product_show", methods={"GET"})
-    */
-   public function show(Product $product, ProductRepository $productRepository)
+    /**
+     * @Route("/product/{id<\d+>}",
+     *     name="product_show",
+     *     methods={"GET"})
+     *
+     * @param ProductRepository $productRepository
+     * @param Product|null      $product
+     *
+     * @return Response
+     */
+   public function show(ProductRepository $productRepository, Product $product = null)
    {
+       if (!$product) {
+
+           throw $this->createNotFoundException('La page que vous recherchez n\'existe pas !');
+       }
        $producer = $product->getProducer();
        $products = $productRepository->findBy(array('producer' => $producer), array(), 5);
 
-       
-       if (!$product) {
-           throw $this->createNotFoundException('Producteur introuvable');
-       }
        return $this->render('frontend/product/show.html.twig', [
-           'product' => $product,
-           'product_producer'=> $products
+           'product'          => $product,
+           'product_producer' => $products
        ]);
    }
 
-   /**
-    * @Route("/product/new", name="product_new", methods={"GET","POST"})
-    */
-
-   public function new( Request $request, FileUploader $fileUploader ) : Response 
-   {
-      
-        $product = new Product();
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) 
-        {
-            // on récupère l'image du formulaire
-            $image = $form['image']->getData();
-            if ($image) {
-                // on récupère le nom de l'image saisi dans le formulaire
-                $imageName = $fileUploader->upload($image);
-                 // on envoi le nom de l'image à la bdd
-                $product->setImage($imageName);
-            }
-            $user = $this->getUser();
-            $producer = $user->getProducer();
-            $product->setProducer($producer);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            $this->addFlash(
-                'success',
-                'Votre produit a bien été enregistré'
-            );
-
-            return $this->redirectToRoute('producer_show',['id'=>$producer->getId()]);
-        }
-
-        return $this->render('/frontend/product/new.html.twig', [
-            'product'=>$product,
-            'form'=>$form->createView()
-
-        ]);
-   }
-   
     /**
-     * @Route("/product/{id<\d+>}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/product/new",
+     *     name="product_new",
+     *     methods={"GET","POST"})
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
-    public function edit(Request $request, ObjectManager $manager, Product $product ): Response
+
+   public function new(Request $request)
+   {
+       if (!$producer = $this->getUser()->getProducer()) {
+
+           throw $this->createAccessDeniedException('Vous devez être producteur pour accéder à cette page !');
+       }
+       $product = new Product();
+       $productForm = $this->createForm(ProductType::class, $product);
+       $productForm->handleRequest($request);
+
+       if ($productForm->isSubmitted() && $productForm->isValid()) {
+           $product->setProducer($producer);
+           $manager = $this->getDoctrine()->getManager();
+           $manager->persist($product);
+           $manager->flush();
+
+           $this->addFlash(
+               'success',
+               'Votre produit a bien été enregistré'
+           );
+
+           return $this->redirectToRoute('product_show', [
+               'id' => $product->getId(),
+           ]);
+       }
+
+       return $this->render('/frontend/product/new.html.twig', [
+           'product' => $product,
+           'form'    => $productForm->createView()
+       ]);
+   }
+
+    /**
+     * @Route("/product/{id<\d+>}/edit",
+     *     name="product_edit",
+     *     methods={"GET","POST"})
+     *
+     * @param Request      $request
+     * @param Product|null $product
+     *
+     * @return RedirectResponse|Response
+     */
+    public function edit(Request $request, Product $product = null)
     {
-        
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+        if (!$product) {
 
-        
+            throw $this->createNotFoundException('La page que vous recherchez n\'existe pas !');
+        }
+        $productForm = $this->createForm(ProductType::class, $product);
+        $productForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+        if ($productForm->isSubmitted() && $productForm->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
 
             $this->addFlash(
                 'info',
                 'Mise à jour effectuée'
             );
 
-            return $this->redirectToRoute('product_show',['id'=>$product->getId()]);
+            return $this->redirectToRoute('product_show', [
+                'id' => $product->getId()
+            ]);
         }
 
         return $this->render('frontend/product/edit.html.twig', [
             'product' => $product,
-            'form' => $form->createView(),
+            'form'    => $productForm->createView(),
         ]);
     }
     
