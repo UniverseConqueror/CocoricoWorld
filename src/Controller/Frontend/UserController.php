@@ -37,6 +37,7 @@ class UserController extends AbstractController
      *     methods={"GET", "POST"})
      *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function profileUpdate(Request $request)
