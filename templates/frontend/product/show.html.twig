@@ -95,14 +95,14 @@
     <div class="card col-md-4 h-100 d-none d-md-block d-lg-block" > 
 
         <div class="row no-gutters" >
-            <div class="col-md-4">
+            <div class="col-md-4 card-img ">
                 {% if product.producer.avatar matches '#^https://#' %}
-                    <img src="{{ product.producer.avatar }}" class="card-img" alt="{{ product.producer.firstname }}">
+                    <img src="{{ product.producer.avatar }}"  alt="{{ product.producer.firstname }}">
                 {% else %}
-                    <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}" class="card-img" alt="{{ product.producer.firstname }}">
+                    <img src="{{ asset('uploads/avatar/' ~ product.producer.avatar) }}"  alt="{{ product.producer.firstname }}">
                 {% endif %}
             </div>
-            <div class="">
+            <div class="mx-auto">
                 <div class="card-body text-center ">
                     <h5 class="card-title">{{ product.producer.socialReason }}</h5>
                     <p>{{ product.producer.city }}</p>
