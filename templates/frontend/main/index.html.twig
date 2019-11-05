@@ -18,8 +18,12 @@
                     <div class="card">
                     <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image}}" alt="" class="card-img-top"></a>
                         <div class="card-body carousel-card-body">
+                            <div>
                             <h5  class="text-center">{{ product.name}}</h5>
+                            </div>
+                            <div>
                             <h6 class="text-center"><span>{{product.price}}€</span></h6>
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -90,6 +94,8 @@
     dots: false,
     autoplay: true,
     rewind:true,
+    nav: true,
+    dots: true,
     autoplaySpeed : 2000,
     autoplayHoverPause: true,
     callbacks: false,

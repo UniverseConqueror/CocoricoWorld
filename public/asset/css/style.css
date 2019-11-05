@@ -209,5 +209,8 @@ a {
 }
 
 .carousel-card-body {
-    height: 100px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
