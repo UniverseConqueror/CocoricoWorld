@@ -16,7 +16,7 @@
         <h1 id="cocorico"> Bienvenue chez Cocorico World</h1>
 
         <div class="owl-carousel owl-theme">
-            {% for product in lastproducts %}
+            {% for product in last_products %}
                 <div class="item">
                     <div class="card">
                         <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image}}" alt="" class="card-img-top"></a>

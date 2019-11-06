@@ -18,19 +18,20 @@ class MainController extends AbstractController
      *     name="homepage",
      *     methods={"GET"})
      *
-     * @param Request            $request
+     * @param Request $request
      * @param ProducerRepository $producerRepository
+     * @param ProductRepository $productRepository
      *
      * @return Response
      */
     public function index(Request $request, ProducerRepository $producerRepository, ProductRepository $productRepository )
     {
         $producers = $producerRepository->findAll();
-        $lastproducts = $productRepository->lastRelease();
+        $lastProducts = $productRepository->lastRelease();
        
         return $this->render('frontend/main/index.html.twig', [
-            'producers' => $producers,
-            'lastproducts' => $lastproducts
+            'producers'     => $producers,
+            'last_products' => $lastProducts,
         ]);
     }
 

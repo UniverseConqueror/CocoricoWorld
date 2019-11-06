@@ -45,4 +45,17 @@ class ProductRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function getProductsWithoutTheOneDisplayed($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.producer', 'pr')
+            ->addSelect('pr')
+            ->andWhere('p.id != :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
