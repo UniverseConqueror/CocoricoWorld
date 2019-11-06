@@ -74,10 +74,10 @@ class MainControllerTest extends WebTestCase
     {
         return [
             ['/'],
-            ['/company'],
+            ['/a-propos'],
             ['/faq'],
             ['/cgv'],
-            ['/legalsmentions'],
+            ['/mentions-legales'],
             ['/contact'],
         ];
     }

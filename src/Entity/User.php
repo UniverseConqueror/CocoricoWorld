@@ -97,6 +97,7 @@ class User implements UserInterface
         $this->enable    = true;
         $this->createdAt = new \DateTime();
         $this->updatedAt = null;
+        $this->roles     = ['ROLE_USER'];
     }
 
     public function __toString()

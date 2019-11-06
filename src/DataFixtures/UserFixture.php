@@ -81,6 +81,12 @@ class UserFixture extends BaseFixture implements DependentFixtureInterface
             return $producer;
         });
 
+        $producers = $this->getReferences('main_producer');
+        foreach ($producers as $producer) {
+            $user = $producer->getUser();
+            $user->setRoles(['ROLE_PRODUCER']);
+        }
+
         $manager->flush();
     }
 

@@ -3,21 +3,34 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Service\FileUploader;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\Subcategory;
-
-
 
 class ProductType extends AbstractType
 {
+    /** @var FileUploader $uploader */
+    private $uploader;
+
+    /**
+     * @Required
+     *
+     * @param FileUploader $uploader
+     */
+    public function setFileUploader(FileUploader $uploader)
+    {
+        $this->uploader = $uploader;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,14 +43,15 @@ class ProductType extends AbstractType
             ->add('quantity', IntegerType::class, [
                 'label'=>'Quantité du produit'])
             ->add('image', FileType::class, [
-                    'label' => 'Image',
-                    'mapped' => false,
-                    'required' => false,
+                    'label'       => 'Image',
+                    'mapped'      => false,
+                    'required'    => false,
                     'constraints' => [
                         new File([
-                            'maxSize' => '1024k',
+                            'maxSize'   => '1024k',
                             'mimeTypes' => [
                                 'image/jpeg',
+                                'image/png',
                             ],
                             'mimeTypesMessage' => 'Merci de télécharger une image au format jpeg ',
                         ])
@@ -67,10 +81,14 @@ class ProductType extends AbstractType
                 'placeholder' => 'Sélectionnez une sous-categorie',
                 'mapped'      => false,
                 'required'    => false
-                ]);
-            
-            
-            }
+                ])
+            ->addEventListener(
+                FormEvents::POST_SUBMIT,
+                [$this, 'onPostSubmit']
+            )
+        ;
+
+    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -78,5 +96,19 @@ class ProductType extends AbstractType
             'data_class' => Product::class,
             'attr' => ['novalidate' => 'novalidate'],
         ]);
+    }
+
+    public function onPostSubmit(FormEvent $event)
+    {
+        /** @var Product $product */
+        $product = $event->getData();
+
+        $form = $event->getForm();
+        $image = $form->get('image')->getNormData();
+
+        if ($image) {
+            $imagePath = $this->uploader->upload($image);
+            $product->setImage($imagePath);
+        }
     }
 }

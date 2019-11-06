@@ -16,6 +16,10 @@ security:
             security: false
         main:
             anonymous: true
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
             guard:
                 authenticators:
                     - App\Security\UserAuthenticator

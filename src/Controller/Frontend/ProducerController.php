@@ -2,60 +2,62 @@
 
 namespace App\Controller\Frontend;
 
+
 use App\Entity\Producer;
 use App\Form\ProducerType;
-use App\Service\FileUploader;
-use App\Repository\ProducerRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProducerController extends AbstractController
 {
     /**
-     * @Route("/producer/{id<\d+>}/profil", name="producer_profil")
+     * @Route("/producer/profil",
+     *     name="producer_profil",
+     *     methods={"GET"})
+     *
+     * @return Response
+     *
+     * @throws UnauthorizedHttpException when the user is not registered as a producer
      */
-    public function index($id, ProducerRepository $producerRepository)
+    public function index()
     {
-        $user = $this->getUser();
-        $producer = $user->getProducer();
+        $producer = $this->getUser()->getProducer();
 
-        if ($producer !== null && $id == $producer->getId()) {
-            return $this->render('frontend/producer/profil.html.twig', [
-            'producer' => $producer,
-            ]);
+        if (!$producer) {
+
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous inscrire en tant que producteur pour accéder à cette page !');
         }
 
-        throw $this->createAccessDeniedException();
+        return $this->render('frontend/producer/profil.html.twig', [
+            'producer' => $producer,
+        ]);
     }
 
     /**
-     * @Route("/producer/registration", name="producer_registration", methods={"GET","POST"})
+     * @Route("/producer/registration",
+     *     name="producer_registration",
+     *     methods={"GET","POST"})
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request)
     {
         $producer = new Producer();
-        $form = $this->createForm(ProducerType::class, $producer);
-        $form->handleRequest($request);
+        $producerForm = $this->createForm(ProducerType::class, $producer);
+        $producerForm->handleRequest($request);
 
-        
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // on récupère l'image du formaulaire
-            $avatar = $form['avatar']->getData();
-            if ($avatar) {
-                // on récupère le nom de l'avatar saisi dans le formulaire
-                $avatarName = $fileUploader->upload($avatar);
-                 // on envoi le nom de l'avatar à la bdd
-                $producer->setAvatar($avatarName);
-            }
-            
-            $user = $producer->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($producer);
-            $entityManager->flush();
+        if ($producerForm->isSubmitted() && $producerForm->isValid()) {
+            $producer->setUser($this->getUser());
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($producer);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -67,49 +69,68 @@ class ProducerController extends AbstractController
 
         return $this->render('frontend/producer/registration.html.twig', [
             'producer' => $producer,
-            'form' => $form->createView(),
+            'form'     => $producerForm->createView(),
         ]);
     }
-    /**
-     * @Route("/producer/{id<\d+>}", name="producer_show", methods={"GET"})
-     */
-    public function show($id, ProducerRepository $producerRepository)
-    {
-        $producer = $producerRepository->find($id);
 
+    /**
+     * @Route("/producer/{id<\d+>}",
+     *     name="producer_show",
+     *     methods={"GET"})
+     *
+     * @param Producer|null $producer
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException when the desired producer is not existing
+     */
+    public function show(Producer $producer = null)
+    {
         if (!$producer) {
-            throw $this->createNotFoundException('Producteur introuvable');
+
+            throw $this->createNotFoundException('La page que vous recherchez n\'existe pas');
         }
+
         return $this->render('frontend/producer/show.html.twig', [
             'producer' => $producer,
         ]);
     }
+
     /**
-     * @Route("/producer/{id<\d+>}/edit", name="producer_edit", methods={"GET","POST"})
+     * @Route("/producer/edit",
+     *     name="producer_edit",
+     *     methods={"GET","POST"})
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     *
+     * @throws UnauthorizedHttpException when the user is not registered as a producer
      */
-    public function edit(Request $request, ObjectManager $manager, Producer $producer ): Response
+    public function edit(Request $request)
     {
-        
-        $form = $this->createForm(ProducerType::class, $producer);
-        $form->handleRequest($request);
+        if (!$producer = $this->getUser()->getProducer()) {
 
-        
+            throw new UnauthorizedHttpException('', 'Vous devez d\'abord vous inscrire en tant que producteur pour accéder à cette page !');
+        }
+        $producerForm = $this->createForm(ProducerType::class, $producer);
+        $producerForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+        if ($producerForm->isSubmitted() && $producerForm->isValid()) {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
 
             $this->addFlash(
                 'success',
                 'Mise à jour effectuée'
             );
 
-            return $this->redirectToRoute('producer_profil',['id'=>$producer->getId()]);
+            return $this->redirectToRoute('producer_profil');
         }
     
         return $this->render('frontend/producer/edit.html.twig', [
             'producer' => $producer,
-            'form' => $form->createView(),
+            'form'     => $producerForm->createView(),
         ]);
     }
 }

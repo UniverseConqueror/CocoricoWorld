@@ -102,13 +102,13 @@ class Producer
     private $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="producer", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="producer")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="producer", orphanRemoval=true, cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="producer", orphanRemoval=true)
      */
     private $products;
 
