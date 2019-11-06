@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ProducerRepository;
 use App\Form\ContactFormType;
+use App\Repository\ProductRepository;
 
 class MainController extends AbstractController
 {
@@ -17,17 +18,20 @@ class MainController extends AbstractController
      *     name="homepage",
      *     methods={"GET"})
      *
-     * @param Request            $request
+     * @param Request $request
      * @param ProducerRepository $producerRepository
+     * @param ProductRepository $productRepository
      *
      * @return Response
      */
-    public function index(Request $request, ProducerRepository $producerRepository)
+    public function index(Request $request, ProducerRepository $producerRepository, ProductRepository $productRepository )
     {
         $producers = $producerRepository->findAll();
-
+        $lastProducts = $productRepository->lastRelease();
+       
         return $this->render('frontend/main/index.html.twig', [
-            'producers' => $producers,
+            'producers'     => $producers,
+            'last_products' => $lastProducts,
         ]);
     }
 

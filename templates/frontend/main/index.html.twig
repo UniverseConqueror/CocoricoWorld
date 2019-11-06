@@ -1,19 +1,46 @@
 {% extends 'base.html.twig' %}
 
+ {% block stylesheets %}
+ {{ parent() }}
+<link rel="stylesheet" href="{{ asset('asset/css/owl.carousel.css') }}">
+<link rel="stylesheet" href="{{ asset('asset/css/owl.theme.default.min.css') }}">
+ {% endblock %}
+
 {% block title %}Cocorico World Home {% endblock %}
 
 {% block body %}
 
+<div class="container mt-3">
+    <div class="row">
 
-<h1 id="cocorico"> Bienvenue chez Cocorico World</h1>
+        <h1 id="cocorico"> Bienvenue chez Cocorico World</h1>
 
-{# Message Flash si l'email orgine contact a été correctement envoyé #}
+        <div class="owl-carousel owl-theme">
+            {% for product in last_products %}
+                <div class="item">
+                    <div class="card">
+                        <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image}}" alt="" class="card-img-top"></a>
+                        <div class="card-body carousel-card-body">
+                            <div>
+                                <h5  class="text-center">{{ product.name}}</h5>
+                            </div>
+                            <div>
+                                <h6 class="text-center"><span>{{product.price}}€</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% for message in app.flashes('email sent') %}
-    <div class="flash-notice alert alert-success">
+    <div class="flash-notice alert alert-success"></div>
     {{ message }}
 {% endfor %}
 
-<div class="container-fluid homepagecard">
+<div class="container-fluid homepagecard mt-5">
 
     {% for producer in producers %}
     {% set url = path('producer_show', {'id': producer.id}) %}
@@ -54,5 +81,10 @@
         </div>
     {% endfor %}
 </div>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('asset/js/owl.carousel.js') }}" ></script>
+    <script src="{{ asset('asset/js/script-carousel.js') }}"></script>
 {% endblock %}

@@ -19,6 +19,15 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function lastRelease(){
+
+        $query = $this->createQueryBuilder('p')
+                        ->orderBy('p.createdAt', 'DESC')
+                        ->setMaxResults(20);
+
+        return $query->getQuery()->getResult();
+    }
+
     public function getAllWithSearchQueryBuilder($term)
     {
         $qb = $this->createQueryBuilder('p')
