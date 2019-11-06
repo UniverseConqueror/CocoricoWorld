@@ -35,6 +35,7 @@ class Product
 
     /**
      * @Assert\NotBlank 
+     * @Assert\Positive
      * 
      * @ORM\Column(type="integer")
      */
@@ -42,6 +43,7 @@ class Product
 
     /**
      * @Assert\NotBlank 
+     * @Assert\Positive 
      * 
      * @ORM\Column(type="integer")
      */
@@ -49,18 +51,13 @@ class Product
 
     /**
      * @Assert\NotBlank 
+     * @Assert\PositiveOrZero
      * 
      * @ORM\Column(type="integer")
      */
     private $quantity;
 
     /**
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Votre nom d'image doit comporter {{ limit }} caractères minimum",
-     *      maxMessage = "Votre nom d'image doit comporter {{ limit }} caractères maximum"
-     * ) 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -87,6 +84,7 @@ class Product
 
     /**
      * @Assert\NotBlank 
+     * @Assert\PositiveOrZero
      * 
      * @ORM\Column(type="integer")
      */
@@ -100,13 +98,18 @@ class Product
     private $enable;
 
     /**
-     * @Assert\NotBlank 
+     * @Assert\NotBlank
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value 
      * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

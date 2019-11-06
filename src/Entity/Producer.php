@@ -92,7 +92,7 @@ class Producer
      *     checkMX = true
      * ) 
      * @Assert\Length(
-     *      min = 2,
+     *      min = 6,
      *      max = 180,
      *      minMessage = "Votre email doit comporter {{ limit }} caractères minimum",
      *      maxMessage = "Votre email doit comporter {{ limit }} caractères maximum"
@@ -160,14 +160,7 @@ class Producer
      */
     private $enable;
 
-    /**
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Votre nom d'image doit comporter {{ limit }} caractères minimum",
-     *      maxMessage = "Votre nom d'image doit comporter {{ limit }} caractères maximum"
-     * ) 
-     * 
+    /** 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
@@ -178,13 +171,18 @@ class Producer
     private $description;
 
     /**
-     * @Assert\NotBlank 
+     * @Assert\NotBlank
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value 
      * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

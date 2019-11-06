@@ -21,6 +21,12 @@ class Subcategory
 
     /**
      * @Assert\NotBlank 
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre nom de sous-catégorie doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de sous-catégorie doit comporter {{ limit }} caractères maximum"
+     * )
      * 
      * @ORM\Column(type="string", length=64)
      */
@@ -39,13 +45,18 @@ class Subcategory
     private $enable;
 
     /**
-     * @Assert\NotBlank 
+     * @Assert\NotBlank
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value 
      * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
