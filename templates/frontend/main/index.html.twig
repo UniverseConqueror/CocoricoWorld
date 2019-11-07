@@ -19,7 +19,11 @@
             {% for product in last_products %}
                 <div class="item">
                     <div class="card">
-                        <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image}}" alt="" class="card-img-top"></a>
+                        {% if product.image matches '#^https://#' %}
+                        <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}"></a>
+                        {% else %}
+                            <a href="{{ path('product_show', {'id' : product.id})}}"><img src="{{ asset('uploads/avatar/' ~ product.image) | imagine_filter('carousel') }}" class="card-img-top" alt="{{ product.name }}"></a>
+                        {% endif %}
                         <div class="card-body carousel-card-body">
                             <div>
                                 <h5  class="text-center">{{ product.name}}</h5>
@@ -50,7 +54,7 @@
            {% if producer.avatar matches '#^https://#' %}
                 <a href="{{ url }}"><img src="{{ producer.avatar }}" alt="{{ producer.firstname }}"></a>
             {% else %}
-                <a href="{{ url }}"><img src="{{ asset('uploads/avatar/' ~ producer.avatar) }}" alt="{{ producer.firstname }}"></a>
+                <a href="{{ url }}"><img src="{{ asset('uploads/avatar/' ~ producer.avatar) | imagine_filter("product_thumbnails") }}" alt="{{ producer.firstname }}"></a>
             {% endif %}
             </div>
             <div  class="card-body label-producer-homepage">
