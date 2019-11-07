@@ -40,13 +40,13 @@
     {{ message }}
 {% endfor %}
 
-<div class="container-fluid homepagecard mt-5">
+<div class="container d-flex flex-wrap w-100">
 
     {% for producer in producers %}
     {% set url = path('producer_show', {'id': producer.id}) %}
 
-        <div class="card mr-1 mb-1" style="width: 18rem;">
-            <div class="text-center">
+        <div class="card col-xs-10 col-sm-6 col-md-4 col-lg-3 overflow-hidden " >
+            <div class="card-img-responsive mx-auto my-auto text-center ">
            {% if producer.avatar matches '#^https://#' %}
                 <a href="{{ url }}"><img src="{{ producer.avatar }}" alt="{{ producer.firstname }}"></a>
             {% else %}
@@ -76,7 +76,7 @@
 
             </ul>
             <div class="card-body text-center">
-                <a class="btn btn-info producter-button-shop" href="{{ url }}">Boutique du producteur</a>
+                <a class="btn btn-info prod-button" href="{{ url }}">Boutique du producteur</a>
             </div>
         </div>
     {% endfor %}
