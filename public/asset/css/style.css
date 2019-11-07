@@ -106,13 +106,7 @@ h3 {
 
 .product-button {
     background-color: #A9E7FE;
-    margin-right: 0.4rem;
-}
-
-.product-block {
-    display: flex;
-    justify-content: space-around;
-    padding-left: 0px;
+    margin-right: 0.1rem;
 }
 
 
