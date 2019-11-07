@@ -1,14 +1,14 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 body {
     background-color: white;
     background-size: cover;
     color: black;
 }
 
-.footer{
-    
+.footer {
     color: black;
     border-top: 1rem solid;
     background-image: url(/asset/doc/Background/banner.jpg);
@@ -16,7 +16,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.header{
+.header {
     background-image: url(/asset/doc/Background/banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -27,20 +27,22 @@ body {
     margin-left: 20%;
 }
 
-.homepagecard{
-    margin:auto auto;
+.homepagecard {
+    margin: auto auto;
     display: flex;
     flex-wrap: wrap;
     max-width: 71%;
     justify-content: center;
-
 }
-.search{
-    display:flex;
+
+.search {
+    display: flex;
     justify-content: flex-end;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 2% auto auto;
     width: 50%;
     padding: 0.3rem;
@@ -49,12 +51,10 @@ h1, h2, h3 {
 }
 
 .product-title {
-    margin:0 auto 0 0;
+    margin: 0 auto 0 0;
     text-align: left;
     width: 100%;
 }
-
-
 
 h3 {
     background-color: #A9E7FE;
@@ -64,7 +64,8 @@ h3 {
 
 #cocorico {
     margin: 2% auto auto;
-    margin-bottom: 2rem;;
+    margin-bottom: 2rem;
+    ;
     text-align: center;
     background-image: url(/asset/doc/Background/banner.jpg);
     background-size: cover;
@@ -74,7 +75,6 @@ h3 {
 }
 
 .universtitle {
-
     text-align: center;
     width: 70%;
     background-color: #A9E7FE;
@@ -87,19 +87,18 @@ h3 {
 }
 
 .label-producer-homepage {
-    background-color:#A9E7FE;
+    background-color: #A9E7FE;
 }
 
 .description-producer-homepage {
     height: 185px;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .label-product-card {
     background-color: #A9E7FE;
     height: 190px;
 }
-
 
 .producer-card-product {
     height: 40%;
@@ -111,17 +110,10 @@ h3 {
 }
 
 
-.product-button-seemore {
+.prod-button {
     background-color: #A9E7FE;
-    margin: 10px;
+    color: black;    
 }
-
-.producter-button-shop {
-    background-color: #A9E7FE;
-    color: black;
-}
-
-
 
 
 /* --- HEADER --- */
@@ -144,7 +136,7 @@ h3 {
 .login-form,
 .producer-form {
     background-color: #f1f1f1;
-    border : 1px solid #ccc;
+    border: 1px solid #ccc;
     width: 500px;
     margin: 20px auto;
     padding: 20px;
@@ -165,12 +157,12 @@ a {
 
 .btn {
     text-transform: uppercase;
-}  
+}
 
 .flash {
     text-align: center;
-    margin : auto auto;
-    width : 50%;
+    margin: auto auto;
+    width: 50%;
 }
 
 .search form {
@@ -186,32 +178,90 @@ a {
     height: 300px;
 }
 
-
-
-
-
-
-
-
 @media (max-width: 1200px) {
-.navbar-nav {
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        margin: auto auto;
+    }
+    li {
+        margin: 1rem;
+    }
+    .search form {
+        margin: auto auto;
+        text-align: center;
+    }
+    .search form button {
+        color: red;
+        /* text-align: center; */
+        margin: auto auto;
+    }
+}
+
+.carousel-card-body {
+    height: 150px;
     display: flex;
-    flex-direction: row;
-    margin: auto auto;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-li {
-    margin : 1rem 
-    ;
+.owl-nav button {
+    position: absolute;
+    top: 50%;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    transition: all 0.3s ease-in-out;
 }
 
-.search form {
-    margin: auto auto;
+.owl-nav button.owl-prev {
+    left: 0;
+}
+
+.owl-nav button.owl-next {
+    right: 0;
+}
+
+.owl-dot span {
+    background-color: transparent!important;
+}
+
+.owl-dots {
     text-align: center;
+    padding-top: 15px;
 }
-.search form button {
-    color: red;
-    /* text-align: center; */
-    margin: auto auto;
+
+.owl-dots button.owl-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #ccc!important;
+    margin: 0 3px;
 }
+
+.owl-dots button.owl-dot.active {
+    background-color: #000!important;
+}
+
+.owl-dots button.owl-dot:focus {
+    outline: none;
+}
+
+.owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.38) !important;
+}
+
+span[aria-label="Next"],
+span[aria-label="Previous"] {
+    font-size: 70px;
+    position: relative;
+    top: -5px;
+}
+
+.owl-nav button:focus {
+    outline: none;
 }
