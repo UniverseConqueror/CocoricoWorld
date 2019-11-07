@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -19,21 +21,38 @@ class Product
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre nom de produit doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de produit doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=64)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank 
+     * @Assert\Positive
+     * 
      * @ORM\Column(type="integer")
      */
     private $price;
 
     /**
+     * @Assert\NotBlank 
+     * @Assert\Positive 
+     * 
      * @ORM\Column(type="integer")
      */
     private $weight;
 
     /**
+     * @Assert\NotBlank 
+     * @Assert\PositiveOrZero
+     * 
      * @ORM\Column(type="integer")
      */
     private $quantity;
@@ -64,6 +83,9 @@ class Product
     private $allergens;
 
     /**
+     * @Assert\NotBlank 
+     * @Assert\PositiveOrZero
+     * 
      * @ORM\Column(type="integer")
      */
     private $rate;
@@ -74,11 +96,16 @@ class Product
     private $enable;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

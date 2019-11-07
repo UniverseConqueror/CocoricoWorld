@@ -20,58 +20,134 @@ class Producer
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre nom de raison sociale doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de raison sociale doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=64)
      */
     private $socialReason;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Votre numéro de siret doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre numéro de siret doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string")
      */
     private $siretNumber;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre adresse doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre adresse doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=64)
      */
     private $address;
 
     /**
      * @ORM\Column(type="integer")
+     * 
+     * @Assert\NotBlank
      * @Assert\Positive
      * @Assert\Length(
      * min = 5,
      * max = 5,
-     * minMessage = "Your Postal Code need to be 5 numbers long exactly",
-     * maxMessage = "Your Postal Code need to be 5 numbers long exactly",
+     * minMessage = "Votre code postal doit comporter {{ limit }} caractères minimum",
+     * maxMessage = "Votre code postal doit comporter {{ limit }} caractères maximum",
      * )
      */
     private $postalCode;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre nom de ville doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de ville doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=50)
      */
     private $city;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide."
+     * ) 
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 180,
+     *      minMessage = "Votre email doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre email doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=180)
      */
     private $email;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Votre prénom doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre prénom doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=20)
      */
     private $firstname;
 
     /**
+     * @Assert\NotBlank 
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Votre nom de famille doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de famille doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=20)
      */
     private $lastname;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 21,
+     *      minMessage = "Votre numéro de téléphone doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre numéro de téléphone doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=21)
      */
     private $telephone;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre statut doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre statut doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $status;
@@ -81,7 +157,7 @@ class Producer
      */
     private $enable;
 
-    /**
+    /** 
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
@@ -92,11 +168,16 @@ class Producer
     private $description;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;

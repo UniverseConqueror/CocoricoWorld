@@ -5,13 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UniversRepository")
  */
 class Univers
 {
-    /**
+    /**     
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -19,6 +20,15 @@ class Univers
     private $id;
 
     /**
+     * @Assert\NotBlank 
+     * 
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre nom d'univers doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom d'univers doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=64)
      */
     private $name;
@@ -34,11 +44,16 @@ class Univers
     private $enable;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\Type("\DateTime")
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     
