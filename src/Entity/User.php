@@ -21,8 +21,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank
      * @Assert\Email(
-     *     message = "L'email '{{ value }}' n'est pas valide.",
-     *     checkMX = true
+     *     message = "L'email '{{ value }}' n'est pas valide."
      * )
      * @Assert\Length(
      *      min = 6,
@@ -123,8 +122,6 @@ class User implements UserInterface
     private $city;
 
     /**
-     * @Assert\NotBlank 
-     * 
      * @ORM\Column(type="boolean")
      */
     private $enable;
@@ -136,16 +133,14 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank
-     * @Assert\DateTime
-     * @var string A "Y-m-d H:i:s" formatted value 
+     * @Assert\Type("\DateTime")
      * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @Assert\DateTime
-     * @var string A "Y-m-d H:i:s" formatted value
+     * @Assert\Type("\DateTime")
      * 
      * @ORM\Column(type="datetime", nullable=true)
      */

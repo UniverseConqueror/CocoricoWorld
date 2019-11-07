@@ -39,23 +39,20 @@ class Univers
     private $image;
 
     /**
-     * @Assert\NotBlank
      * @ORM\Column(type="boolean")
      */
     private $enable;
 
     /**
      * @Assert\NotBlank
-     * @Assert\DateTime
-     * @var string A "Y-m-d H:i:s" formatted value 
+     * @Assert\Type("\DateTime")
      * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @Assert\DateTime
-     * @var string A "Y-m-d H:i:s" formatted value 
+     * @Assert\Type("\DateTime")
      * 
      * @ORM\Column(type="datetime", nullable=true)
      */
