@@ -12,8 +12,8 @@
         
               <!-- Content -->
               <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Cocorico World</h5>
-              <p>Nous contacter par mail à : </p>
-              <p>Papi-Seb@cocorico.world</p>
+              <p>Vous avez des questions ?</p>
+              <p><a class="text-dark" href="{{ path('contact') }}">Nous contacter</a></p>
         
         
             </div>
@@ -28,6 +28,11 @@
               <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Cocorico</h5>
         
                 <ul class="list-unstyled ">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if not is_granted('ROLE_PRODUCER') %}
+                            <li><a class="text-dark" href="{{ path('company_page') }}">S'inscrire en tant que producteur</a></li>
+                        {% endif %}
+                    {% endif %}
                     <li><a class="text-dark" href="{{ path('company_page') }}">Qui sommes-nous</a></li>
                     <li><a class="text-dark" href="{{ path('faq_page') }}">FAQ </a></li>
                     <li><a class="text-dark" href="{{ path('legalsmentions_page') }}">Mentions Legales</a></li>    
