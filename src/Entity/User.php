@@ -19,38 +19,81 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 180,
+     *      minMessage = "Votre email doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre email doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email
      */
     private $email;
 
     /**
+     * @Assert\NotBlank 
+     * 
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
+     * @Assert\NotBlank 
+     * 
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Votre prénom doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre prénom doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $firstname;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 20,
+     *      minMessage = "Votre nom de famille doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre nom de famille doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $lastname;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre numéro de téléphone doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre numéro de téléphone doit comporter {{ limit }} caractères maximum"
+     * )
+     * 
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $telephone;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Votre adresse doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre adresse doit comporter {{ limit }} caractères maximum"
+     * )  
+     * 
      * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $address;
@@ -61,18 +104,27 @@ class User implements UserInterface
      * @Assert\Length(
      * min = 5,
      * max = 5,
-     * minMessage = "Your Postal Code need to be 5 numbers long exactly",
-     * maxMessage = "Your Postal Code need to be 5 numbers long exactly",
+     * minMessage = "Votre code postal doit comporter {{ limit }} caractères minimum",
+     * maxMessage = "Votre code postal doit comporter {{ limit }} caractères maximum",
      * )
      */
     private $postalCode;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Votre ville doit comporter {{ limit }} caractères minimum",
+     *      maxMessage = "Votre ville doit comporter {{ limit }} caractères maximum"
+     * ) 
+     * 
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $city;
 
     /**
+     * @Assert\NotBlank 
+     * 
      * @ORM\Column(type="boolean")
      */
     private $enable;
@@ -83,11 +135,18 @@ class User implements UserInterface
     private $producer;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value 
+     * 
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
+     * @Assert\DateTime
+     * @var string A "Y-m-d H:i:s" formatted value
+     * 
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
