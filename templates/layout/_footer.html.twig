@@ -30,7 +30,7 @@
                 <ul class="list-unstyled ">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {% if not is_granted('ROLE_PRODUCER') %}
-                            <li><a class="text-dark" href="{{ path('company_page') }}">S'inscrire en tant que producteur</a></li>
+                            <li><a class="text-dark" href="{{ path('producer_registration') }}">S'inscrire en tant que producteur</a></li>
                         {% endif %}
                     {% endif %}
                     <li><a class="text-dark" href="{{ path('company_page') }}">Qui sommes-nous</a></li>
